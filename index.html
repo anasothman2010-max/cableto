@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كابليتو | Cableto - الموقع الرسمي للشواحن والكابلات والباور بانك</title>
-    <meta name="description" content="تسوق أحدث الشواحن السريعة والكابلات والباور بانك الأصلية مع ضمان معتمد 12 شهراً من كابليتو مصر.">
+    <meta name="description" content="تسوق أفضل الكابلات والشواحن السريعة والباور بانك من كابليتو. ضمان 12 شهر معتمد، منتجات أصلية وشحن سريع لكافة محافظات مصر.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,7 +123,6 @@
         .product-badge.discount { background: #e11d48; color: #fff; }
         .product-img-holder { height: 220px; overflow: hidden; background: #f1f5f9; }
         .product-img-holder img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .product-card:hover .product-img-holder img { transform: scale(1.06); }
         .product-details { padding: 18px; }
         .product-model { font-size: 0.75rem; color: var(--blue-primary); font-weight: 800; }
         .product-title { font-size: 0.95rem; margin: 6px 0; line-height: 1.4; height: 44px; overflow: hidden; color: var(--text-dark); }
@@ -136,6 +135,29 @@
         .btn-cart:hover { border-color: var(--blue-primary); color: var(--blue-primary); background: var(--blue-light); }
         .btn-buy { background: var(--blue-primary); color: #ffffff; padding: 8px 12px; font-size: 0.85rem; font-weight: 800; }
         .btn-buy:hover { background: var(--blue-hover); }
+
+        /* Checkout Modal */
+        .checkout-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); z-index: 2000; opacity: 0; pointer-events: none; transition: var(--transition); display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .checkout-modal-overlay.active { opacity: 1; pointer-events: all; }
+        .checkout-modal { background: #ffffff; border-radius: 24px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid var(--border-light); padding: 30px; position: relative; }
+        .modal-close-btn { position: absolute; top: 20px; left: 20px; background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+        
+        .checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-top: 20px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+        .form-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-light); background: var(--bg-surface); font-size: 0.9rem; outline: none; margin-bottom: 12px; }
+        .form-input:focus { border-color: var(--blue-primary); background: #ffffff; }
+
+        .payment-option { border: 2px solid var(--border-light); border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: var(--transition); }
+        .payment-option.active { border-color: var(--blue-primary); background: var(--blue-light); }
+        .payment-option.disabled { opacity: 0.55; cursor: not-allowed; background: #f1f5f9; border-color: #cbd5e1; }
+        .disabled-badge { font-size: 0.75rem; background: #94a3b8; color: #fff; padding: 2px 8px; border-radius: 8px; font-weight: 700; }
+
+        .summary-box { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: 16px; padding: 20px; }
+        .summary-row { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 10px; color: var(--text-muted); }
+        .summary-row.total { font-size: 1.2rem; font-weight: 900; color: var(--text-dark); border-top: 1px solid var(--border-light); padding-top: 12px; margin-top: 12px; }
+
+        .notice-banner { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 12px; font-size: 0.85rem; color: #065f46; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-top: 14px; }
 
         /* Verification & B2B */
         .verify-section { padding: 60px 0; }
@@ -152,15 +174,11 @@
         .b2b-list { list-style: none; margin-top: 20px; }
         .b2b-list li { margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--text-dark); }
         .b2b-form-box { background: var(--bg-surface); padding: 30px; border-radius: 22px; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 700; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-light); outline: none; }
 
         .main-footer { background: #ffffff; border-top: 1px solid var(--border-light); padding-top: 60px; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; padding-bottom: 40px; }
-        .footer-logo { width: 44px; border-radius: 8px; margin-bottom: 16px; border: 1px solid var(--blue-primary); }
         .footer-bottom { border-top: 1px solid var(--border-light); padding: 20px 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-surface); }
 
+        /* Cart Drawer */
         .cart-drawer-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 999; opacity: 0; pointer-events: none; transition: var(--transition); }
         .cart-drawer-overlay.active { opacity: 1; pointer-events: all; }
         .cart-drawer { position: fixed; top: 0; left: 0; bottom: 0; width: 380px; max-width: 90vw; background: #ffffff; border-right: 1px solid var(--border-light); z-index: 1000; transform: translateX(-100%); transition: transform 0.4s ease; display: flex; flex-direction: column; box-shadow: 10px 0 30px rgba(0,0,0,0.1); }
@@ -174,9 +192,8 @@
         .cart-total-price { color: var(--blue-primary); }
 
         @media (max-width: 992px) {
-            .hero-grid, .b2b-grid { grid-template-columns: 1fr; }
+            .hero-grid, .b2b-grid, .checkout-grid { grid-template-columns: 1fr; }
             .features-grid, .categories-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 600px) {
             .features-grid, .categories-grid, .products-grid { grid-template-columns: 1fr; }
@@ -765,6 +782,150 @@
         </div>
     </section>
 
+    <!-- Detailed Checkout Modal -->
+    <div class="checkout-modal-overlay" id="checkout-modal-overlay">
+        <div class="checkout-modal">
+            <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+            <h2 style="font-size: 1.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 6px;">
+                <i class="fa-solid fa-clipboard-check text-blue"></i> إتمام طلب الشراء والتوصيل
+            </h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                يرجى ملء بيانات العنوان والتوصيل لاستلام منتجات كابليتو خلال 24 - 48 ساعة.
+            </p>
+
+            <form id="checkout-form">
+                <div class="checkout-grid">
+                    <!-- Shipping Address Inputs -->
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--blue-primary);">
+                            <i class="fa-solid fa-truck-ramp-box"></i> بيانات العنوان والتوصيل
+                        </h4>
+
+                        <label class="form-label">الاسم بالكامل *</label>
+                        <input type="text" id="cust-name" required class="form-input" placeholder="مثال: أحمد محمد علي">
+
+                        <label class="form-label">رقم الهاتف / الواتساب للتأكيد *</label>
+                        <input type="tel" id="cust-phone" required class="form-input" placeholder="010XXXXXXXX">
+
+                        <div class="form-row">
+                            <div>
+                                <label class="form-label">المحافظة *</label>
+                                <select id="cust-gov" required class="form-input" style="font-weight: 700;">
+                                    <option value="القاهرة">القاهرة</option>
+                                    <option value="الجيزة">الجيزة</option>
+                                    <option value="الإسكندرية">الإسكندرية</option>
+                                    <option value="الدقهلية">الدقهلية (المنصورة)</option>
+                                    <option value="الغربية">الغربية (طنطا)</option>
+                                    <option value="محافظة أخرى">محافظة أخرى</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label">المنطقة / الحي *</label>
+                                <input type="text" id="cust-district" required class="form-input" placeholder="مثال: مدينة نصر">
+                            </div>
+                        </div>
+
+                        <label class="form-label">اسم الشارع والمبنى *</label>
+                        <input type="text" id="cust-street" required class="form-input" placeholder="مثال: شارع عباس العقاد - عمارة 15">
+
+                        <div class="form-row">
+                            <div>
+                                <label class="form-label">رقم الطابق / الدور *</label>
+                                <input type="text" id="cust-floor" required class="form-input" placeholder="مثال: الدور الرابع">
+                            </div>
+                            <div>
+                                <label class="form-label">رقم الشقة *</label>
+                                <input type="text" id="cust-flat" required class="form-input" placeholder="مثال: شقة 12">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary & Payment Method -->
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--blue-primary);">
+                            <i class="fa-solid fa-receipt"></i> لائحة ما قبل الشراء
+                        </h4>
+
+                        <div class="summary-box">
+                            <div id="checkout-items-preview" style="max-height: 120px; overflow-y: auto; margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;">
+                                <!-- Items rendered dynamically -->
+                            </div>
+
+                            <div class="summary-row">
+                                <span>سعر المنتجات:</span>
+                                <span id="summary-subtotal">0 ج.م</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>خدمة التوصيل الشحن:</span>
+                                <span id="summary-shipping">50 ج.م</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>الضريبة المضافة VAT (14%):</span>
+                                <span style="color: #10b981; font-weight: 700;">مشمولة مجاناً</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>الإجمالي النهائي:</span>
+                                <span id="summary-final-total" style="color: var(--blue-primary);">0 ج.م</span>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <h4 style="font-size: 0.9rem; font-weight: 800; margin: 16px 0 10px; color: var(--text-dark);">
+                            اختر طريقة الدفع:
+                        </h4>
+
+                        <div class="payment-option active">
+                            <div>
+                                <strong style="display: block; font-size: 0.9rem;"><i class="fa-solid fa-hand-holding-dollar text-blue"></i> الدفع عند الاستلام (COD)</strong>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">ادفع كاش للمندوب عند معاينة المنتج</span>
+                            </div>
+                            <i class="fa-solid fa-circle-check text-blue"></i>
+                        </div>
+
+                        <div class="payment-option disabled" title="غير متاح حالياً">
+                            <div>
+                                <strong style="display: block; font-size: 0.9rem;"><i class="fa-solid fa-credit-card"></i> الدفع بالفيزا / كارت البنك</strong>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">الدفع الإلكتروني عبر البنك</span>
+                            </div>
+                            <span class="disabled-badge">غير متوفر حالياً</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary-blue btn-block" style="margin-top: 14px; font-size: 1.05rem;">
+                            تأكيد وإتمام الشراء الآن <i class="fa-solid fa-check-double"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Order Success Delivery Guarantee Notice -->
+                <div class="notice-banner">
+                    <i class="fa-solid fa-truck-clock" style="font-size: 1.3rem;"></i>
+                    <div>
+                        سيتم توصيل طلبك خلال <strong>24 إلى 48 ساعة</strong> من التأكيد | شكراً لشرائك من كابليتو!
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Slide-over Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> سلة التسوق الخاصة بك</h3>
+            <button class="close-cart" id="close-cart-btn">&times;</button>
+        </div>
+        <div class="cart-drawer-body" id="cart-items-container">
+            <!-- Items rendered via JavaScript -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal">
+                <span>الإجمالي:</span>
+                <span class="cart-total-price" id="cart-total">0 ج.م</span>
+            </div>
+            <button class="btn btn-primary-blue btn-block" id="cart-checkout-btn">إتمام الطلب الآن <i class="fa-solid fa-arrow-left"></i></button>
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer class="main-footer">
         <div class="container footer-bottom">
@@ -772,15 +933,163 @@
         </div>
     </footer>
 
-    <!-- Filter & Navigation JS Script -->
+    <!-- Complete Cart & Checkout JS Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            let cart = [];
+            const shippingFee = 50;
+
+            const cartBtn = document.getElementById('cart-btn');
+            const cartDrawer = document.getElementById('cart-drawer');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const closeCartBtn = document.getElementById('close-cart-btn');
+            const cartBadge = document.getElementById('cart-badge');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalEl = document.getElementById('cart-total');
+            
+            const checkoutModalOverlay = document.getElementById('checkout-modal-overlay');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
+            const checkoutForm = document.getElementById('checkout-form');
+            
+            const summarySubtotal = document.getElementById('summary-subtotal');
+            const summaryFinalTotal = document.getElementById('summary-final-total');
+            const checkoutItemsPreview = document.getElementById('checkout-items-preview');
+
+            // Open/Close Cart
+            function toggleCart(show) {
+                if (show) {
+                    cartDrawer.classList.add('active');
+                    cartOverlay.classList.add('active');
+                } else {
+                    cartDrawer.classList.remove('active');
+                    cartOverlay.classList.remove('active');
+                }
+            }
+
+            cartBtn.addEventListener('click', () => toggleCart(true));
+            closeCartBtn.addEventListener('click', () => toggleCart(false));
+            cartOverlay.addEventListener('click', () => toggleCart(false));
+
+            // Open/Close Checkout Modal
+            function openCheckoutModal() {
+                if (cart.length === 0) {
+                    alert('سلة التسوق فارغة! أضف منتجات أولاً.');
+                    return;
+                }
+                toggleCart(false);
+                updateCheckoutSummary();
+                checkoutModalOverlay.classList.add('active');
+            }
+
+            function closeCheckoutModal() {
+                checkoutModalOverlay.classList.remove('active');
+            }
+
+            modalCloseBtn.addEventListener('click', closeCheckoutModal);
+            cartCheckoutBtn.addEventListener('click', openCheckoutModal);
+
+            // Update Cart UI
+            function updateCartUI() {
+                const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartBadge.textContent = count;
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 40px 0;">السلة فارغة حالياً</p>';
+                    cartTotalEl.textContent = '0 ج.م';
+                    return;
+                }
+
+                let total = 0;
+                cartItemsContainer.innerHTML = cart.map(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    return `
+                        <div class="cart-item">
+                            <img src="${item.img}" alt="${item.title}">
+                            <div style="flex: 1;">
+                                <div class="cart-item-title">${item.title}</div>
+                                <div class="cart-item-price">${item.price.toLocaleString()} ج.م × ${item.quantity}</div>
+                            </div>
+                            <button onclick="window.removeItem(${item.id})" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                }).join('');
+
+                cartTotalEl.textContent = `${total.toLocaleString()} ج.م`;
+            }
+
+            function updateCheckoutSummary() {
+                const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const finalTotal = subtotal + shippingFee;
+
+                summarySubtotal.textContent = `${subtotal.toLocaleString()} ج.م`;
+                summaryFinalTotal.textContent = `${finalTotal.toLocaleString()} ج.م`;
+
+                checkoutItemsPreview.innerHTML = cart.map(item => `
+                    <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px; font-weight:700;">
+                        <span>${item.title} (x${item.quantity})</span>
+                        <span style="color:var(--blue-primary);">${(item.price * item.quantity).toLocaleString()} ج.م</span>
+                    </div>
+                `).join('');
+            }
+
+            window.addToCart = function(id, title, price, img) {
+                const existing = cart.find(item => item.id === id);
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ id, title, price: parseFloat(price), img, quantity: 1 });
+                }
+                updateCartUI();
+                toggleCart(true);
+            };
+
+            window.removeItem = function(id) {
+                cart = cart.filter(item => item.id !== id);
+                updateCartUI();
+            };
+
+            // Add to Cart buttons
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img);
+                });
+            });
+
+            // Buy Now buttons -> direct checkout
+            document.querySelectorAll('.buy-now-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img);
+                    openCheckoutModal();
+                });
+            });
+
+            // Submit Checkout Form
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('cust-name').value;
+                const phone = document.getElementById('cust-phone').value;
+                const gov = document.getElementById('cust-gov').value;
+                const district = document.getElementById('cust-district').value;
+                const street = document.getElementById('cust-street').value;
+                const floor = document.getElementById('cust-floor').value;
+                const flat = document.getElementById('cust-flat').value;
+
+                alert(`🎉 شكراً لشرائك من كابليتو يا ${name}!\n\nتم تأكيد طلبك بنجاح بأمر الدفع عند الاستلام.\nالعنوان: ${gov} - ${district} - ${street} (الدور: ${floor} / شقة: ${flat})\nرقم التواصل: ${phone}\n\nسيتم توصيل الطلب خلال 24 إلى 48 ساعة!`);
+
+                cart = [];
+                updateCartUI();
+                closeCheckoutModal();
+                checkoutForm.reset();
+            });
+
+            // Category Filter Buttons
             const filterBtns = document.querySelectorAll('.filter-btn');
             const productCards = document.querySelectorAll('.product-card');
             const catTriggers = document.querySelectorAll('.cat-trigger-card, .nav-filter-link');
             
             function applyFilter(category) {
-                // Update filter buttons UI
                 filterBtns.forEach(btn => {
                     if (btn.dataset.filter === category) {
                         btn.classList.add('active');
@@ -789,7 +1098,6 @@
                     }
                 });
 
-                // Show/hide product cards
                 productCards.forEach(card => {
                     if (category === 'all' || card.dataset.category === category) {
                         card.style.display = 'flex';
@@ -799,14 +1107,12 @@
                 });
             }
 
-            // Filter button click event
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     applyFilter(btn.dataset.filter);
                 });
             });
 
-            // Category card click event -> filter & scroll
             catTriggers.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     const category = trigger.dataset.cat || trigger.dataset.filter;
