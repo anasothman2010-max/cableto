@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كابليتو | Cableto - الموقع الرسمي للشواحن والكابلات والباور بانك</title>
+    <meta name="description" content="تسوق أفضل الكابلات والشواحن السريعة والباور بانك من كابليتو. ضمان 12 شهر معتمد، منتجات أصلية وشحن سريع لكافة محافظات مصر.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #ffffff;
+            --bg-surface: #f8fafc;
+            --bg-card: #ffffff;
+            --blue-primary: #0088ff;
+            --blue-hover: #0066cc;
+            --blue-light: #e6f2ff;
+            --blue-glow: rgba(0, 136, 255, 0.25);
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-light: #e2e8f0;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --shadow-soft: 0 10px 30px rgba(0, 102, 204, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg-surface); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+        img { max-width: 100%; height: auto; display: block; }
+        
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        .gradient-text { background: linear-gradient(135deg, var(--blue-primary), #00c6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        .text-blue { color: var(--blue-primary); }
+
+        /* Buttons */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; font-size: 1rem; font-weight: 700; border-radius: var(--radius-md); cursor: pointer; text-decoration: none; transition: var(--transition); border: none; }
+        .btn-primary-blue { background: linear-gradient(135deg, var(--blue-primary), #0055ff); color: #fff; box-shadow: 0 4px 15px var(--blue-glow); }
+        .btn-primary-blue:hover { background: linear-gradient(135deg, var(--blue-hover), #0044cc); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0, 102, 204, 0.4); }
+        .btn-secondary-white { background: #ffffff; color: var(--blue-primary); border: 2px solid var(--blue-primary); }
+        .btn-secondary-white:hover { background: var(--blue-light); transform: translateY(-2px); }
+        .btn-block { width: 100%; }
+
+        /* Top Announcement Bar */
+        .announcement-bar { background: var(--blue-light); border-bottom: 1px solid rgba(0, 136, 255, 0.15); padding: 8px 0; font-size: 0.88rem; color: var(--text-dark); }
+        .announcement-content { display: flex; justify-content: space-between; align-items: center; }
+        .announcement-links { display: flex; gap: 18px; }
+        .announcement-links a { color: var(--blue-primary); text-decoration: none; font-weight: 700; transition: var(--transition); }
+        .announcement-links a:hover { color: var(--blue-hover); text-decoration: underline; }
+
+        /* Header */
+        .main-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
+        .header-content { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; gap: 20px; }
+        .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 48px; height: 48px; border-radius: 12px; border: 2px solid var(--blue-primary); box-shadow: 0 4px 12px var(--blue-glow); object-fit: cover; }
+        .brand-name { font-family: 'Outfit', 'Cairo', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--text-dark); letter-spacing: 1px; }
+        .brand-sub { font-size: 0.85rem; color: var(--blue-primary); display: block; margin-top: -6px; font-weight: 700; }
+
+        .search-box { display: flex; flex: 1; max-width: 450px; position: relative; }
+        .search-box input { width: 100%; padding: 10px 18px; border-radius: 25px; background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-dark); outline: none; font-size: 0.9rem; transition: var(--transition); }
+        .search-box input:focus { border-color: var(--blue-primary); box-shadow: 0 0 15px var(--blue-glow); }
+        .search-box button { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--blue-primary); cursor: pointer; padding: 8px; font-size: 1rem; }
+
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .icon-btn { background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-dark); width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; transition: var(--transition); }
+        .icon-btn:hover { border-color: var(--blue-primary); color: var(--blue-primary); background: var(--blue-light); }
+        .cart-count { position: absolute; top: -4px; right: -4px; background: var(--blue-primary); color: #fff; font-size: 0.75rem; font-weight: 800; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        .nav-menu { border-top: 1px solid var(--border-light); background: #ffffff; }
+        .nav-links { display: flex; list-style: none; gap: 26px; padding: 12px 0; }
+        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: var(--transition); display: flex; align-items: center; gap: 6px; }
+        .nav-links a.active, .nav-links a:hover { color: var(--blue-primary); }
+
+        /* Hero Section */
+        .hero-section { padding: 60px 0; background: linear-gradient(180deg, #ffffff 0%, var(--bg-surface) 100%); }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .tech-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--blue-light); border: 1px solid rgba(0, 136, 255, 0.3); border-radius: 20px; color: var(--blue-primary); font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; }
+        .hero-text h1 { font-size: 2.8rem; line-height: 1.25; margin-bottom: 20px; color: var(--text-dark); }
+        .hero-text p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
+        .hero-actions { display: flex; gap: 16px; margin-bottom: 40px; }
+        .hero-stats { display: flex; gap: 30px; border-top: 1px solid var(--border-light); padding-top: 20px; }
+        .stat-num { display: block; font-size: 1.6rem; font-weight: 900; color: var(--blue-primary); }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+        .hero-image-wrapper { position: relative; }
+        .hero-img { width: 100%; border-radius: var(--radius-lg); border: 3px solid #ffffff; box-shadow: 0 20px 40px rgba(0, 102, 204, 0.15); object-fit: cover; }
+        .floating-badge { position: absolute; bottom: -20px; right: -20px; background: #ffffff; border: 2px solid var(--blue-light); padding: 12px 20px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+
+        /* Features Bar */
+        .features-bar { padding: 30px 0; background: #ffffff; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .feature-card { display: flex; align-items: center; gap: 16px; padding: 18px; background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); transition: var(--transition); }
+        .feature-card:hover { border-color: var(--blue-primary); box-shadow: var(--shadow-soft); }
+        .feature-icon { font-size: 1.8rem; color: var(--blue-primary); }
+        .feature-info h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); }
+        .feature-info p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Categories */
+        .categories-section { padding: 60px 0; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-size: 2.2rem; margin-bottom: 10px; color: var(--text-dark); }
+        .section-header p { color: var(--text-muted); }
+        .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .category-card { background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px; text-align: center; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .category-card:hover { transform: translateY(-6px); border-color: var(--blue-primary); box-shadow: var(--shadow-soft); }
+        .cat-img-box { width: 100%; height: 180px; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 16px; }
+        .cat-img-box img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+
+        /* Catalog Filter & Products */
+        .catalog-section { padding: 60px 0; background: var(--bg-surface); }
+        .filter-bar { display: flex; justify-content: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+        .filter-btn { padding: 10px 22px; background: #ffffff; border: 1px solid var(--border-light); color: var(--text-dark); border-radius: 20px; cursor: pointer; font-weight: 700; transition: var(--transition); }
+        .filter-btn.active, .filter-btn:hover { background: var(--blue-primary); color: #ffffff; border-color: var(--blue-primary); box-shadow: 0 4px 15px var(--blue-glow); }
+
+        .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .product-card { background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; position: relative; transition: var(--transition); box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card:hover { border-color: var(--blue-primary); transform: translateY(-6px); box-shadow: var(--shadow-soft); }
+        .product-badge { position: absolute; top: 12px; right: 12px; background: var(--blue-primary); color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; z-index: 2; }
+        .product-badge.discount { background: #e11d48; color: #fff; }
+        .product-img-holder { height: 220px; overflow: hidden; background: #f1f5f9; }
+        .product-img-holder img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-details { padding: 18px; }
+        .product-model { font-size: 0.75rem; color: var(--blue-primary); font-weight: 800; }
+        .product-title { font-size: 1rem; margin: 6px 0; line-height: 1.4; height: 44px; overflow: hidden; color: var(--text-dark); }
+        .product-rating { color: #f59e0b; font-size: 0.8rem; margin-bottom: 12px; display: flex; align-items: center; gap: 4px; }
+        .product-rating span { color: var(--text-muted); margin-right: 6px; }
+        .product-price { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+        .current-price { font-size: 1.25rem; font-weight: 900; color: var(--blue-primary); }
+        .old-price { font-size: 0.9rem; color: var(--text-muted); text-decoration: line-through; }
+        .product-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+        .btn-cart { background: var(--bg-surface); color: var(--text-dark); border: 1px solid var(--border-light); padding: 8px 12px; font-size: 0.85rem; font-weight: 700; }
+        .btn-cart:hover { border-color: var(--blue-primary); color: var(--blue-primary); background: var(--blue-light); }
+        .btn-buy { background: var(--blue-primary); color: #ffffff; padding: 8px 12px; font-size: 0.85rem; font-weight: 800; }
+        .btn-buy:hover { background: var(--blue-hover); }
+
+        /* Verification & B2B */
+        .verify-section { padding: 60px 0; }
+        .verify-box { background: linear-gradient(135deg, #ffffff, var(--blue-light)); border: 2px solid rgba(0, 136, 255, 0.2); border-radius: var(--radius-lg); padding: 45px; text-align: center; max-width: 800px; margin: 0 auto; box-shadow: var(--shadow-soft); }
+        .verify-icon-large { font-size: 3.2rem; color: var(--blue-primary); margin-bottom: 16px; }
+        .verify-box p { color: var(--text-muted); margin: 12px 0 24px; }
+        .verify-input-group { display: flex; gap: 12px; max-width: 550px; margin: 0 auto; }
+        .verify-input-group input { flex: 1; padding: 14px 20px; border-radius: var(--radius-md); background: #ffffff; border: 1px solid var(--border-light); color: var(--text-dark); outline: none; font-size: 0.95rem; }
+        .verify-result { margin-top: 20px; font-weight: 800; font-size: 1.1rem; }
+        .verify-result.success { color: #10b981; }
+        .verify-result.error { color: #ef4444; }
+
+        .b2b-section { padding: 60px 0; background: #ffffff; }
+        .b2b-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .b2b-list { list-style: none; margin-top: 20px; }
+        .b2b-list li { margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--text-dark); }
+        .b2b-form-box { background: var(--bg-surface); padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); }
+        .b2b-form-box h3 { margin-bottom: 20px; color: var(--text-dark); }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-size: 0.9rem; color: var(--text-dark); font-weight: 700; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border-radius: var(--radius-sm); background: #ffffff; border: 1px solid var(--border-light); color: var(--text-dark); outline: none; }
+
+        /* Footer */
+        .main-footer { background: #ffffff; border-top: 1px solid var(--border-light); padding-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; padding-bottom: 40px; }
+        .footer-logo { width: 44px; border-radius: 8px; margin-bottom: 16px; border: 1px solid var(--blue-primary); }
+        .footer-brand p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+        .social-links { display: flex; gap: 12px; }
+        .social-links a { width: 36px; height: 36px; background: var(--blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--blue-primary); text-decoration: none; transition: var(--transition); }
+        .social-links a:hover { background: var(--blue-primary); color: #ffffff; }
+
+        .footer-links h4, .footer-contact h4 { font-size: 1.1rem; margin-bottom: 18px; color: var(--blue-primary); font-weight: 800; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600; }
+        .footer-links a:hover { color: var(--blue-primary); }
+        .footer-contact p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; }
+        .payment-methods { font-size: 1.5rem; gap: 12px; display: flex; margin-top: 16px; color: var(--blue-primary); }
+        .footer-bottom { border-top: 1px solid var(--border-light); padding: 20px 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-surface); }
+
+        /* Cart Drawer */
+        .cart-drawer-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 999; opacity: 0; pointer-events: none; transition: var(--transition); }
+        .cart-drawer-overlay.active { opacity: 1; pointer-events: all; }
+        .cart-drawer { position: fixed; top: 0; left: 0; bottom: 0; width: 380px; max-width: 90vw; background: #ffffff; border-right: 1px solid var(--border-light); z-index: 1000; transform: translateX(-100%); transition: transform 0.4s ease; display: flex; flex-direction: column; box-shadow: 10px 0 30px rgba(0,0,0,0.1); }
+        .cart-drawer.active { transform: translateX(0); }
+        .cart-drawer-header { padding: 20px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--blue-light); }
+        .cart-drawer-header h3 { color: var(--blue-primary); }
+        .close-cart { background: none; border: none; color: var(--text-dark); font-size: 1.8rem; cursor: pointer; }
+        .cart-drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+        .cart-item { display: flex; gap: 14px; align-items: center; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--border-light); }
+        .cart-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+        .cart-item-title { font-size: 0.9rem; font-weight: 700; color: var(--text-dark); }
+        .cart-item-price { color: var(--blue-primary); font-weight: 800; font-size: 0.9rem; }
+        .cart-drawer-footer { padding: 20px; border-top: 1px solid var(--border-light); }
+        .cart-subtotal { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 900; margin-bottom: 16px; color: var(--text-dark); }
+        .cart-total-price { color: var(--blue-primary); }
+
+        @media (max-width: 992px) {
+            .hero-grid, .b2b-grid { grid-template-columns: 1fr; }
+            .features-grid, .categories-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .features-grid, .categories-grid, .products-grid { grid-template-columns: 1fr; }
+            .nav-links, .search-box { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container announcement-content">
+            <span><i class="fa-solid fa-bolt text-blue"></i> خصم خاص 15% على جميع كابلات Type-C السريعة | استخدم كود: <strong>CABLE15</strong></span>
+            <div class="announcement-links">
+                <a href="#serial-verify"><i class="fa-solid fa-shield-halved"></i> تحقق من الأصالة</a>
+                <a href="#b2b-dealer"><i class="fa-solid fa-store"></i> سجّل كتاجر بالجملة</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header" id="header">
+        <div class="container header-content">
+            <a href="#" class="brand-logo">
+                <img src="public/images/logo.jpg" alt="Cableto Logo" class="logo-img">
+                <span class="brand-name">CABLETO <span class="brand-sub">كابليتو</span></span>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="ابحث عن باور بانك، كابل 100W، شاحن سريع...">
+                <button id="search-btn" aria-label="بحث"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <button class="icon-btn" id="fav-btn" title="المفضلة"><i class="fa-regular fa-heart"></i></button>
+                <button class="icon-btn cart-trigger" id="cart-btn" title="سلة التسوق">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu" id="nav-menu">
+            <div class="container nav-content">
+                <ul class="nav-links">
+                    <li><a href="#" class="active"><i class="fa-solid fa-house"></i> الرئيسية</a></li>
+                    <li><a href="#catalog">كل المنتجات</a></li>
+                    <li><a href="#powerbanks">باور بانك</a></li>
+                    <li><a href="#chargers">شواحن جدارية وسيارة</a></li>
+                    <li><a href="#cables">كابلات شحن ونقل بيانات</a></li>
+                    <li><a href="#earbuds">سماعات وصوتيات</a></li>
+                    <li><a href="#serial-verify">تحقق من الكود</a></li>
+                    <li><a href="#b2b-dealer">سجّل كتاجر</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <span class="tech-tag"><i class="fa-solid fa-bolt text-blue"></i> تقنيات الشحن السريع 2026</span>
+                <h1>طاقة فائقة وأمان دائم مع <span class="gradient-text">كابليتو Cableto</span></h1>
+                <p>استكشف التشكيلة الجديدة كلياً من الكابلات المجدولة، الباور بانك عالي السعة، والشواحن الذكية بقوة تصل إلى 140W مع ضمان معتمد لمدة 12 شهراً وشحن لكافة المحافظات.</p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn btn-primary-blue"><i class="fa-solid fa-cart-shopping"></i> تسوق التشكيلة الجديدة</a>
+                    <a href="#serial-verify" class="btn btn-secondary-white"><i class="fa-solid fa-shield-check"></i> فحص الأصالة</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">+50K</span>
+                        <span class="stat-label">عميل يثق بنا</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-label">ضمان استبدال</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">24h</span>
+                        <span class="stat-label">توصيل سريع</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="public/images/hero.jpg" alt="Cableto Premium Products" class="hero-img">
+                <div class="floating-badge badge-1">
+                    <i class="fa-solid fa-bolt text-blue fa-2x"></i>
+                    <div>
+                        <strong>HyperCharge 140W</strong>
+                        <span>شحن سريع وسرعة فائقة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Features -->
+    <section class="features-bar">
+        <div class="container features-grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-award feature-icon"></i>
+                <div class="feature-info">
+                    <h4>ضمان معتمد 12 شهراً</h4>
+                    <p>استبدال فوري عند وجود أي عيب مصنعي</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-truck-fast feature-icon"></i>
+                <div class="feature-info">
+                    <h4>شحن لكافة المحافظات</h4>
+                    <p>التوصيل خلال 24 - 48 ساعة فقط</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-shield-virus feature-icon"></i>
+                <div class="feature-info">
+                    <h4>منتجات أصلية 100%</h4>
+                    <p>مزودة بكود تحقق مائي فريد</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-headset feature-icon"></i>
+                <div class="feature-info">
+                    <h4>دعم فني متاح 24/7</h4>
+                    <p>فريق متخصص لخدمتك عبر الواتساب</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>تسوق حسب <span class="gradient-text">الفئات</span></h2>
+                <p>اختر الفئة للاطلاع على أحدث منتجات كابليتو</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" data-cat="powerbank">
+                    <div class="cat-img-box">
+                        <img src="public/images/powerbank.jpg" alt="باور بانك">
+                    </div>
+                    <h3>باور بانك (Power Banks)</h3>
+                    <span>سعات ضخمة شحن سريع</span>
+                </div>
+                <div class="category-card" data-cat="charger">
+                    <div class="cat-img-box">
+                        <img src="public/images/charger.jpg" alt="شواحن">
+                    </div>
+                    <h3>شواحن جدارية (Fast Chargers)</h3>
+                    <span>تقنية GaN حتى 140W</span>
+                </div>
+                <div class="category-card" data-cat="cable">
+                    <div class="cat-img-box">
+                        <img src="public/images/cable.jpg" alt="كابلات">
+                    </div>
+                    <h3>كابلات شحن (Cables)</h3>
+                    <span>Type-C, Lightning, AUX</span>
+                </div>
+                <div class="category-card" data-cat="earbuds">
+                    <div class="cat-img-box">
+                        <img src="public/images/earbuds.jpg" alt="سماعات">
+                    </div>
+                    <h3>سماعات وصوتيات (Audio)</h3>
+                    <span>ANC UltraPods</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section class="catalog-section" id="catalog">
+        <div class="container">
+            <div class="section-header">
+                <h2>منتجات <span class="gradient-text">كابليتو الأكثر مبيعاً</span></h2>
+                <p>تصميم متين وأداء يعتمد عليه للأستخدام اليومي</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">عرض الكل</button>
+                <button class="filter-btn" data-filter="powerbank">باور بانك</button>
+                <button class="filter-btn" data-filter="charger">شواحن</button>
+                <button class="filter-btn" data-filter="cable">كابلات</button>
+                <button class="filter-btn" data-filter="earbuds">سماعات</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card" data-category="powerbank">
+                    <div class="product-badge">الأكثر مبيعاً</div>
+                    <div class="product-img-holder">
+                        <img src="public/images/powerbank.jpg" alt="باور بانك كابليتو 20,000mAh">
+                    </div>
+                    <div class="product-details">
+                        <span class="product-model">موديل: CB-PB20K</span>
+                        <h3 class="product-title">باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED</h3>
+                        <div class="product-price">
+                            <span class="current-price">1,250 ج.م</span>
+                            <span class="old-price">1,550 ج.م</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-cart add-to-cart-btn" data-id="1" data-title="باور بانك كابليتو TitanPower 20,000mAh" data-price="1250" data-img="public/images/powerbank.jpg">
+                                <i class="fa-solid fa-cart-plus"></i> للسلة
+                            </button>
+                            <button class="btn btn-buy buy-now-btn" data-id="1" data-title="باور بانك كابليتو TitanPower 20,000mAh" data-price="1250" data-img="public/images/powerbank.jpg">
+                                شراء الآن
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card" data-category="charger">
+                    <div class="product-badge discount">-20%</div>
+                    <div class="product-img-holder">
+                        <img src="public/images/charger.jpg" alt="شاحن جداري كابليتو 100W GaN">
+                    </div>
+                    <div class="product-details">
+                        <span class="product-model">موديل: CB-CH100W</span>
+                        <h3 class="product-title">شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)</h3>
+                        <div class="product-price">
+                            <span class="current-price">790 ج.م</span>
+                            <span class="old-price">990 ج.م</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-cart add-to-cart-btn" data-id="2" data-title="شاحن جداري كابليتو GaNPro 100W" data-price="790" data-img="public/images/charger.jpg">
+                                <i class="fa-solid fa-cart-plus"></i> للسلة
+                            </button>
+                            <button class="btn btn-buy buy-now-btn" data-id="2" data-title="شاحن جداري كابليتو GaNPro 100W" data-price="790" data-img="public/images/charger.jpg">
+                                شراء الآن
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card" data-category="cable">
+                    <div class="product-badge">جديد</div>
+                    <div class="product-img-holder">
+                        <img src="public/images/cable.jpg" alt="كابل كابليتو 240W Type-C">
+                    </div>
+                    <div class="product-details">
+                        <span class="product-model">موديل: CB-CB240W</span>
+                        <h3 class="product-title">كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط</h3>
+                        <div class="product-price">
+                            <span class="current-price">290 ج.م</span>
+                            <span class="old-price">350 ج.م</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-cart add-to-cart-btn" data-id="3" data-title="كابل شحن كابليتو ArmorFlex 240W" data-price="290" data-img="public/images/cable.jpg">
+                                <i class="fa-solid fa-cart-plus"></i> للسلة
+                            </button>
+                            <button class="btn btn-buy buy-now-btn" data-id="3" data-title="كابل شحن كابليتو ArmorFlex 240W" data-price="290" data-img="public/images/cable.jpg">
+                                شراء الآن
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="product-card" data-category="earbuds">
+                    <div class="product-badge">عزل ضوضاء</div>
+                    <div class="product-img-holder">
+                        <img src="public/images/earbuds.jpg" alt="سماعات كابليتو UltraPods ANC">
+                    </div>
+                    <div class="product-details">
+                        <span class="product-model">موديل: CB-PODS-ANC</span>
+                        <h3 class="product-title">سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط</h3>
+                        <div class="product-price">
+                            <span class="current-price">1,350 ج.م</span>
+                            <span class="old-price">1,800 ج.م</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-cart add-to-cart-btn" data-id="4" data-title="سماعات كابليتو UltraPods ANC" data-price="1350" data-img="public/images/earbuds.jpg">
+                                <i class="fa-solid fa-cart-plus"></i> للسلة
+                            </button>
+                            <button class="btn btn-buy buy-now-btn" data-id="4" data-title="سماعات كابليتو UltraPods ANC" data-price="1350" data-img="public/images/earbuds.jpg">
+                                شراء الآن
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serial Authenticity Verification Section -->
+    <section class="verify-section" id="serial-verify">
+        <div class="container">
+            <div class="verify-box">
+                <div class="verify-icon-large">
+                    <i class="fa-solid fa-shield-check"></i>
+                </div>
+                <h2>فحص وتأكيد الأصالة لمنتجات <span class="gradient-text">كابليتو</span></h2>
+                <p>تأكد أن منتجك أصلي 100% وداخل الضمان عبر كتابة السيريال كود الموجود تحت الشريط المائي على العلبة.</p>
+                <div class="verify-input-group">
+                    <input type="text" id="serial-code" placeholder="أدخل الكود هنا (مثال: CABLETO-8899-X)">
+                    <button class="btn btn-primary-blue" id="verify-btn"><i class="fa-solid fa-magnifying-glass-chart"></i> تحقق من الكود</button>
+                </div>
+                <div id="verify-result" class="verify-result"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="container footer-bottom">
+            <p>© 2026 جميع الحقوق محفوظة لـ <strong>كابليتو (Cableto)</strong> | الموقع الرسمي للشواحن والكابلات.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+                    productCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
