@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: `${SITE_CONFIG.nameEn} | ${SITE_CONFIG.name} - ${SITE_CONFIG.tagline}`,
   description: 'تسوق أحدث الشواحن السريعة، الباور بانك والكابلات المجدولة الأصلية مع ضمان 12 شهراً وشحن لكل المحافظات.',
   verification: {
-    google: '1fc92a1552d844',
+    google: 'lufdPjx7Ntupfd4U8_RQUz_YaMTLpSAqahYxTB7Oo8w',
   },
 };
 
