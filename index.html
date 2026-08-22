@@ -50,7 +50,6 @@
         .announcement-content { display: flex; justify-content: space-between; align-items: center; }
         .announcement-links { display: flex; gap: 18px; }
         .announcement-links a { color: var(--blue-primary); text-decoration: none; font-weight: 700; transition: var(--transition); }
-        .announcement-links a:hover { color: var(--blue-hover); text-decoration: underline; }
 
         /* Header */
         .main-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
@@ -96,7 +95,7 @@
         .feature-card:hover { border-color: var(--blue-primary); box-shadow: var(--shadow-soft); }
         .feature-icon { font-size: 1.8rem; color: var(--blue-primary); }
 
-        /* Best Sellers (ONLY 4 PRODUCTS) */
+        /* Best Sellers (ONLY 4 FLAGSHIP PRODUCTS) */
         .bestsellers-section { padding: 60px 0; background: #ffffff; }
         .section-header { text-align: center; margin-bottom: 40px; }
         .section-header h2 { font-size: 2.2rem; margin-bottom: 10px; color: var(--text-dark); }
@@ -108,11 +107,11 @@
         .product-badge { position: absolute; top: 12px; right: 12px; background: var(--blue-primary); color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; z-index: 2; }
         .product-badge.gold { background: #f59e0b; color: #fff; }
         
-        .product-img-holder { height: 210px; overflow: hidden; background: #f8fafc; display: flex; align-items: center; justify-content: center; position: relative; }
+        .product-img-holder { height: 210px; overflow: hidden; background: linear-gradient(135deg, #f8fafc, #e2e8f0); display: flex; align-items: center; justify-content: center; position: relative; }
         .product-img-holder img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
         .product-card:hover .product-img-holder img { transform: scale(1.06); }
         
-        .product-type-icon { position: absolute; bottom: 10px; left: 10px; background: rgba(255, 255, 255, 0.9); border-radius: 8px; padding: 4px 10px; font-size: 0.8rem; font-weight: 800; color: var(--blue-primary); backdrop-filter: blur(4px); }
+        .product-type-icon { position: absolute; bottom: 10px; left: 10px; background: rgba(255, 255, 255, 0.92); border-radius: 8px; padding: 4px 10px; font-size: 0.8rem; font-weight: 800; color: var(--blue-primary); backdrop-filter: blur(4px); border: 1px solid rgba(0,136,255,0.2); }
 
         .product-details { padding: 18px; }
         .product-model { font-size: 0.75rem; color: var(--blue-primary); font-weight: 800; }
@@ -127,17 +126,27 @@
         .btn-buy { background: var(--blue-primary); color: #ffffff; padding: 8px 12px; font-size: 0.85rem; font-weight: 800; }
         .btn-buy:hover { background: var(--blue-hover); }
 
-        /* Categories Cards */
+        /* Categories Section */
         .categories-section { padding: 60px 0; background: var(--bg-surface); }
         .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
         .category-card { background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px; text-align: center; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(0,0,0,0.02); position: relative; }
         .category-card:hover { transform: translateY(-6px); border-color: var(--blue-primary); box-shadow: var(--shadow-soft); }
         .cat-icon-large { font-size: 2.8rem; color: var(--blue-primary); margin-bottom: 14px; display: inline-block; }
 
-        /* Category Modal / Dedicated Section */
-        .category-dedicated-section { padding: 60px 0; background: #ffffff; border-top: 1px solid var(--border-light); display: none; }
-        .category-dedicated-section.active { display: block; }
-        .cat-header-banner { background: linear-gradient(135deg, var(--blue-primary), #0055ff); color: #ffffff; padding: 30px; border-radius: 20px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; }
+        /* Fullscreen Category Modal Page */
+        .category-page-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #ffffff; z-index: 2500; overflow-y: auto; display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .category-page-modal.active { display: block; opacity: 1; }
+        .cat-modal-header { position: sticky; top: 0; z-index: 10; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); padding: 18px 0; }
+        .cat-modal-header-content { display: flex; justify-content: space-between; align-items: center; }
+
+        /* Dedicated Why Buy From Cableto (Footer Trust Section) */
+        .why-cableto-section { background: linear-gradient(180deg, #f8fafc 0%, #e6f2ff 100%); border-top: 1px solid var(--border-light); padding: 70px 0; }
+        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; }
+        .trust-box { background: #ffffff; border-radius: var(--radius-md); padding: 26px; border: 1px solid rgba(0, 136, 255, 0.15); box-shadow: var(--shadow-soft); text-align: center; transition: var(--transition); }
+        .trust-box:hover { transform: translateY(-6px); border-color: var(--blue-primary); }
+        .trust-icon { width: 64px; height: 64px; background: var(--blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--blue-primary); font-size: 1.8rem; }
+        .trust-box h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+        .trust-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
 
         /* Checkout Modal */
         .checkout-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); z-index: 2000; opacity: 0; pointer-events: none; transition: var(--transition); display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -161,13 +170,6 @@
         .summary-row.total { font-size: 1.2rem; font-weight: 900; color: var(--text-dark); border-top: 1px solid var(--border-light); padding-top: 12px; margin-top: 12px; }
         .notice-banner { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 12px; font-size: 0.85rem; color: #065f46; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-top: 14px; }
 
-        /* Verification */
-        .verify-section { padding: 60px 0; }
-        .verify-box { background: linear-gradient(135deg, #ffffff, var(--blue-light)); border: 2px solid rgba(0, 136, 255, 0.2); border-radius: 22px; padding: 45px; text-align: center; max-width: 800px; margin: 0 auto; box-shadow: var(--shadow-soft); }
-        .verify-icon-large { font-size: 3.2rem; color: var(--blue-primary); margin-bottom: 16px; }
-        .verify-input-group { display: flex; gap: 12px; max-width: 550px; margin: 0 auto; }
-        .verify-input-group input { flex: 1; padding: 14px 20px; border-radius: 14px; border: 1px solid var(--border-light); outline: none; font-size: 0.95rem; }
-
         /* Cart Drawer */
         .cart-drawer-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 999; opacity: 0; pointer-events: none; transition: var(--transition); }
         .cart-drawer-overlay.active { opacity: 1; pointer-events: all; }
@@ -179,15 +181,15 @@
         .cart-drawer-footer { padding: 20px; border-top: 1px solid var(--border-light); }
         .cart-subtotal { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 900; margin-bottom: 16px; color: var(--text-dark); }
         
-        .main-footer { background: #ffffff; border-top: 1px solid var(--border-light); padding-top: 60px; }
+        .main-footer { background: #ffffff; border-top: 1px solid var(--border-light); padding-top: 40px; }
         .footer-bottom { border-top: 1px solid var(--border-light); padding: 20px 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-surface); }
 
         @media (max-width: 992px) {
-            .hero-grid, .checkout-grid { grid-template-columns: 1fr; }
+            .hero-grid, .checkout-grid, .trust-grid { grid-template-columns: 1fr; }
             .features-grid, .categories-grid, .products-grid-4 { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 600px) {
-            .features-grid, .categories-grid, .products-grid-4 { grid-template-columns: 1fr; }
+            .features-grid, .categories-grid, .products-grid-4, .trust-grid { grid-template-columns: 1fr; }
             .nav-links, .search-box { display: none; }
         }
     </style>
@@ -200,7 +202,7 @@
             <span><i class="fa-solid fa-bolt text-blue"></i> خصم خاص 15% على جميع كابلات Type-C السريعة | كود الخصم: <strong>CABLE15</strong></span>
             <div class="announcement-links">
                 <a href="#serial-verify"><i class="fa-solid fa-shield-halved"></i> تحقق من الأصالة</a>
-                <a href="#categories-section"><i class="fa-solid fa-layer-group"></i> فئات المنتجات</a>
+                <a href="#why-cableto"><i class="fa-solid fa-award"></i> لماذا كابليتو؟</a>
             </div>
         </div>
     </div>
@@ -235,11 +237,11 @@
                 <ul class="nav-links">
                     <li><a href="#" class="active"><i class="fa-solid fa-house"></i> الرئيسية</a></li>
                     <li><a href="#bestsellers-section"><i class="fa-solid fa-fire"></i> الأكثر مبيعاً (4)</a></li>
-                    <li><a href="#categories-section" class="cat-nav-link" data-cat="powerbank"><i class="fa-solid fa-battery-full"></i> الباور بانك</a></li>
-                    <li><a href="#categories-section" class="cat-nav-link" data-cat="charger"><i class="fa-solid fa-plug"></i> الشواحن الجدارية والسيارة</a></li>
-                    <li><a href="#categories-section" class="cat-nav-link" data-cat="cable"><i class="fa-solid fa-bolt-lightning"></i> كابلات الشحن</a></li>
-                    <li><a href="#categories-section" class="cat-nav-link" data-cat="earbuds"><i class="fa-solid fa-headphones"></i> السماعات والصوتيات</a></li>
-                    <li><a href="#serial-verify"><i class="fa-solid fa-shield-check"></i> تحقق من الأصالة</a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="powerbank"><i class="fa-solid fa-battery-full"></i> الباور بانك</a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="charger"><i class="fa-solid fa-plug"></i> الشواحن الجدارية والسيارة</a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="cable"><i class="fa-solid fa-bolt-lightning"></i> كابلات الشحن</a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="earbuds"><i class="fa-solid fa-headphones"></i> السماعات والصوتيات</a></li>
+                    <li><a href="#why-cableto"><i class="fa-solid fa-shield-halved"></i> لماذا كابليتو؟</a></li>
                 </ul>
             </div>
         </nav>
@@ -251,10 +253,10 @@
             <div class="hero-text">
                 <span class="tech-tag"><i class="fa-solid fa-bolt text-blue"></i> تقنيات الشحن السريع 2026</span>
                 <h1>طاقة فائقة وأمان دائم مع <span class="gradient-text">كابليتو Cableto</span></h1>
-                <p>استكشف المنتجات الأكثر مبيعاً والفئات المتميزة من الباور بانك عالي السعة، الشواحن الذكية، الكابلات المجدولة وسماعات عزل الضوضاء.</p>
+                <p>منتجات حقيقية أصلية 100% مع ضمان معتمد لمدة 12 شهراً وشحن سريع لكافة المحافظات المصرية.</p>
                 <div class="hero-actions">
-                    <a href="#bestsellers-section" class="btn btn-primary-blue"><i class="fa-solid fa-fire"></i> المنتجات الأكثر مبيعاً</a>
-                    <a href="#categories-section" class="btn btn-secondary-white"><i class="fa-solid fa-border-all"></i> تصفح الفئات</a>
+                    <a href="#bestsellers-section" class="btn btn-primary-blue"><i class="fa-solid fa-fire"></i> الأكثر مبيعاً</a>
+                    <a href="#categories-section" class="btn btn-secondary-white"><i class="fa-solid fa-border-all"></i> تصفح الفئات الأربعة</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -323,7 +325,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>منتجات كابليتو <span class="gradient-text">الأكثر مبيعاً ⭐</span></h2>
-                <p>المنتج الأول والأكثر طلباً من كل فئة من فئات كابليتو</p>
+                <p>المنتج الأول والأكثر طلباً من كل فئة من فئات كابليتو الرئيسية</p>
             </div>
 
             <div class="products-grid-4">
@@ -430,62 +432,62 @@
         </div>
     </section>
 
-    <!-- SECTION 2: CATEGORIES EXPLORER (4 CATEGORY CARDS) -->
+    <!-- SECTION 2: CATEGORIES (BUTTONS TO DEDICATED FULL PAGES) -->
     <section class="categories-section" id="categories-section">
         <div class="container">
             <div class="section-header">
-                <h2>فئات منتجات <span class="gradient-text">كابليتو</span></h2>
-                <p>اضغط على أي فئة لفتح وتصفح المنتجات الـ 4 المخصصة لها فوراً</p>
+                <h2>أقسام وفئات <span class="gradient-text">كابليتو الرئيسيـة</span></h2>
+                <p>اضغط على أزرار الأقسام لفتح صفحة كاملة ومستقلة تعرض منتجات كل فئة بالتفصيل</p>
             </div>
             <div class="categories-grid">
-                <div class="category-card cat-select-btn" data-cat="powerbank">
+                <div class="category-card open-cat-btn" data-cat="powerbank">
                     <i class="fa-solid fa-battery-full cat-icon-large"></i>
-                    <h3 style="font-size: 1.2rem; font-weight: 800;">الباور بانك</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">4 أنواع بسعات تقنيات مختلفة</p>
-                    <span class="btn btn-secondary-white" style="margin-top: 14px; padding: 6px 14px; font-size: 0.8rem;">تصفح الفئة <i class="fa-solid fa-arrow-left"></i></span>
+                    <h3 style="font-size: 1.2rem; font-weight: 800;">الباور بانك (Power Banks)</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">4 سعات وتقنيات شحن مختلفة</p>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة الباور بانك <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
 
-                <div class="category-card cat-select-btn" data-cat="charger">
+                <div class="category-card open-cat-btn" data-cat="charger">
                     <i class="fa-solid fa-plug-circle-bolt cat-icon-large"></i>
                     <h3 style="font-size: 1.2rem; font-weight: 800;">الشواحن الجدارية والسيارة</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">شواحن GaN وسيارات فائقة السرعة</p>
-                    <span class="btn btn-secondary-white" style="margin-top: 14px; padding: 6px 14px; font-size: 0.8rem;">تصفح الفئة <i class="fa-solid fa-arrow-left"></i></span>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة الشواحن <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
 
-                <div class="category-card cat-select-btn" data-cat="cable">
+                <div class="category-card open-cat-btn" data-cat="cable">
                     <i class="fa-solid fa-bolt-lightning cat-icon-large"></i>
                     <h3 style="font-size: 1.2rem; font-weight: 800;">كابلات الشحن ونقل البيانات</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">ArmorFlex, Lightning, AUX, USB-A</p>
-                    <span class="btn btn-secondary-white" style="margin-top: 14px; padding: 6px 14px; font-size: 0.8rem;">تصفح الفئة <i class="fa-solid fa-arrow-left"></i></span>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة الكابلات <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
 
-                <div class="category-card cat-select-btn" data-cat="earbuds">
+                <div class="category-card open-cat-btn" data-cat="earbuds">
                     <i class="fa-solid fa-headphones cat-icon-large"></i>
                     <h3 style="font-size: 1.2rem; font-weight: 800;">السماعات والصوتيات</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">UltraPods, مكبرات RGB, AirPro, سلكية</p>
-                    <span class="btn btn-secondary-white" style="margin-top: 14px; padding: 6px 14px; font-size: 0.8rem;">تصفح الفئة <i class="fa-solid fa-arrow-left"></i></span>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة السماعات <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3: DEDICATED CATEGORY SHOWCASE -->
-    <section class="category-dedicated-section" id="category-dedicated-section">
-        <div class="container">
-            <div class="cat-header-banner">
+    <!-- FULLSCREEN CATEGORY MODAL PAGE -->
+    <div class="category-page-modal" id="category-page-modal">
+        <div class="cat-modal-header">
+            <div class="container cat-modal-header-content">
                 <div>
-                    <h2 id="cat-banner-title" style="font-size: 1.8rem; font-weight: 900;">قسم المنتجات</h2>
-                    <p id="cat-banner-desc" style="font-size: 0.95rem; opacity: 0.9;">يعرض الآن المنتجات الـ 4 المخصصة لهذه الفئة</p>
+                    <h2 id="cat-modal-title" style="font-size: 1.6rem; font-weight: 900; color: var(--text-dark);">عنوان الفئة</h2>
+                    <p id="cat-modal-desc" style="font-size: 0.85rem; color: var(--text-muted);">وصف منتجات الفئة</p>
                 </div>
-                <button class="btn btn-secondary-white" id="close-cat-view" style="background:#fff; border:none; color:var(--text-dark);"><i class="fa-solid fa-xmark"></i> إغلاق الفئة</button>
-            </div>
-
-            <!-- Category Products Grid -->
-            <div class="products-grid-4" id="cat-products-grid">
-                <!-- Products dynamically inserted via JavaScript -->
+                <button class="btn btn-secondary-white" id="close-cat-modal" style="font-size: 0.9rem;"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
             </div>
         </div>
-    </section>
+        <div class="container" style="padding: 50px 20px;">
+            <div class="products-grid-4" id="cat-modal-grid">
+                <!-- Category Products Rendered via JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- Serial Authenticity Verification Section -->
     <section class="verify-section" id="serial-verify">
@@ -501,6 +503,42 @@
                     <button class="btn btn-primary-blue" id="verify-btn"><i class="fa-solid fa-magnifying-glass-chart"></i> تحقق من الكود</button>
                 </div>
                 <div id="verify-result" class="verify-result"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER TRUST & WHY BUY FROM CABLETO SECTION -->
+    <section class="why-cableto-section" id="why-cableto">
+        <div class="container">
+            <div class="section-header">
+                <h2>لماذا تشتري من <span class="gradient-text">كابليتو (Cableto)؟</span></h2>
+                <p>نحن شركة آمنة وموثوقة 100% نقدم أمتن وأقوى تقنيات الشحن مع ضمان الاستبدال المعتمد</p>
+            </div>
+
+            <div class="trust-grid">
+                <div class="trust-box">
+                    <div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>شركة آمنة وموثوقة 100%</h4>
+                    <p>منتجات أصلية معتمدة وفق أعلى معايير الجودة العالمية لحماية أجهزتك الذكية ضد السخونة والجهد العالي.</p>
+                </div>
+
+                <div class="trust-box">
+                    <div class="trust-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>منتجات خاماتها معضلة وقوية</h4>
+                    <p>كابلاتنا مجدولة بألياف Kevlar المقواة وشواحننا مصنوعة من سبائك الألومنيوم وتقنية GaN المقاومة للصدمات.</p>
+                </div>
+
+                <div class="trust-box">
+                    <div class="trust-icon"><i class="fa-solid fa-award"></i></div>
+                    <h4>ضمان معتمد 12 شهراً</h4>
+                    <p>استبدال فوري وحقيقي لأي منتج خلال عام كامل عند وجود أي عيب مصنعي بدون أي تعقيدات.</p>
+                </div>
+
+                <div class="trust-box">
+                    <div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h4>توصيل آمن لكافة المحافظات</h4>
+                    <p>شحن سريع خلال 24 - 48 ساعة والدفع كاش عند الاستلام بعد معاينة المنتج بنفسك وتأكده.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -642,10 +680,10 @@
         </div>
     </div>
 
-    <!-- Footer Section -->
+    <!-- Main Footer -->
     <footer class="main-footer">
         <div class="container footer-bottom">
-            <p>© 2026 جميع الحقوق محفوظة لـ <strong>كابليتو (Cableto)</strong> | الموقع الرسمي للشواحن والكابلات السريعة.</p>
+            <p>© 2026 جميع الحقوق محفوظة لـ <strong>كابليتو (Cableto)</strong> | الموقع الرسمي للشواحن والكابلات السريعة والباور بانك.</p>
         </div>
     </footer>
 
@@ -654,17 +692,17 @@
         const CATEGORIES_DATABASE = {
             powerbank: {
                 title: "فئة الباور بانك (Power Banks)",
-                desc: "4 منتجات ذات سعات وتقنيات شحن مختلفة لتناسب استخدامك الشخصي واللابتوب والرحلات",
+                desc: "استكشف 4 أنواع مختلفة من الباور بانك بسعات 5k, 10k, 20k, 30k mAh وتقنيات MagSafe واللابتوب",
                 products: [
                     { id: 1, model: "CB-PB20K", name: "باور بانك TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية", price: 1250, oldPrice: 1550, badge: "الأكثر مبيعاً", icon: "fa-battery-full", img: "public/images/powerbank.jpg", tag: "سعة 20k + شاشة" },
-                    { id: 2, model: "CB-PB10K", name: "باور بانك SlimMag 10,000mAh لاسلكي مدمج مغناطيسي MagSafe", price: 890, oldPrice: 1100, badge: "MagSafe آيفون", icon: "fa-magnet", img: "public/images/powerbank.jpg", tag: "لاسلكي 15W" },
-                    { id: 3, model: "CB-PB30K", name: "باور بانك MaxVolt 30,000mAh بقوة 100W لشحن اللابتوب", price: 1850, oldPrice: 2200, badge: "عملاق اللابتوب", icon: "fa-laptop", img: "public/images/powerbank.jpg", tag: "100W PD" },
+                    { id: 2, model: "CB-PB10K", name: "باور بانك SlimMag 10,000mAh لاسلكي مدمج مغناطيسي MagSafe للآيفون", price: 890, oldPrice: 1100, badge: "MagSafe آيفون", icon: "fa-magnet", img: "public/images/powerbank.jpg", tag: "لاسلكي 15W" },
+                    { id: 3, model: "CB-PB30K", name: "باور بانك MaxVolt 30,000mAh بقوة 100W لشحن اللابتوب والهواتف", price: 1850, oldPrice: 2200, badge: "عملاق اللابتوب", icon: "fa-laptop", img: "public/images/powerbank.jpg", tag: "100W PD" },
                     { id: 4, model: "CB-PB-MINI", name: "باور بانك PocketGo 5,000mAh كبسولة شحن سريع للجيب", price: 490, oldPrice: 600, badge: "حجم مدمج", icon: "fa-capsules", img: "public/images/powerbank.jpg", tag: "كبسولة جيب" }
                 ]
             },
             charger: {
                 title: "فئة الشواحن الجدارية والسيارة (Fast Chargers)",
-                desc: "4 شواحن فائقة السرعة بتقنية GaN الذكية ومنافذ متعددة وشاحن سيارة معدني",
+                desc: "4 شواحن فائقة السرعة بتقنية GaN الذكية ومنافذ متعددة وشاحن سيارة معدني 75W",
                 products: [
                     { id: 5, model: "CB-CH100W", name: "شاحن جداري GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)", price: 790, oldPrice: 990, badge: "GaNPro 100W", icon: "fa-plug-circle-bolt", img: "public/images/charger.jpg", tag: "ثلاثي المنافذ" },
                     { id: 6, model: "CB-CH65W", name: "شاحن جداري DuoCharge 65W مزدوج المنافذ Type-C سريع", price: 580, oldPrice: 720, badge: "DuoCharge 65W", icon: "fa-bolt", img: "public/images/charger.jpg", tag: "مزدوج C" },
@@ -674,7 +712,7 @@
             },
             cable: {
                 title: "فئة كابلات الشحن ونقل البيانات (High Performance Cables)",
-                desc: "4 كابلات متينة مجدولة بالنايلون بشاشة واط، وصلات آيفون، USB-A، وسلك AUX صوتيات",
+                desc: "4 كابلات متينة معضلة مجدولة بالنايلون بشاشة واط، وصلات آيفون Lightning، وUSB-A، ووصلة AUX صوتيات",
                 products: [
                     { id: 9, model: "CB-CB240W", name: "كابل شحن ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط", price: 290, oldPrice: 350, badge: "شاشة واط 240W", icon: "fa-bolt-lightning", img: "public/images/cable.jpg", tag: "مجدول 240W" },
                     { id: 10, model: "CB-CB-PD27W", name: "كابل Type-C إلى Lightning بقوة 27W شحن سريع للآيفون", price: 220, oldPrice: 280, badge: "آيفون Lightning", icon: "fa-mobile-screen-button", img: "public/images/cable.jpg", tag: "Lightning 27W" },
@@ -684,7 +722,7 @@
             },
             earbuds: {
                 title: "فئة السماعات والصوتيات (Audio & Wireless Earbuds)",
-                desc: "4 منتجات صوتية تشمل سماعات شفاف ANC، مكبر صوت RGB محمول، سماعات سينمائية، وسماعة سلكية",
+                desc: "4 منتجات صوتية تشمل سماعات شفاف ANC، مكبر صوت RGB محمول، سماعات سينمائية، وسماعة سلكية DeepBass",
                 products: [
                     { id: 13, model: "CB-PODS-ANC", name: "سماعات لاسلكية UltraPods مع عزل ضوضاء نشط ANC وحافظة شفافة", price: 1350, oldPrice: 1800, badge: "ANC شفاف", icon: "fa-headphones", img: "public/images/earbuds.jpg", tag: "عزل ضوضاء" },
                     { id: 14, model: "CB-SPK-360", name: "مكبر صوت BassBlast بلوتوث محمول مع إضاءة RGB 360 درجة", price: 650, oldPrice: 850, badge: "مكبر RGB", icon: "fa-radio", img: "public/images/earbuds.jpg", tag: "إضاءة 360" },
@@ -715,21 +753,21 @@
             const summaryFinalTotal = document.getElementById('summary-final-total');
             const checkoutItemsPreview = document.getElementById('checkout-items-preview');
 
-            const dedicatedSection = document.getElementById('category-dedicated-section');
-            const catBannerTitle = document.getElementById('cat-banner-title');
-            const catBannerDesc = document.getElementById('cat-banner-desc');
-            const catProductsGrid = document.getElementById('cat-products-grid');
-            const closeCatView = document.getElementById('close-cat-view');
+            const categoryPageModal = document.getElementById('category-page-modal');
+            const catModalTitle = document.getElementById('cat-modal-title');
+            const catModalDesc = document.getElementById('cat-modal-desc');
+            const catModalGrid = document.getElementById('cat-modal-grid');
+            const closeCatModal = document.getElementById('close-cat-modal');
 
-            // Open Dedicated Category View
-            function openCategoryView(catKey) {
+            // Open Dedicated Fullscreen Category Page Modal
+            function openCategoryPageModal(catKey) {
                 const category = CATEGORIES_DATABASE[catKey];
                 if (!category) return;
 
-                catBannerTitle.textContent = category.title;
-                catBannerDesc.textContent = category.desc;
+                catModalTitle.textContent = category.title;
+                catModalDesc.textContent = category.desc;
 
-                catProductsGrid.innerHTML = category.products.map(p => `
+                catModalGrid.innerHTML = category.products.map(p => `
                     <div class="product-card">
                         <div class="product-badge">${p.badge}</div>
                         <div class="product-img-holder">
@@ -755,31 +793,32 @@
                     </div>
                 `).join('');
 
-                // Re-bind buttons inside rendered grid
-                catProductsGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                catModalGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
                     btn.addEventListener('click', () => addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img));
                 });
-                catProductsGrid.querySelectorAll('.buy-now-btn').forEach(btn => {
+                catModalGrid.querySelectorAll('.buy-now-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img);
+                        closeCategoryPageModal();
                         openCheckoutModal();
                     });
                 });
 
-                dedicatedSection.classList.add('active');
-                dedicatedSection.scrollIntoView({ behavior: 'smooth' });
+                categoryPageModal.classList.add('active');
             }
 
-            closeCatView.addEventListener('click', () => {
-                dedicatedSection.classList.remove('active');
-            });
+            function closeCategoryPageModal() {
+                categoryPageModal.classList.remove('active');
+            }
 
-            // Category card click & nav link click listeners
-            document.querySelectorAll('.cat-select-btn, .cat-nav-link').forEach(elem => {
+            closeCatModal.addEventListener('click', closeCategoryPageModal);
+
+            document.querySelectorAll('.open-cat-btn').forEach(elem => {
                 elem.addEventListener('click', (e) => {
+                    e.preventDefault();
                     const catKey = elem.dataset.cat;
                     if (catKey) {
-                        openCategoryView(catKey);
+                        openCategoryPageModal(catKey);
                     }
                 });
             });
