@@ -17,10 +17,32 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: `${SITE_CONFIG.nameEn} | ${SITE_CONFIG.name} - ${SITE_CONFIG.tagline}`,
+  title: `${SITE_CONFIG.nameEn} | ${SITE_CONFIG.name}`,
   description: 'تسوق أحدث الشواحن السريعة، الباور بانك والكابلات المجدولة الأصلية مع ضمان 12 شهراً وشحن لكل المحافظات.',
   verification: {
     google: 'lufdPjx7Ntupfd4U8_RQUz_YaMTLpSAqahYxTB7Oo8w',
+  },
+  openGraph: {
+    title: `${SITE_CONFIG.nameEn} | ${SITE_CONFIG.name}`,
+    description: 'تسوق أحدث الشواحن السريعة، الباور بانك والكابلات المجدولة الأصلية مع ضمان 12 شهراً وشحن لكل المحافظات.',
+    url: 'https://cableto.vercel.app',
+    siteName: SITE_CONFIG.name,
+    images: [
+      {
+        url: 'https://cableto.vercel.app/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: SITE_CONFIG.name,
+      },
+    ],
+    locale: 'ar_EG',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_CONFIG.nameEn} | ${SITE_CONFIG.name}`,
+    description: 'تسوق أحدث الشواحن السريعة، الباور بانك والكابلات المجدولة الأصلية مع ضمان 12 شهراً وشحن لكل المحافظات.',
+    images: ['https://cableto.vercel.app/og-image.jpg'],
   },
 };
 
