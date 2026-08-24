@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Cairo, Outfit } from 'next/font/google';
 import './globals.css';
 import { SITE_CONFIG } from '@/constants/products';
+import { Analytics } from '@vercel/analytics/react';
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" className={`${cairo.variable} ${outfit.variable}`}>
       <body className="font-sans bg-slate-50 text-slate-900 min-h-screen">
         {children}
+        <Analytics />
       </body>
     </html>
   );
