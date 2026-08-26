@@ -83,11 +83,11 @@
 
         .brand-logo { display: flex; align-items: center; justify-content: center; text-decoration: none; direction: ltr !important; }
         .logo-text-wrapper { text-align: center; direction: ltr !important; }
-        .brand-name { font-family: 'Outfit', 'Cairo', sans-serif; font-size: 1.85rem; font-weight: 900; color: var(--text-dark); letter-spacing: 1.5px; line-height: 1; display: inline-flex; align-items: center; direction: ltr !important; unicode-bidi: isolate; }
+        .brand-name { font-family: 'Outfit', 'Cairo', sans-serif; font-size: 1.95rem; font-weight: 900; color: var(--text-dark); letter-spacing: 1.5px; line-height: 1; display: inline-flex; align-items: center; direction: ltr !important; unicode-bidi: isolate; }
         .brand-sub { font-size: 0.85rem; color: var(--blue-primary); display: block; font-weight: 800; letter-spacing: 2px; margin-top: 3px; direction: rtl; text-align: center; }
         
         .logo-letter-o { position: relative; display: inline-flex; align-items: center; justify-content: center; }
-        .subtle-bolt { position: absolute; width: 12px; height: 12px; color: #0088ff; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+        .subtle-bolt { position: absolute; width: 18px; height: 18px; color: #0088ff; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; filter: drop-shadow(0 0 2px rgba(0, 136, 255, 0.6)); }
 
         .search-box { display: flex; width: 100%; max-width: 380px; position: relative; }
         .search-box input { width: 100%; padding: 10px 18px; border-radius: 25px; background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-dark); outline: none; font-size: 0.9rem; transition: var(--transition); }
@@ -168,6 +168,18 @@
         .category-page-modal.active { display: block; opacity: 1; }
         .cat-modal-header { position: sticky; top: 0; z-index: 10; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); padding: 18px 0; }
         .cat-modal-header-content { display: flex; justify-content: space-between; align-items: center; }
+
+        /* Authenticity Verification Section */
+        .verify-section { padding: 70px 0; background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(0, 136, 255, 0.05) 100%); border-top: 1px solid var(--border-light); }
+        .verify-box { max-width: 650px; margin: 0 auto; background: var(--bg-card, #ffffff); border: 1px solid var(--border-light); border-radius: 20px; padding: 36px 28px; text-align: center; box-shadow: var(--shadow-soft); }
+        .verify-icon-large { width: 68px; height: 68px; background: var(--blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--blue-primary); font-size: 2rem; box-shadow: 0 4px 15px var(--blue-glow); }
+        .verify-box h2 { font-size: 1.6rem; font-weight: 900; color: var(--text-dark); margin-bottom: 8px; }
+        .verify-box p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 22px; }
+        .verify-input-group { display: flex; align-items: center; max-width: 480px; margin: 0 auto; background: var(--bg-surface); border: 2px solid var(--border-light); border-radius: 30px; padding: 4px 6px; transition: var(--transition); }
+        .verify-input-group:focus-within { border-color: var(--blue-primary); box-shadow: 0 0 15px var(--blue-glow); background: #ffffff; }
+        .verify-input-group input { flex: 1; border: none; background: transparent; padding: 10px 16px; font-size: 0.9rem; font-weight: 700; color: var(--text-dark); outline: none; }
+        .verify-input-group button { border-radius: 25px; padding: 10px 20px; font-size: 0.9rem; font-weight: 800; border: none; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .verify-result { display: none; margin-top: 16px; border-radius: 12px; font-size: 0.88rem; }
 
         /* Dedicated Why Buy From Cableto (Footer Trust Section) */
         .why-cableto-section { background: linear-gradient(180deg, #f8fafc 0%, #e6f2ff 100%); border-top: 1px solid var(--border-light); padding: 70px 0; }
@@ -293,7 +305,9 @@
         [data-theme="dark"] .summary-box,
         [data-theme="dark"] .feature-card,
         [data-theme="dark"] .search-box input,
-        [data-theme="dark"] .product-img-holder {
+        [data-theme="dark"] .product-img-holder,
+        [data-theme="dark"] .verify-box,
+        [data-theme="dark"] .verify-input-group {
             background-color: #0f172a !important;
             color: var(--text-dark) !important;
             border-color: var(--border-light) !important;
@@ -449,7 +463,7 @@
     <div class="toast-container" id="toast-container"></div>
 
     <!-- Floating WhatsApp Action Button -->
-    <a href="https://wa.me/971509019496?text=السلام%20عليكم%20،%20كنت%20حابب%20أستفسر%20عن%20منتجات%20كابليتو%20وتفاصيل%20التوصيل%20والضمان." target="_blank" class="whatsapp-float" aria-label="تواصل واتساب" title="تواصل معنا عبر واتساب">
+    <a href="https://wa.me/971509019496?text=السلام%20عليكم" target="_blank" class="whatsapp-float" aria-label="تواصل واتساب" title="تواصل معنا عبر واتساب">
         <i class="fa-brands fa-whatsapp"></i>
         <span class="whatsapp-tooltip">تواصل عبر واتساب (+971 50 901 9496)</span>
     </a>
@@ -459,7 +473,7 @@
         <div class="container announcement-content">
             <span><i class="fa-solid fa-bolt text-blue"></i> خصم خاص 15% على جميع كابلات Type-C السريعة | كود الخصم: <strong>CABLE15</strong></span>
             <div class="announcement-links">
-                <a href="https://wa.me/971509019496?text=السلام%20عليكم%20،%20أود%20الاستفسار%20عن%20المنتجات%20المتاحة%20وعروض%20كابليتو." target="_blank"><i class="fa-brands fa-whatsapp text-blue"></i> خدمة العملاء (+971 50 901 9496)</a>
+                <a href="https://wa.me/971509019496?text=السلام%20عليكم" target="_blank"><i class="fa-brands fa-whatsapp text-blue"></i> خدمة العملاء (+971 50 901 9496)</a>
                 <a href="#serial-verify"><i class="fa-solid fa-shield-halved"></i> فحص الأصالة</a>
                 <a href="#why-cableto"><i class="fa-solid fa-award"></i> لماذا كابليتو؟</a>
             </div>
@@ -599,20 +613,20 @@
 
             <div class="products-grid-4">
                 <!-- Best Seller 1: Powerbank -->
-                <div class="product-card">
+                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(1)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(1)" title="اضغط لعرض المواصفات الكاملة">
+                    <div class="product-img-holder">
                         <img src="images/pb_20k.jpg" alt="باور بانك TitanPower 20,000mAh">
                         <span class="product-type-icon"><i class="fa-solid fa-battery-full"></i> باور بانك</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-PB20K</span>
-                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(1)" title="اضغط لعرض المواصفات الكاملة">باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية</h3>
+                        <h3 class="product-title">باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية</h3>
                         <div class="product-price">
                             <span class="current-price">1,250 ج.م</span>
                             <span class="old-price">1,550 ج.م</span>
                         </div>
-                        <div class="product-actions">
+                        <div class="product-actions" onclick="event.stopPropagation()">
                             <button class="btn btn-cart add-to-cart-btn" data-id="1" data-title="باور بانك TitanPower 20,000mAh" data-price="1250" data-img="images/pb_20k.jpg">
                                 <i class="fa-solid fa-cart-plus"></i> للسلة
                             </button>
@@ -620,27 +634,24 @@
                                 شراء الآن
                             </button>
                         </div>
-                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(1)">
-                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
-                        </button>
                     </div>
                 </div>
 
                 <!-- Best Seller 2: Charger -->
-                <div class="product-card">
+                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(5)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(5)" title="اضغط لعرض المواصفات الكاملة">
+                    <div class="product-img-holder">
                         <img src="images/ch_100w.jpg" alt="شاحن جداري GaNPro 100W">
                         <span class="product-type-icon"><i class="fa-solid fa-plug-circle-bolt"></i> شواحن</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-CH100W</span>
-                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(5)" title="اضغط لعرض المواصفات الكاملة">شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)</h3>
+                        <h3 class="product-title">شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)</h3>
                         <div class="product-price">
                             <span class="current-price">790 ج.م</span>
                             <span class="old-price">990 ج.م</span>
                         </div>
-                        <div class="product-actions">
+                        <div class="product-actions" onclick="event.stopPropagation()">
                             <button class="btn btn-cart add-to-cart-btn" data-id="5" data-title="شاحن جداري GaNPro 100W" data-price="790" data-img="images/ch_100w.jpg">
                                 <i class="fa-solid fa-cart-plus"></i> للسلة
                             </button>
@@ -648,27 +659,24 @@
                                 شراء الآن
                             </button>
                         </div>
-                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(5)">
-                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
-                        </button>
                     </div>
                 </div>
 
                 <!-- Best Seller 3: Cable -->
-                <div class="product-card">
+                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(9)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(9)" title="اضغط لعرض المواصفات الكاملة">
+                    <div class="product-img-holder">
                         <img src="images/cb_240w.jpg" alt="كابل ArmorFlex 240W">
                         <span class="product-type-icon"><i class="fa-solid fa-bolt-lightning"></i> كابلات</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-CB240W</span>
-                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(9)" title="اضغط لعرض المواصفات الكاملة">كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط</h3>
+                        <h3 class="product-title">كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط</h3>
                         <div class="product-price">
                             <span class="current-price">290 ج.م</span>
                             <span class="old-price">350 ج.م</span>
                         </div>
-                        <div class="product-actions">
+                        <div class="product-actions" onclick="event.stopPropagation()">
                             <button class="btn btn-cart add-to-cart-btn" data-id="9" data-title="كابل ArmorFlex 240W" data-price="290" data-img="images/cb_240w.jpg">
                                 <i class="fa-solid fa-cart-plus"></i> للسلة
                             </button>
@@ -676,27 +684,24 @@
                                 شراء الآن
                             </button>
                         </div>
-                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(9)">
-                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
-                        </button>
                     </div>
                 </div>
 
                 <!-- Best Seller 4: Earbuds -->
-                <div class="product-card">
+                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(13)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(13)" title="اضغط لعرض المواصفات الكاملة">
+                    <div class="product-img-holder">
                         <img src="images/ear_anc.jpg" alt="سماعات UltraPods ANC">
                         <span class="product-type-icon"><i class="fa-solid fa-headphones"></i> سماعات</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-PODS-ANC</span>
-                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(13)" title="اضغط لعرض المواصفات الكاملة">سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط وحافظة شفافة</h3>
+                        <h3 class="product-title">سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط وحافظة شفافة</h3>
                         <div class="product-price">
                             <span class="current-price">1,350 ج.م</span>
                             <span class="old-price">1,800 ج.م</span>
                         </div>
-                        <div class="product-actions">
+                        <div class="product-actions" onclick="event.stopPropagation()">
                             <button class="btn btn-cart add-to-cart-btn" data-id="13" data-title="سماعات UltraPods ANC" data-price="1350" data-img="images/ear_anc.jpg">
                                 <i class="fa-solid fa-cart-plus"></i> للسلة
                             </button>
@@ -704,9 +709,6 @@
                                 شراء الآن
                             </button>
                         </div>
-                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(13)">
-                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1504,7 +1506,7 @@
                 }
 
                 // Natural WhatsApp greeting
-                const waText = `السلام عليكم ، كنت حابب أستفسر عن تفاصيل وسعر منتج: ${product.name} (موديل ${product.model})`;
+                const waText = `السلام عليكم`;
                 if (pdpWhatsAppBtn) pdpWhatsAppBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
 
                 if (pdpModalOverlay) pdpModalOverlay.classList.add('active');
@@ -1685,20 +1687,20 @@
                 catModalDesc.textContent = category.desc;
 
                 catModalGrid.innerHTML = category.products.map(p => `
-                    <div class="product-card">
+                    <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="اضغط لعرض تفاصيل ومواصفات المنتج">
                         <div class="product-badge">${p.badge}</div>
-                        <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="اضغط لعرض المواصفات الكاملة">
+                        <div class="product-img-holder">
                             <img src="${p.img}" alt="${p.name}">
                             <span class="product-type-icon"><i class="fa-solid ${p.icon}"></i> ${p.tag}</span>
                         </div>
                         <div class="product-details">
                             <span class="product-model">موديل: ${p.model}</span>
-                            <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="اضغط لعرض المواصفات الكاملة">${p.name}</h3>
+                            <h3 class="product-title">${p.name}</h3>
                             <div class="product-price">
                                 <span class="current-price">${p.price.toLocaleString()} ج.م</span>
                                 <span class="old-price">${p.oldPrice.toLocaleString()} ج.م</span>
                             </div>
-                            <div class="product-actions">
+                            <div class="product-actions" onclick="event.stopPropagation()">
                                 <button class="btn btn-cart add-to-cart-btn" data-id="${p.id}" data-title="${p.name}" data-price="${p.price}" data-img="${p.img}">
                                     <i class="fa-solid fa-cart-plus"></i> للسلة
                                 </button>
@@ -1706,9 +1708,6 @@
                                     شراء الآن
                                 </button>
                             </div>
-                            <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(${p.id})">
-                                <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
-                            </button>
                         </div>
                     </div>
                 `).join('');
