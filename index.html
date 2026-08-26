@@ -94,7 +94,36 @@
         .search-box input:focus { border-color: var(--blue-primary); box-shadow: 0 0 15px var(--blue-glow); }
         .search-box button { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--blue-primary); cursor: pointer; padding: 8px; font-size: 1rem; }
 
-        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .header-actions { display: flex; align-items: center; gap: 10px; }
+        .lang-switch-pill {
+            background: rgba(0, 136, 255, 0.1);
+            color: var(--blue-primary);
+            border: 1px solid rgba(0, 136, 255, 0.25);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        .lang-switch-pill:hover {
+            background: var(--blue-primary);
+            color: #ffffff;
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 12px var(--blue-glow);
+        }
+        [dir="ltr"] .search-box button { left: auto; right: 8px; }
+        [dir="ltr"] .search-box input { padding: 10px 40px 10px 18px; text-align: left; }
+        [dir="ltr"] .announcement-links { gap: 14px; }
+        [dir="ltr"] .brand-sub { direction: ltr; }
+        [dir="ltr"] .pdp-desc { border-right: none; border-left: 3px solid var(--blue-primary); }
+        [dir="ltr"] .verify-input-group input { text-align: left; direction: ltr; }
+        [dir="ltr"] .checkout-modal .modal-close-btn { left: auto; right: 20px; }
+
         .icon-btn { background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-dark); width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; transition: var(--transition); }
         .icon-btn:hover { border-color: var(--blue-primary); color: var(--blue-primary); background: var(--blue-light); }
         .cart-count { position: absolute; top: -4px; right: -4px; background: var(--blue-primary); color: #fff; font-size: 0.75rem; font-weight: 800; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -471,11 +500,12 @@
     <!-- Top Announcement Bar -->
     <div class="announcement-bar">
         <div class="container announcement-content">
-            <span><i class="fa-solid fa-bolt text-blue"></i> خصم خاص 15% على جميع كابلات Type-C السريعة | كود الخصم: <strong>CABLE15</strong></span>
+            <span id="ann-text"><i class="fa-solid fa-bolt text-blue"></i> خصم خاص 15% على جميع كابلات Type-C السريعة | كود الخصم: <strong>CABLE15</strong></span>
             <div class="announcement-links">
-                <a href="https://wa.me/971509019496?text=السلام%20عليكم" target="_blank"><i class="fa-brands fa-whatsapp text-blue"></i> خدمة العملاء (+971 50 901 9496)</a>
-                <a href="#serial-verify"><i class="fa-solid fa-shield-halved"></i> فحص الأصالة</a>
-                <a href="#why-cableto"><i class="fa-solid fa-award"></i> لماذا كابليتو؟</a>
+                <a href="https://wa.me/971509019496?text=السلام%20عليكم" target="_blank" id="ann-cs-link"><i class="fa-brands fa-whatsapp text-blue"></i> <span id="ann-cs-text">خدمة العملاء (+971 50 901 9496)</span></a>
+                <a href="#serial-verify" id="ann-verify-link"><i class="fa-solid fa-shield-halved"></i> <span id="ann-verify-text">فحص الأصالة</span></a>
+                <a href="#why-cableto" id="ann-why-link"><i class="fa-solid fa-award"></i> <span id="ann-why-text">لماذا كابليتو؟</span></a>
+                <button class="lang-switch-pill" id="lang-switch-top-btn" title="Switch Language / تبديل اللغة"><i class="fa-solid fa-globe"></i> <span class="lang-text-label">English</span></button>
             </div>
         </div>
     </div>
@@ -497,14 +527,15 @@
                 <a href="#" class="brand-logo" dir="ltr">
                     <div class="logo-text-wrapper" dir="ltr">
                         <span class="brand-name" dir="ltr">CABLET<span class="logo-letter-o">O<svg class="subtle-bolt" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z"/></svg></span></span>
-                        <span class="brand-sub">كابليتو</span>
+                        <span class="brand-sub" id="brand-sub-label">كابليتو</span>
                     </div>
                 </a>
             </div>
 
-            <!-- 3. Left Side: Header Actions (Theme Toggle & Cart) -->
+            <!-- 3. Left Side: Header Actions (Theme Toggle & Cart & Lang) -->
             <div class="header-left">
                 <div class="header-actions">
+                    <button class="lang-switch-pill" id="lang-switch-header-btn" title="Switch Language / تبديل اللغة"><i class="fa-solid fa-globe"></i> <span class="lang-text-label">English</span></button>
                     <button class="icon-btn" id="theme-toggle-btn" title="تبديل الوضع الليلي / الفاتح"><i class="fa-solid fa-moon"></i></button>
                     <button class="icon-btn cart-trigger" id="cart-btn" title="سلة التسوق">
                         <i class="fa-solid fa-bag-shopping"></i>
@@ -518,13 +549,13 @@
         <nav class="nav-menu" id="nav-menu">
             <div class="container nav-content">
                 <ul class="nav-links">
-                    <li><a href="#" class="active"><i class="fa-solid fa-house"></i> الرئيسية</a></li>
-                    <li><a href="#bestsellers-section"><i class="fa-solid fa-fire"></i> الأكثر مبيعاً (4)</a></li>
-                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="powerbank"><i class="fa-solid fa-battery-full"></i> الباور بانك</a></li>
-                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="charger"><i class="fa-solid fa-plug"></i> الشواحن الجدارية والسيارة</a></li>
-                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="cable"><i class="fa-solid fa-bolt-lightning"></i> كابلات الشحن</a></li>
-                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="earbuds"><i class="fa-solid fa-headphones"></i> السماعات والصوتيات</a></li>
-                    <li><a href="#why-cableto"><i class="fa-solid fa-shield-halved"></i> لماذا كابليتو؟</a></li>
+                    <li><a href="#" class="active"><i class="fa-solid fa-house"></i> <span id="nav-home">الرئيسية</span></a></li>
+                    <li><a href="#bestsellers-section"><i class="fa-solid fa-fire"></i> <span id="nav-bs">الأكثر مبيعاً (4)</span></a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="powerbank"><i class="fa-solid fa-battery-full"></i> <span id="nav-pb">الباور بانك</span></a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="charger"><i class="fa-solid fa-plug"></i> <span id="nav-ch">الشواحن الجدارية والسيارة</span></a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="cable"><i class="fa-solid fa-bolt-lightning"></i> <span id="nav-cb">كابلات الشحن</span></a></li>
+                    <li><a href="javascript:void(0)" class="open-cat-btn" data-cat="earbuds"><i class="fa-solid fa-headphones"></i> <span id="nav-ear">السماعات والصوتيات</span></a></li>
+                    <li><a href="#why-cableto"><i class="fa-solid fa-shield-halved"></i> <span id="nav-why">لماذا كابليتو؟</span></a></li>
                 </ul>
             </div>
         </nav>
@@ -534,25 +565,25 @@
     <section class="hero-section">
         <div class="container hero-grid">
             <div class="hero-text">
-                <span class="tech-tag"><i class="fa-solid fa-bolt text-blue"></i> تقنيات الشحن السريع 2026</span>
-                <h1>طاقة فائقة وأمان دائم مع <span class="gradient-text">كابليتو Cableto</span></h1>
-                <p>منتجات حقيقية أصلية 100% مع ضمان معتمد لمدة 12 شهراً وشحن سريع لكافة المحافظات المصرية.</p>
+                <span class="tech-tag" id="hero-tag"><i class="fa-solid fa-bolt text-blue"></i> تقنيات الشحن السريع 2026</span>
+                <h1 id="hero-title">طاقة فائقة وأمان دائم مع <span class="gradient-text">كابليتو Cableto</span></h1>
+                <p id="hero-desc">منتجات حقيقية أصلية 100% مع ضمان معتمد لمدة 12 شهراً وتوصيل سريع وموثوق.</p>
                 <div class="hero-actions">
-                    <a href="#bestsellers-section" class="btn btn-primary-blue"><i class="fa-solid fa-fire"></i> الأكثر مبيعاً</a>
-                    <a href="#categories-section" class="btn btn-secondary-white"><i class="fa-solid fa-border-all"></i> تصفح الفئات الأربعة</a>
+                    <a href="#bestsellers-section" class="btn btn-primary-blue" id="hero-btn-bs"><i class="fa-solid fa-fire"></i> <span id="hero-btn-bs-text">الأكثر مبيعاً</span></a>
+                    <a href="#categories-section" class="btn btn-secondary-white" id="hero-btn-cats"><i class="fa-solid fa-border-all"></i> <span id="hero-btn-cats-text">تصفح الفئات الأربعة</span></a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-num">+50K</span>
-                        <span class="stat-label">عميل يثق بنا</span>
+                        <span class="stat-label" id="stat1-label">عميل يثق بنا</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-num">100%</span>
-                        <span class="stat-label">ضمان استبدال</span>
+                        <span class="stat-label" id="stat2-label">ضمان استبدال</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-num">24h</span>
-                        <span class="stat-label">توصيل سريع</span>
+                        <span class="stat-label" id="stat3-label">توصيل سريع</span>
                     </div>
                 </div>
             </div>
@@ -562,7 +593,7 @@
                     <i class="fa-solid fa-bolt text-blue fa-2x"></i>
                     <div>
                         <strong>HyperCharge 140W</strong>
-                        <span>شحن سريع وسرعة فائقة</span>
+                        <span id="hero-badge-sub">شحن فائق السرعة وأمان</span>
                     </div>
                 </div>
             </div>
@@ -575,29 +606,29 @@
             <div class="feature-card">
                 <i class="fa-solid fa-award feature-icon"></i>
                 <div class="feature-info">
-                    <h4>ضمان معتمد 12 شهراً</h4>
-                    <p>استبدال فوري عند وجود أي عيب مصنعي</p>
+                    <h4 id="feat1-h4">ضمان معتمد 12 شهراً</h4>
+                    <p id="feat1-p">استبدال فوري عند وجود أي عيب مصنعي</p>
                 </div>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-truck-fast feature-icon"></i>
                 <div class="feature-info">
-                    <h4>شحن لكافة المحافظات</h4>
-                    <p>التوصيل خلال 24 - 48 ساعة فقط</p>
+                    <h4 id="feat2-h4">توصيل سريع وآمن</h4>
+                    <p id="feat2-p">التوصيل خلال 24 - 48 ساعة لباب منزلك</p>
                 </div>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-shield-virus feature-icon"></i>
                 <div class="feature-info">
-                    <h4>منتجات أصلية 100%</h4>
-                    <p>مزودة بكود تحقق مائي فريد</p>
+                    <h4 id="feat3-h4">منتجات أصلية 100%</h4>
+                    <p id="feat3-p">مزودة بكود تحقق مائي فريد</p>
                 </div>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-headset feature-icon"></i>
                 <div class="feature-info">
-                    <h4>دعم فني متاح 24/7</h4>
-                    <p>فريق متخصص لخدمتك عبر الواتساب</p>
+                    <h4 id="feat4-h4">دعم فني متاح 24/7</h4>
+                    <p id="feat4-p">فريق متخصص لخدمتك عبر الواتساب</p>
                 </div>
             </div>
         </div>
@@ -607,110 +638,12 @@
     <section class="bestsellers-section" id="bestsellers-section">
         <div class="container">
             <div class="section-header">
-                <h2>منتجات كابليتو <span class="gradient-text">الأكثر مبيعاً ⭐</span></h2>
-                <p>المنتج الأول والأكثر طلباً من كل فئة من فئات كابليتو الرئيسية</p>
+                <h2 id="bs-title">منتجات كابليتو <span class="gradient-text">الأكثر مبيعاً ⭐</span></h2>
+                <p id="bs-desc">المنتج الأول والأكثر طلباً من كل فئة من فئات كابليتو الرئيسية</p>
             </div>
 
-            <div class="products-grid-4">
-                <!-- Best Seller 1: Powerbank -->
-                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(1)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
-                    <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
-                        <img src="images/powerbank.jpg" alt="باور بانك TitanPower 20,000mAh">
-                        <span class="product-type-icon"><i class="fa-solid fa-battery-full"></i> باور بانك</span>
-                    </div>
-                    <div class="product-details">
-                        <span class="product-model">موديل: CB-PB20K</span>
-                        <h3 class="product-title">باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية</h3>
-                        <div class="product-price">
-                            <span class="current-price">1,250 ج.م</span>
-                            <span class="old-price">1,550 ج.م</span>
-                        </div>
-                        <div class="product-actions" onclick="event.stopPropagation()">
-                            <button class="btn btn-cart add-to-cart-btn" data-id="1" data-title="باور بانك TitanPower 20,000mAh" data-price="1250" data-img="images/powerbank.jpg">
-                                <i class="fa-solid fa-cart-plus"></i> للسلة
-                            </button>
-                            <button class="btn btn-buy buy-now-btn" data-id="1" data-title="باور بانك TitanPower 20,000mAh" data-price="1250" data-img="images/powerbank.jpg">
-                                شراء الآن
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Best Seller 2: Charger -->
-                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(5)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
-                    <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
-                        <img src="images/charger.jpg" alt="شاحن جداري GaNPro 100W">
-                        <span class="product-type-icon"><i class="fa-solid fa-plug-circle-bolt"></i> شواحن</span>
-                    </div>
-                    <div class="product-details">
-                        <span class="product-model">موديل: CB-CH100W</span>
-                        <h3 class="product-title">شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)</h3>
-                        <div class="product-price">
-                            <span class="current-price">790 ج.م</span>
-                            <span class="old-price">990 ج.م</span>
-                        </div>
-                        <div class="product-actions" onclick="event.stopPropagation()">
-                            <button class="btn btn-cart add-to-cart-btn" data-id="5" data-title="شاحن جداري GaNPro 100W" data-price="790" data-img="images/charger.jpg">
-                                <i class="fa-solid fa-cart-plus"></i> للسلة
-                            </button>
-                            <button class="btn btn-buy buy-now-btn" data-id="5" data-title="شاحن جداري GaNPro 100W" data-price="790" data-img="images/charger.jpg">
-                                شراء الآن
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Best Seller 3: Cable -->
-                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(9)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
-                    <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
-                        <img src="images/cable.jpg" alt="كابل ArmorFlex 240W">
-                        <span class="product-type-icon"><i class="fa-solid fa-bolt-lightning"></i> كابلات</span>
-                    </div>
-                    <div class="product-details">
-                        <span class="product-model">موديل: CB-CB240W</span>
-                        <h3 class="product-title">كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط</h3>
-                        <div class="product-price">
-                            <span class="current-price">290 ج.م</span>
-                            <span class="old-price">350 ج.م</span>
-                        </div>
-                        <div class="product-actions" onclick="event.stopPropagation()">
-                            <button class="btn btn-cart add-to-cart-btn" data-id="9" data-title="كابل ArmorFlex 240W" data-price="290" data-img="images/cable.jpg">
-                                <i class="fa-solid fa-cart-plus"></i> للسلة
-                            </button>
-                            <button class="btn btn-buy buy-now-btn" data-id="9" data-title="كابل ArmorFlex 240W" data-price="290" data-img="images/cable.jpg">
-                                شراء الآن
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Best Seller 4: Earbuds -->
-                <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(13)" title="اضغط لعرض تفاصيل ومواصفات المنتج">
-                    <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
-                        <img src="images/earbuds.jpg" alt="سماعات UltraPods ANC">
-                        <span class="product-type-icon"><i class="fa-solid fa-headphones"></i> سماعات</span>
-                    </div>
-                    <div class="product-details">
-                        <span class="product-model">موديل: CB-PODS-ANC</span>
-                        <h3 class="product-title">سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط وحافظة شفافة</h3>
-                        <div class="product-price">
-                            <span class="current-price">1,350 ج.م</span>
-                            <span class="old-price">1,800 ج.م</span>
-                        </div>
-                        <div class="product-actions" onclick="event.stopPropagation()">
-                            <button class="btn btn-cart add-to-cart-btn" data-id="13" data-title="سماعات UltraPods ANC" data-price="1350" data-img="images/earbuds.jpg">
-                                <i class="fa-solid fa-cart-plus"></i> للسلة
-                            </button>
-                            <button class="btn btn-buy buy-now-btn" data-id="13" data-title="سماعات UltraPods ANC" data-price="1350" data-img="images/earbuds.jpg">
-                                شراء الآن
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="products-grid-4" id="bestsellers-grid">
+                <!-- 4 Flagship Best Sellers dynamically rendered via JS in AR & EN -->
             </div>
         </div>
     </section>
@@ -719,36 +652,36 @@
     <section class="categories-section" id="categories-section">
         <div class="container">
             <div class="section-header">
-                <h2>أقسام وفئات <span class="gradient-text">كابليتو الرئيسيـة</span></h2>
-                <p>اضغط على أزرار الأقسام لفتح صفحة كاملة ومستقلة تعرض منتجات كل فئة بالتفصيل</p>
+                <h2 id="cat-sec-title">أقسام وفئات <span class="gradient-text">كابليتو الرئيسيـة</span></h2>
+                <p id="cat-sec-desc">اضغط على أزرار الأقسام لفتح صفحة كاملة ومستقلة تعرض منتجات كل فئة بالتفصيل</p>
             </div>
             <div class="categories-grid">
                 <div class="category-card open-cat-btn" data-cat="powerbank">
                     <i class="fa-solid fa-battery-full cat-icon-large"></i>
-                    <h3 style="font-size: 1.2rem; font-weight: 800;">الباور بانك (Power Banks)</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">4 سعات وتقنيات شحن مختلفة</p>
-                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة الباور بانك <i class="fa-solid fa-arrow-left"></i></button>
+                    <h3 style="font-size: 1.2rem; font-weight: 800;" id="cat1-card-title">الباور بانك (Power Banks)</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;" id="cat1-card-desc">4 سعات وتقنيات شحن مختلفة</p>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;"><span id="cat1-card-btn">افتح صفحة الباور بانك</span> <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
 
                 <div class="category-card open-cat-btn" data-cat="charger">
                     <i class="fa-solid fa-plug-circle-bolt cat-icon-large"></i>
-                    <h3 style="font-size: 1.2rem; font-weight: 800;">الشواحن الجدارية والسيارة</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">شواحن GaN وسيارات فائقة السرعة</p>
-                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة الشواحن <i class="fa-solid fa-arrow-left"></i></button>
+                    <h3 style="font-size: 1.2rem; font-weight: 800;" id="cat2-card-title">الشواحن الجدارية والسيارة</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;" id="cat2-card-desc">شواحن GaN وسيارات فائقة السرعة</p>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;"><span id="cat2-card-btn">افتح صفحة الشواحن</span> <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
 
                 <div class="category-card open-cat-btn" data-cat="cable">
                     <i class="fa-solid fa-bolt-lightning cat-icon-large"></i>
-                    <h3 style="font-size: 1.2rem; font-weight: 800;">كابلات الشحن ونقل البيانات</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">ArmorFlex, Lightning, AUX, USB-A</p>
-                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة الكابلات <i class="fa-solid fa-arrow-left"></i></button>
+                    <h3 style="font-size: 1.2rem; font-weight: 800;" id="cat3-card-title">كابلات الشحن ونقل البيانات</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;" id="cat3-card-desc">ArmorFlex, Lightning, AUX, USB-A</p>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;"><span id="cat3-card-btn">افتح صفحة الكابلات</span> <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
 
                 <div class="category-card open-cat-btn" data-cat="earbuds">
                     <i class="fa-solid fa-headphones cat-icon-large"></i>
-                    <h3 style="font-size: 1.2rem; font-weight: 800;">السماعات والصوتيات</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">UltraPods, مكبرات RGB, AirPro, سلكية</p>
-                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;">افتح صفحة السماعات <i class="fa-solid fa-arrow-left"></i></button>
+                    <h3 style="font-size: 1.2rem; font-weight: 800;" id="cat4-card-title">السماعات والصوتيات</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;" id="cat4-card-desc">UltraPods, مكبرات RGB, AirPro, سلكية</p>
+                    <button class="btn btn-primary-blue" style="margin-top: 16px; width: 100%; font-size: 0.85rem;"><span id="cat4-card-btn">افتح صفحة السماعات</span> <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
             </div>
         </div>
@@ -762,7 +695,7 @@
                     <h2 id="cat-modal-title" style="font-size: 1.6rem; font-weight: 900; color: var(--text-dark);">عنوان الفئة</h2>
                     <p id="cat-modal-desc" style="font-size: 0.85rem; color: var(--text-muted);">وصف منتجات الفئة</p>
                 </div>
-                <button class="btn btn-secondary-white" id="close-cat-modal" style="font-size: 0.9rem;"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
+                <button class="btn btn-secondary-white" id="close-cat-modal" style="font-size: 0.9rem;"><i class="fa-solid fa-arrow-right"></i> <span id="close-cat-modal-text">العودة للرئيسية</span></button>
             </div>
         </div>
         <div class="container" style="padding: 50px 20px;">
@@ -779,11 +712,11 @@
                 <div class="verify-icon-large">
                     <i class="fa-solid fa-shield-check"></i>
                 </div>
-                <h2>فحص وتأكيد الأصالة لمنتجات <span class="gradient-text">كابليتو</span></h2>
-                <p>تأكد أن منتجك أصلي 100% وداخل الضمان عبر كتابة السيريال كود الموجود تحت الشريط المائي على العلبة.</p>
+                <h2 id="verify-title">فحص وتأكيد الأصالة لمنتجات <span class="gradient-text">كابليتو</span></h2>
+                <p id="verify-desc">تأكد أن منتجك أصلي 100% وداخل الضمان عبر كتابة السيريال كود الموجود تحت الشريط المائي على العلبة.</p>
                 <div class="verify-input-group">
                     <input type="text" id="serial-code" placeholder="أدخل الكود هنا (مثال: CABLETO-8899-X)">
-                    <button class="btn btn-primary-blue" id="verify-btn"><i class="fa-solid fa-magnifying-glass-chart"></i> تحقق من الكود</button>
+                    <button class="btn btn-primary-blue" id="verify-btn"><i class="fa-solid fa-magnifying-glass-chart"></i> <span id="verify-btn-text">تحقق من الكود</span></button>
                 </div>
                 <div id="verify-result" class="verify-result"></div>
             </div>
@@ -794,33 +727,33 @@
     <section class="why-cableto-section" id="why-cableto">
         <div class="container">
             <div class="section-header">
-                <h2>لماذا تشتري من <span class="gradient-text">كابليتو (Cableto)؟</span></h2>
-                <p>نحن شركة آمنة وموثوقة 100% نقدم أمتن وأقوى تقنيات الشحن مع ضمان الاستبدال المعتمد</p>
+                <h2 id="why-title">لماذا تشتري من <span class="gradient-text">كابليتو (Cableto)؟</span></h2>
+                <p id="why-desc">نحن شركة آمنة وموثوقة 100% نقدم أمتن وأقوى تقنيات الشحن مع ضمان الاستبدال المعتمد</p>
             </div>
 
             <div class="trust-grid">
                 <div class="trust-box">
                     <div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h4>شركة آمنة وموثوقة 100%</h4>
-                    <p>منتجات أصلية معتمدة وفق أعلى معايير الجودة العالمية لحماية أجهزتك الذكية ضد السخونة والجهد الزائد.</p>
+                    <h4 id="trust1-h4">شركة آمنة وموثوقة 100%</h4>
+                    <p id="trust1-p">منتجات أصلية معتمدة وفق أعلى معايير الجودة العالمية لحماية أجهزتك الذكية ضد السخونة والجهد الزائد.</p>
                 </div>
 
                 <div class="trust-box">
                     <div class="trust-icon"><i class="fa-solid fa-bolt"></i></div>
-                    <h4>منتجات خاماتها معضلة وقوية</h4>
-                    <p>كابلاتنا مجدولة بألياف Kevlar المقواة وشواحننا مصنوعة من سبائك الألومنيوم وتقنية GaN المقاومة للصدمات.</p>
+                    <h4 id="trust2-h4">منتجات خاماتها معضلة وقوية</h4>
+                    <p id="trust2-p">كابلاتنا مجدولة بألياف Kevlar المقواة وشواحننا مصنوعة من سبائك الألومنيوم وتقنية GaN المقاومة للصدمات.</p>
                 </div>
 
                 <div class="trust-box">
                     <div class="trust-icon"><i class="fa-solid fa-award"></i></div>
-                    <h4>ضمان معتمد 12 شهراً</h4>
-                    <p>استبدال فوري وحقيقي لأي منتج خلال عام كامل عند وجود أي عيب مصنعي بدون أي تعقيدات.</p>
+                    <h4 id="trust3-h4">ضمان معتمد 12 شهراً</h4>
+                    <p id="trust3-p">استبدال فوري وحقيقي لأي منتج خلال عام كامل عند وجود أي عيب مصنعي بدون أي تعقيدات.</p>
                 </div>
 
                 <div class="trust-box">
                     <div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div>
-                    <h4>توصيل آمن لكافة المحافظات</h4>
-                    <p>شحن سريع خلال 24 - 48 ساعة والدفع كاش عند الاستلام بعد معاينة المنتج بنفسك وتأكده.</p>
+                    <h4 id="trust4-h4">توصيل آمن وسريع</h4>
+                    <p id="trust4-p">شحن سريع خلال 24 - 48 ساعة مع فحص المنتج وتغليف احترافي محمي ضد الصدمات.</p>
                 </div>
             </div>
         </div>
@@ -836,7 +769,7 @@
                         <img id="pdp-image" src="images/powerbank.jpg" alt="تفاصيل المنتج">
                     </div>
                     <a id="pdp-whatsapp-btn" href="#" target="_blank" class="pdp-wa-btn">
-                        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> استفسار عن المنتج عبر واتساب
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> <span id="pdp-wa-text">استفسار عن المنتج عبر واتساب</span>
                     </a>
                 </div>
 
@@ -863,15 +796,15 @@
 
                     <div class="notice-banner" style="margin-top:0; margin-bottom:14px; font-size:0.82rem;">
                         <i class="fa-solid fa-shield-check"></i>
-                        <div>ضمان معتمد 12 شهراً | توصيل سريع خلال 24 - 48 ساعة والدفع عند الاستلام</div>
+                        <div id="pdp-notice-text">ضمان معتمد 12 شهراً | توصيل سريع والدفع عند الاستلام</div>
                     </div>
 
                     <div class="pdp-actions-row">
                         <button class="btn btn-secondary-white btn-block" id="pdp-add-cart-btn">
-                            <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                            <i class="fa-solid fa-cart-plus"></i> <span id="pdp-add-cart-text">إضافة للسلة</span>
                         </button>
                         <button class="btn btn-primary-blue btn-block" id="pdp-buy-now-btn">
-                            شراء الآن <i class="fa-solid fa-bolt"></i>
+                            <span id="pdp-buy-now-text">شراء الآن</span> <i class="fa-solid fa-bolt"></i>
                         </button>
                     </div>
                 </div>
@@ -883,62 +816,54 @@
     <div class="checkout-modal-overlay" id="checkout-modal-overlay">
         <div class="checkout-modal">
             <button class="modal-close-btn" id="modal-close-btn">&times;</button>
-            <h2 style="font-size: 1.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 6px;">
+            <h2 style="font-size: 1.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 6px;" id="checkout-heading">
                 <i class="fa-solid fa-clipboard-check text-blue"></i> إتمام طلب الشراء والتوصيل
             </h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;" id="checkout-subheading">
                 يرجى ملء بيانات العنوان والتوصيل لاستلام منتجات كابليتو خلال 24 - 48 ساعة.
             </p>
 
             <form id="checkout-form">
                 <div class="checkout-grid">
                     <div>
-                        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--blue-primary);">
+                        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--blue-primary);" id="chk-addr-h4">
                             <i class="fa-solid fa-truck-ramp-box"></i> بيانات العنوان والتوصيل
                         </h4>
 
-                        <label class="form-label">الاسم بالكامل *</label>
+                        <label class="form-label" id="lbl-cust-name">الاسم بالكامل *</label>
                         <input type="text" id="cust-name" required class="form-input" placeholder="مثال: أحمد محمد علي">
 
-                        <label class="form-label">رقم الهاتف / الواتساب للتأكيد *</label>
-                        <input type="tel" id="cust-phone" required class="form-input" placeholder="010XXXXXXXX">
+                        <label class="form-label" id="lbl-cust-phone">رقم الهاتف / الواتساب للتأكيد *</label>
+                        <input type="tel" id="cust-phone" required class="form-input" placeholder="050XXXXXXXX / 010XXXXXXXX">
 
                         <div class="form-row">
                             <div>
-                                <label class="form-label">المحافظة *</label>
+                                <label class="form-label" id="lbl-cust-gov">الإمارة / المدينة *</label>
                                 <select id="cust-gov" required class="form-input" style="font-weight: 700;">
-                                    <option value="القاهرة">القاهرة</option>
-                                    <option value="الجيزة">الجيزة</option>
-                                    <option value="الإسكندرية">الإسكندرية</option>
-                                    <option value="الدقهلية">الدقهلية (المنصورة)</option>
-                                    <option value="الغربية">الغربية (طنطا)</option>
-                                    <option value="محافظة أخرى">محافظة أخرى</option>
+                                    <option value="دبي (Dubai)">دبي (Dubai)</option>
+                                    <option value="أبوظبي (Abu Dhabi)">أبوظبي (Abu Dhabi)</option>
+                                    <option value="الشارقة (Sharjah)">الشارقة (Sharjah)</option>
+                                    <option value="عجمان (Ajman)">عجمان (Ajman)</option>
+                                    <option value="رأس الخيمة (RAK)">رأس الخيمة (RAK)</option>
+                                    <option value="القاهرة (Cairo)">القاهرة (Cairo)</option>
+                                    <option value="الجيزة (Giza)">الجيزة (Giza)</option>
+                                    <option value="الإسكندرية (Alex)">الإسكندرية (Alex)</option>
+                                    <option value="أخرى (Other)">أخرى (Other)</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="form-label">المنطقة / الحي *</label>
-                                <input type="text" id="cust-district" required class="form-input" placeholder="مثال: مدينة نصر">
+                                <label class="form-label" id="lbl-cust-district">المنطقة / الحي *</label>
+                                <input type="text" id="cust-district" required class="form-input" placeholder="مثال: ديرة / Marina / المعادي">
                             </div>
                         </div>
 
-                        <label class="form-label">اسم الشارع والمبنى *</label>
-                        <input type="text" id="cust-street" required class="form-input" placeholder="مثال: شارع عباس العقاد - عمارة 15">
-
-                        <div class="form-row">
-                            <div>
-                                <label class="form-label">رقم الطابق / الدور *</label>
-                                <input type="text" id="cust-floor" required class="form-input" placeholder="مثال: الدور الرابع">
-                            </div>
-                            <div>
-                                <label class="form-label">رقم الشقة *</label>
-                                <input type="text" id="cust-flat" required class="form-input" placeholder="مثال: شقة 12">
-                            </div>
-                        </div>
+                        <label class="form-label" id="lbl-cust-street">اسم الشارع والمبنى *</label>
+                        <input type="text" id="cust-street" required class="form-input" placeholder="مثال: برج اليمامة - شقة 402">
                     </div>
 
                     <div>
-                        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--blue-primary);">
-                            <i class="fa-solid fa-receipt"></i> لائحة ما قبل الشراء
+                        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--blue-primary);" id="chk-summary-h4">
+                            <i class="fa-solid fa-receipt"></i> ملخص الطلب
                         </h4>
 
                         <div class="summary-box">
@@ -947,64 +872,56 @@
 
                             <div style="margin: 12px 0; border-top: 1px dashed var(--border-light); padding-top: 10px;">
                                 <div style="display: flex; gap: 8px;">
-                                    <input type="text" id="coupon-code-input" placeholder="كود الخصم (مثال: CABLE15)" class="form-input" style="margin-bottom: 0; text-transform: uppercase; font-weight: 700; font-size: 0.85rem;">
-                                    <button type="button" id="apply-coupon-btn" class="btn btn-secondary-white" style="padding: 6px 14px; font-size: 0.85rem; white-space: nowrap;">تطبيق</button>
+                                    <input type="text" id="coupon-code-input" placeholder="كود الخصم (CABLE15)" class="form-input" style="margin-bottom: 0; text-transform: uppercase; font-weight: 700; font-size: 0.85rem;">
+                                    <button type="button" id="apply-coupon-btn" class="btn btn-secondary-white" style="padding: 6px 14px; font-size: 0.85rem; white-space: nowrap;"><span id="coupon-btn-text">تطبيق</span></button>
                                 </div>
                                 <div id="coupon-alert" style="font-size: 0.8rem; font-weight: 700; margin-top: 4px; display: none;"></div>
                             </div>
 
                             <div class="summary-row" id="coupon-discount-row" style="display: none; color: #10b981; font-weight: 700;">
-                                <span>قيمة الخصم:</span>
-                                <span id="summary-discount">-0 ج.م</span>
+                                <span id="lbl-discount-val">قيمة الخصم:</span>
+                                <span id="summary-discount">-0 AED</span>
                             </div>
 
                             <div class="summary-row">
-                                <span>سعر المنتجات:</span>
-                                <span id="summary-subtotal">0 ج.م</span>
+                                <span id="lbl-subtotal">سعر المنتجات:</span>
+                                <span id="summary-subtotal">0 AED</span>
                             </div>
                             <div class="summary-row">
-                                <span>خدمة التوصيل الشحن:</span>
-                                <span id="summary-shipping">50 ج.م</span>
+                                <span id="lbl-shipping">خدمة التوصيل الشحن:</span>
+                                <span id="summary-shipping">15 AED</span>
                             </div>
                             <div class="summary-row">
-                                <span>الضريبة المضافة VAT (14%):</span>
-                                <span style="color: #10b981; font-weight: 700;">مشمولة مجاناً</span>
+                                <span id="lbl-vat">ضريبة القيمة المضافة VAT:</span>
+                                <span style="color: #10b981; font-weight: 700;" id="lbl-vat-val">مشمولة مجاناً</span>
                             </div>
                             <div class="summary-row total">
-                                <span>الإجمالي النهائي:</span>
-                                <span id="summary-final-total" style="color: var(--blue-primary);">0 ج.م</span>
+                                <span id="lbl-final-total">الإجمالي النهائي:</span>
+                                <span id="summary-final-total" style="color: var(--blue-primary);">0 AED</span>
                             </div>
                         </div>
 
-                        <h4 style="font-size: 0.9rem; font-weight: 800; margin: 16px 0 10px; color: var(--text-dark);">
-                            اختر طريقة الدفع:
+                        <h4 style="font-size: 0.9rem; font-weight: 800; margin: 16px 0 10px; color: var(--text-dark);" id="lbl-payment-title">
+                            طريقة الدفع:
                         </h4>
 
                         <div class="payment-option active">
                             <div>
-                                <strong style="display: block; font-size: 0.9rem;"><i class="fa-solid fa-hand-holding-dollar text-blue"></i> الدفع عند الاستلام (COD)</strong>
-                                <span style="font-size: 0.75rem; color: var(--text-muted);">ادفع كاش للمندوب عند معاينة المنتج</span>
+                                <strong style="display: block; font-size: 0.9rem;" id="lbl-cod"><i class="fa-solid fa-hand-holding-dollar text-blue"></i> الدفع عند الاستلام (COD)</strong>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);" id="lbl-cod-sub">ادفع عند استلام ومعاينة المنتج</span>
                             </div>
                             <i class="fa-solid fa-circle-check text-blue"></i>
                         </div>
 
-                        <div class="payment-option disabled" title="غير متاح حالياً">
-                            <div>
-                                <strong style="display: block; font-size: 0.9rem;"><i class="fa-solid fa-credit-card"></i> الدفع بالفيزا / كارت البنك</strong>
-                                <span style="font-size: 0.75rem; color: var(--text-muted);">الدفع الإلكتروني عبر البنك</span>
-                            </div>
-                            <span class="disabled-badge">غير متوفر حالياً</span>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary-blue btn-block" style="margin-top: 14px; font-size: 1.05rem;">
-                            تأكيد وإتمام الشراء الآن <i class="fa-solid fa-check-double"></i>
+                        <button type="submit" class="btn btn-primary-blue btn-block" style="margin-top: 14px; font-size: 1.05rem;" id="chk-submit-btn">
+                            <span id="chk-submit-text">تأكيد وإتمام الشراء الآن</span> <i class="fa-solid fa-check-double"></i>
                         </button>
                     </div>
                 </div>
 
                 <div class="notice-banner">
                     <i class="fa-solid fa-truck-clock" style="font-size: 1.3rem;"></i>
-                    <div>
+                    <div id="chk-footer-notice">
                         سيتم توصيل طلبك خلال <strong>24 إلى 48 ساعة</strong> من التأكيد | شكراً لشرائك من كابليتو!
                     </div>
                 </div>
@@ -1018,39 +935,39 @@
             <div style="width: 70px; height: 70px; background: #ecfdf5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #10b981; font-size: 2.2rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);">
                 <i class="fa-solid fa-circle-check"></i>
             </div>
-            <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 6px;" class="gradient-text">تم تسجيل طلبك بنجاح!</h3>
-            <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">شكراً لثقتك في كابليتو. تفاصيل فاتورتك ومعلومات الشحن جاهزة أدناه:</p>
+            <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 6px;" class="gradient-text" id="succ-h3">تم تسجيل طلبك بنجاح!</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;" id="succ-desc">شكراً لثقتك في كابليتو. تفاصيل فاتورتك ومعلومات الشحن جاهزة أدناه:</p>
             
-            <div style="background: var(--bg-surface); border: 1px dashed var(--border-light); border-radius: 14px; padding: 18px; text-align: right; margin-bottom: 20px; font-size: 0.9rem;">
+            <div style="background: var(--bg-surface); border: 1px dashed var(--border-light); border-radius: 14px; padding: 18px; text-align: right; margin-bottom: 20px; font-size: 0.9rem;" id="succ-invoice-box">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 800;">
-                    <span>رقم الفاتورة / الطلب:</span>
+                    <span id="succ-lbl-orderno">رقم الفاتورة / الطلب:</span>
                     <span id="success-order-id" style="color: var(--blue-primary); font-family: monospace; font-size: 1rem;">#CBL-0000</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span>اسم المستلم:</span>
+                    <span id="succ-lbl-name">اسم المستلم:</span>
                     <span id="success-cust-name" style="font-weight: 700;">-</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span>العنوان المفصل:</span>
+                    <span id="succ-lbl-addr">العنوان المفصل:</span>
                     <span id="success-cust-addr" style="font-weight: 700;">-</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span>طريقة الدفع:</span>
-                    <span style="font-weight: 700; color: #10b981;">الدفع عند الاستلام (COD)</span>
+                    <span id="succ-lbl-paymethod">طريقة الدفع:</span>
+                    <span style="font-weight: 700; color: #10b981;" id="succ-val-paymethod">الدفع عند الاستلام (COD)</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border-light); padding-top: 8px; font-weight: 900;">
-                    <span>الإجمالي النهائي المستحق:</span>
-                    <span id="success-order-total" style="color: var(--blue-primary); font-size: 1.15rem;">0 ج.م</span>
+                    <span id="succ-lbl-total">الإجمالي النهائي المستحق:</span>
+                    <span id="success-order-total" style="color: var(--blue-primary); font-size: 1.15rem;">0 AED</span>
                 </div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <a id="success-whatsapp-btn" href="#" target="_blank" class="btn btn-block" style="background: #25d366; color: #ffffff !important; font-size: 1rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> تأكيد الطلب فوراً عبر الواتساب (+971 50 901 9496)
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> <span id="succ-wa-btn-text">تأكيد الطلب فوراً عبر الواتساب (+971 50 901 9496)</span>
                 </a>
                 <div style="display: flex; gap: 10px;">
-                    <button class="btn btn-secondary-white" style="flex: 1;" onclick="window.print()"><i class="fa-solid fa-print"></i> طباعة الفاتورة</button>
-                    <button class="btn btn-primary-blue" style="flex: 1;" id="close-success-btn">متابعة التسوق <i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="btn btn-secondary-white" style="flex: 1;" onclick="window.print()"><i class="fa-solid fa-print"></i> <span id="succ-print-btn">طباعة الفاتورة</span></button>
+                    <button class="btn btn-primary-blue" style="flex: 1;" id="close-success-btn"><span id="succ-cont-btn">متابعة التسوق</span> <i class="fa-solid fa-arrow-left"></i></button>
                 </div>
             </div>
         </div>
@@ -1060,382 +977,825 @@
     <div class="cart-drawer-overlay" id="cart-overlay"></div>
     <div class="cart-drawer" id="cart-drawer">
         <div class="cart-drawer-header">
-            <h3><i class="fa-solid fa-bag-shopping"></i> سلة التسوق الخاصة بك</h3>
+            <h3><i class="fa-solid fa-bag-shopping"></i> <span id="cart-drawer-title">سلة التسوق الخاصة بك</span></h3>
             <button class="close-cart" id="close-cart-btn">&times;</button>
         </div>
         <div class="cart-drawer-body" id="cart-items-container"></div>
         <div class="cart-drawer-footer">
             <div class="cart-subtotal">
-                <span>الإجمالي:</span>
-                <span class="cart-total-price" id="cart-total">0 ج.م</span>
+                <span id="cart-drawer-total-label">الإجمالي:</span>
+                <span class="cart-total-price" id="cart-total">0 AED</span>
             </div>
-            <button class="btn btn-primary-blue btn-block" id="cart-checkout-btn">إتمام الطلب الآن <i class="fa-solid fa-arrow-left"></i></button>
+            <button class="btn btn-primary-blue btn-block" id="cart-checkout-btn"><span id="cart-drawer-checkout-text">إتمام الطلب الآن</span> <i class="fa-solid fa-arrow-left"></i></button>
         </div>
     </div>
 
     <!-- Main Footer -->
     <footer class="main-footer">
         <div class="container footer-bottom">
-            <p>© 2026 جميع الحقوق محفوظة لـ <strong>كابليتو (Cableto)</strong> | الموقع الرسمي للشواحن والكابلات السريعة والباور بانك.</p>
+            <p id="footer-copyright">© 2026 جميع الحقوق محفوظة لـ <strong>كابليتو (Cableto)</strong> | الموقع الرسمي للشواحن والكابلات السريعة والباور بانك.</p>
         </div>
     </footer>
 
     <!-- Detailed JS Data and Logic -->
     <script>
         const WHATSAPP_NUMBER = "971509019496";
+        let currentLang = localStorage.getItem('cableto-lang') || 'ar';
+
+        const TRANSLATIONS = {
+            ar: {
+                langLabel: "English",
+                annText: '<i class="fa-solid fa-bolt text-blue"></i> خصم خاص 15% على جميع كابلات Type-C السريعة | كود الخصم: <strong>CABLE15</strong>',
+                annCs: 'خدمة العملاء (+971 50 901 9496)',
+                annVerify: 'فحص الأصالة',
+                annWhy: 'لماذا كابليتو؟',
+                searchPlaceholder: 'ابحث عن باور بانك، كابل 100W، شاحن سريع...',
+                brandSub: 'كابليتو',
+                navHome: 'الرئيسية',
+                navBs: 'الأكثر مبيعاً (4)',
+                navPb: 'الباور بانك',
+                navCh: 'الشواحن الجدارية والسيارة',
+                navCb: 'كابلات الشحن',
+                navEar: 'السماعات والصوتيات',
+                navWhy: 'لماذا كابليتو؟',
+                heroTag: '<i class="fa-solid fa-bolt text-blue"></i> تقنيات الشحن السريع 2026',
+                heroTitle: 'طاقة فائقة وأمان دائم مع <span class="gradient-text">كابليتو Cableto</span>',
+                heroDesc: 'منتجات حقيقية أصلية 100% مع ضمان معتمد لمدة 12 شهراً وشحن سريع وموثوق.',
+                heroBtnBs: 'الأكثر مبيعاً',
+                heroBtnCats: 'تصفح الفئات الأربعة',
+                stat1Label: 'عميل يثق بنا',
+                stat2Label: 'ضمان استبدال',
+                stat3Label: 'توصيل سريع',
+                heroBadgeSub: 'شحن فائق السرعة وأمان',
+                feat1H4: 'ضمان معتمد 12 شهراً',
+                feat1P: 'استبدال فوري عند وجود أي عيب مصنعي',
+                feat2H4: 'توصيل سريع وآمن',
+                feat2P: 'التوصيل خلال 24 - 48 ساعة لباب منزلك',
+                feat3H4: 'منتجات أصلية 100%',
+                feat3P: 'مزودة بكود تحقق مائي فريد',
+                feat4H4: 'دعم فني متاح 24/7',
+                feat4P: 'فريق متخصص لخدمتك عبر الواتساب',
+                bsTitle: 'منتجات كابليتو <span class="gradient-text">الأكثر مبيعاً ⭐</span>',
+                bsDesc: 'المنتج الأول والأكثر طلباً من كل فئة من فئات كابليتو الرئيسية',
+                catSecTitle: 'أقسام وفئات <span class="gradient-text">كابليتو الرئيسيـة</span>',
+                catSecDesc: 'اضغط على أزرار الأقسام لفتح صفحة كاملة ومستقلة تعرض منتجات كل فئة بالتفصيل',
+                cat1CardTitle: 'الباور بانك (Power Banks)',
+                cat1CardDesc: '4 سعات وتقنيات شحن مختلفة',
+                cat1CardBtn: 'افتح صفحة الباور بانك',
+                cat2CardTitle: 'الشواحن الجدارية والسيارة',
+                cat2CardDesc: 'شواحن GaN وسيارات فائقة السرعة',
+                cat2CardBtn: 'افتح صفحة الشواحن',
+                cat3CardTitle: 'كابلات الشحن ونقل البيانات',
+                cat3CardDesc: 'ArmorFlex, Lightning, AUX, USB-A',
+                cat3CardBtn: 'افتح صفحة الكابلات',
+                cat4CardTitle: 'السماعات والصوتيات',
+                cat4CardDesc: 'UltraPods, مكبرات RGB, AirPro, سلكية',
+                cat4CardBtn: 'افتح صفحة السماعات',
+                closeCatModalText: 'العودة للرئيسية',
+                verifyTitle: 'فحص وتأكيد الأصالة لمنتجات <span class="gradient-text">كابليتو</span>',
+                verifyDesc: 'تأكد أن منتجك أصلي 100% وداخل الضمان عبر كتابة السيريال كود الموجود تحت الشريط المائي على العلبة.',
+                serialPlaceholder: 'أدخل الكود هنا (مثال: CABLETO-8899-X)',
+                verifyBtnText: 'تحقق من الكود',
+                whyTitle: 'لماذا تشتري من <span class="gradient-text">كابليتو (Cableto)؟</span>',
+                whyDesc: 'نحن شركة آمنة وموثوقة 100% نقدم أمتن وأقوى تقنيات الشحن مع ضمان الاستبدال المعتمد',
+                trust1H4: 'شركة آمنة وموثوقة 100%',
+                trust1P: 'منتجات أصلية معتمدة وفق أعلى معايير الجودة العالمية لحماية أجهزتك الذكية ضد السخونة والجهد الزائد.',
+                trust2H4: 'منتجات خاماتها معضلة وقوية',
+                trust2P: 'كابلاتنا مجدولة بألياف Kevlar المقواة وشواحننا مصنوعة من سبائك الألومنيوم وتقنية GaN المقاومة للصدمات.',
+                trust3H4: 'ضمان معتمد 12 شهراً',
+                trust3P: 'استبدال فوري وحقيقي لأي منتج خلال عام كامل عند وجود أي عيب مصنعي بدون أي تعقيدات.',
+                trust4H4: 'توصيل آمن وسريع',
+                trust4P: 'شحن سريع خلال 24 - 48 ساعة مع فحص المنتج وتغليف احترافي محمي ضد الصدمات.',
+                pdpWaText: 'استفسار عن المنتج عبر واتساب',
+                pdpNoticeText: 'ضمان معتمد 12 شهراً | توصيل سريع والدفع عند الاستلام',
+                pdpAddCartText: 'إضافة للسلة',
+                pdpBuyNowText: 'شراء الآن',
+                pdpModelPrefix: 'موديل: ',
+                pdpSavePrefix: 'وفر ',
+                checkoutHeading: '<i class="fa-solid fa-clipboard-check text-blue"></i> إتمام طلب الشراء والتوصيل',
+                checkoutSubheading: 'يرجى ملء بيانات العنوان والتوصيل لاستلام منتجات كابليتو خلال 24 - 48 ساعة.',
+                chkAddrH4: '<i class="fa-solid fa-truck-ramp-box"></i> بيانات العنوان والتوصيل',
+                lblCustName: 'الاسم بالكامل *',
+                namePlaceholder: 'مثال: أحمد محمد علي',
+                lblCustPhone: 'رقم الهاتف / الواتساب للتأكيد *',
+                phonePlaceholder: '050XXXXXXXX / 010XXXXXXXX',
+                lblCustGov: 'الإمارة / المدينة *',
+                lblCustDistrict: 'المنطقة / الحي *',
+                districtPlaceholder: 'مثال: ديرة / Marina / المعادي',
+                lblCustStreet: 'اسم الشارع والمبنى *',
+                streetPlaceholder: 'مثال: برج اليمامة - شقة 402',
+                chkSummaryH4: '<i class="fa-solid fa-receipt"></i> ملخص الطلب',
+                couponPlaceholder: 'كود الخصم (CABLE15)',
+                couponBtnText: 'تطبيق',
+                lblDiscountVal: 'قيمة الخصم:',
+                lblSubtotal: 'سعر المنتجات:',
+                lblShipping: 'خدمة التوصيل الشحن:',
+                lblVat: 'ضريبة القيمة المضافة VAT:',
+                lblVatVal: 'مشمولة مجاناً',
+                lblFinalTotal: 'الإجمالي النهائي:',
+                lblPaymentTitle: 'طريقة الدفع:',
+                lblCod: '<i class="fa-solid fa-hand-holding-dollar text-blue"></i> الدفع عند الاستلام (COD)',
+                lblCodSub: 'ادفع عند استلام ومعاينة المنتج',
+                chkSubmitText: 'تأكيد وإتمام الشراء الآن',
+                chkFooterNotice: 'سيتم توصيل طلبك خلال <strong>24 إلى 48 ساعة</strong> من التأكيد | شكراً لشرائك من كابليتو!',
+                succH3: 'تم تسجيل طلبك بنجاح!',
+                succDesc: 'شكراً لثقتك في كابليتو. تفاصيل فاتورتك ومعلومات الشحن جاهزة أدناه:',
+                succLblOrderno: 'رقم الفاتورة / الطلب:',
+                succLblName: 'اسم المستلم:',
+                succLblAddr: 'العنوان المفصل:',
+                succLblPaymethod: 'طريقة الدفع:',
+                succValPaymethod: 'الدفع عند الاستلام (COD)',
+                succLblTotal: 'الإجمالي النهائي المستحق:',
+                succWaBtnText: 'تأكيد الطلب فوراً عبر الواتساب (+971 50 901 9496)',
+                succPrintBtn: 'طباعة الفاتورة',
+                succContBtn: 'متابعة التسوق',
+                cartDrawerTitle: 'سلة التسوق الخاصة بك',
+                cartDrawerTotalLabel: 'الإجمالي:',
+                cartDrawerCheckoutText: 'إتمام الطلب الآن',
+                cartEmptyText: 'سلة التسوق فارغة حالياً',
+                footerCopyright: '© 2026 جميع الحقوق محفوظة لـ <strong>كابليتو (Cableto)</strong> | الموقع الرسمي للشواحن والكابلات السريعة والباور بانك.',
+                btnAddToCart: 'للسلة',
+                btnBuyNow: 'شراء الآن',
+                currency: 'AED',
+                waGreeting: 'السلام عليكم'
+            },
+            en: {
+                langLabel: "العربية",
+                annText: '<i class="fa-solid fa-bolt text-blue"></i> Special 15% OFF on all Fast Type-C Cables | Code: <strong>CABLE15</strong>',
+                annCs: 'Customer Support (+971 50 901 9496)',
+                annVerify: 'Authenticity Check',
+                annWhy: 'Why Cableto?',
+                searchPlaceholder: 'Search power banks, 100W cables, fast chargers...',
+                brandSub: 'Smart Charging Tech',
+                navHome: 'Home',
+                navBs: 'Best Sellers (4)',
+                navPb: 'Power Banks',
+                navCh: 'Wall & Car Chargers',
+                navCb: 'Charging Cables',
+                navEar: 'Audio & Earbuds',
+                navWhy: 'Why Cableto?',
+                heroTag: '<i class="fa-solid fa-bolt text-blue"></i> Fast Charging Tech 2026',
+                heroTitle: 'Unstoppable Power & Safety with <span class="gradient-text">Cableto</span>',
+                heroDesc: '100% Genuine charging gear backed by 12 months warranty with express delivery across UAE and the region.',
+                heroBtnBs: 'Best Sellers',
+                heroBtnCats: 'Browse 4 Categories',
+                stat1Label: 'Happy Customers',
+                stat2Label: 'Replacement Warranty',
+                stat3Label: 'Express Delivery',
+                heroBadgeSub: 'Fast & Certified Charging',
+                feat1H4: '12-Month Official Warranty',
+                feat1P: 'Instant hassle-free replacement against defects',
+                feat2H4: 'Fast & Secure Delivery',
+                feat2P: 'Delivery within 24 - 48 hours to your door',
+                feat3H4: '100% Genuine Hardware',
+                feat3P: 'Equipped with anti-counterfeit serial code',
+                feat4H4: '24/7 Dedicated Support',
+                feat4P: 'Live WhatsApp expert customer support',
+                bsTitle: 'Cableto <span class="gradient-text">Best Sellers ⭐</span>',
+                bsDesc: 'The top-rated and most demanded product from each core Cableto category',
+                catSecTitle: 'Core <span class="gradient-text">Cableto Categories</span>',
+                catSecDesc: 'Click on any category button to open its dedicated collection page',
+                cat1CardTitle: 'Power Banks (Portable Chargers)',
+                cat1CardDesc: '4 high-density capacities & MagSafe options',
+                cat1CardBtn: 'Open Power Banks Page',
+                cat2CardTitle: 'Wall & Car Chargers',
+                cat2CardDesc: 'Next-gen GaN & fast metal car chargers',
+                cat2CardBtn: 'Open Chargers Page',
+                cat3CardTitle: 'Charging & Data Cables',
+                cat3CardDesc: 'ArmorFlex, Lightning, AUX & USB-A',
+                cat3CardBtn: 'Open Cables Page',
+                cat4CardTitle: 'Audio & Earbuds',
+                cat4CardDesc: 'UltraPods ANC, RGB speakers, AirPro & HiFi',
+                cat4CardBtn: 'Open Audio Page',
+                closeCatModalText: 'Back to Home',
+                verifyTitle: 'Product Authenticity Verification for <span class="gradient-text">Cableto</span>',
+                verifyDesc: 'Ensure your product is 100% original and under active warranty by entering the security serial code from the box.',
+                serialPlaceholder: 'Enter serial code (e.g. CABLETO-8899-X)',
+                verifyBtnText: 'Verify Code',
+                whyTitle: 'Why Buy From <span class="gradient-text">Cableto?</span>',
+                whyDesc: '100% trusted and certified brand delivering rugged charging technology backed by instant warranty',
+                trust1H4: '100% Safe & Certified Brand',
+                trust1P: 'Certified original products engineered to international safety standards protecting devices against overvoltage and overheating.',
+                trust2H4: 'Rugged Military-Grade Materials',
+                trust2P: 'Kevlar-braided cables and aerospace-grade aluminum GaN chargers built to withstand everyday heavy use.',
+                trust3H4: '12-Month Replacement Warranty',
+                trust3P: 'Instant hassle-free replacement for an entire year against any manufacturing defect.',
+                trust4H4: 'Fast & Secure Regional Delivery',
+                trust4P: 'Express 24-48h delivery with damage-proof packaging and payment upon receipt.',
+                pdpWaText: 'Inquire via WhatsApp',
+                pdpNoticeText: '12-Month Warranty | Express 24-48h Delivery | Cash on Delivery',
+                pdpAddCartText: 'Add to Cart',
+                pdpBuyNowText: 'Buy Now',
+                pdpModelPrefix: 'Model: ',
+                pdpSavePrefix: 'Save ',
+                checkoutHeading: '<i class="fa-solid fa-clipboard-check text-blue"></i> Complete Your Order & Shipping',
+                checkoutSubheading: 'Please fill in your delivery details to receive your Cableto products within 24 - 48 hours.',
+                chkAddrH4: '<i class="fa-solid fa-truck-ramp-box"></i> Shipping & Address Details',
+                lblCustName: 'Full Name *',
+                namePlaceholder: 'e.g. John Doe / Mohammed Ali',
+                lblCustPhone: 'Phone / WhatsApp Number *',
+                phonePlaceholder: '+971 50 XXX XXXX',
+                lblCustGov: 'Emirate / City *',
+                lblCustDistrict: 'Area / District *',
+                districtPlaceholder: 'e.g. Dubai Marina / Downtown / Deira',
+                lblCustStreet: 'Street & Building Name *',
+                streetPlaceholder: 'e.g. Al Wasl Tower - Apt 402',
+                chkSummaryH4: '<i class="fa-solid fa-receipt"></i> Order Summary',
+                couponPlaceholder: 'Discount Code (CABLE15)',
+                couponBtnText: 'Apply',
+                lblDiscountVal: 'Discount Amount:',
+                lblSubtotal: 'Subtotal:',
+                lblShipping: 'Shipping Fee:',
+                lblVat: 'VAT (Value Added Tax):',
+                lblVatVal: 'Included Free',
+                lblFinalTotal: 'Grand Total:',
+                lblPaymentTitle: 'Payment Method:',
+                lblCod: '<i class="fa-solid fa-hand-holding-dollar text-blue"></i> Cash on Delivery (COD)',
+                lblCodSub: 'Pay cash to the courier upon inspecting your order',
+                chkSubmitText: 'Confirm & Place Order Now',
+                chkFooterNotice: 'Your order will be delivered within <strong>24 to 48 hours</strong> | Thank you for choosing Cableto!',
+                succH3: 'Order Placed Successfully!',
+                succDesc: 'Thank you for trusting Cableto. Your invoice and shipping details are confirmed below:',
+                succLblOrderno: 'Invoice / Order ID:',
+                succLblName: 'Customer Name:',
+                succLblAddr: 'Shipping Address:',
+                succLblPaymethod: 'Payment Method:',
+                succValPaymethod: 'Cash on Delivery (COD)',
+                succLblTotal: 'Grand Total Due:',
+                succWaBtnText: 'Confirm Order on WhatsApp (+971 50 901 9496)',
+                succPrintBtn: 'Print Invoice',
+                succContBtn: 'Continue Shopping',
+                cartDrawerTitle: 'Your Shopping Cart',
+                cartDrawerTotalLabel: 'Total:',
+                cartDrawerCheckoutText: 'Proceed to Checkout',
+                cartEmptyText: 'Your cart is currently empty',
+                footerCopyright: '© 2026 All Rights Reserved to <strong>Cableto</strong> | Official Store for Fast Chargers, Cables & Power Banks.',
+                btnAddToCart: 'Add to Cart',
+                btnBuyNow: 'Buy Now',
+                currency: 'AED',
+                waGreeting: 'Hello Cableto, I would like to inquire about your products.'
+            }
+        };
 
         const CATEGORIES_DATABASE = {
             powerbank: {
-                title: "فئة الباور بانك (Power Banks)",
-                desc: "استكشف 4 أنواع مختلفة من الباور بانك بسعات 5k, 10k, 20k, 30k mAh وتقنيات MagSafe واللابتوب",
+                title_ar: "فئة الباور بانك (Power Banks)",
+                title_en: "Power Banks & Portable Chargers",
+                desc_ar: "استكشف 4 أنواع مختلفة من الباور بانك بسعات 5k, 10k, 20k, 30k mAh وتقنيات MagSafe واللابتوب",
+                desc_en: "Explore 4 high-density power banks with capacities from 5k to 30k mAh, MagSafe & 100W laptop PD",
                 products: [
                     {
                         id: 1,
                         model: "CB-PB20K",
-                        name: "باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية",
-                        price: 1250,
-                        oldPrice: 1550,
-                        badge: "الأكثر مبيعاً 🥇",
+                        name_ar: "باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية",
+                        name_en: "Cableto TitanPower 20,000mAh 65W Fast Power Bank with LED Digital Display",
+                        price: 150,
+                        oldPrice: 185,
+                        badge_ar: "الأكثر مبيعاً 🥇",
+                        badge_en: "Best Seller 🥇",
                         icon: "fa-battery-full",
                         img: "images/powerbank.jpg",
-                        tag: "سعة 20k + شاشة",
-                        desc: "باور بانك احترافي فائق السرعة بقدرة 65 واط بتقنية Power Delivery 3.0 و Quick Charge 4.0+. يشحن الهواتف من 0% إلى 60% في 25 دقيقة فقط، ويدعم شحن أجهزة اللابتوب والماك بوك مع شاشة LED رقمية دقيقة لعرض النسبة المئوية وقدرة الشحن.",
-                        specs: {
+                        tag_ar: "سعة 20k + شاشة",
+                        tag_en: "20k mAh + LED",
+                        desc_ar: "باور بانك احترافي فائق السرعة بقدرة 65 واط بتقنية Power Delivery 3.0 و Quick Charge 4.0+. يشحن الهواتف من 0% إلى 60% في 25 دقيقة فقط، ويدعم شحن أجهزة اللابتوب والماك بوك مع شاشة LED رقمية دقيقة لعرض النسبة المئوية وقدرة الشحن.",
+                        desc_en: "High-speed 65W power bank with PD 3.0 & QC 4.0+. Charges phones from 0% to 60% in 25 minutes, supports MacBook/Laptop fast charging with real-time numeric LED display.",
+                        specs_ar: {
                             "السعة الإجمالية": "20,000 مللي أمبير / 74Wh ليثيوم بوليمر",
                             "أقصى قدرة إخراج": "65 واط (PD 3.0 + QC 4.0+)",
                             "المنافذ": "2x Type-C (شحن وإخراج) + 1x USB-A سريع",
                             "الشاشة الذكية": "شاشة LED رقمية لقياس النسبة المئوية المتبقية",
                             "نظام الحماية": "نظام MultiProtect لحماية الدوائر من الحرارة والجهد العالي",
                             "محتويات العلبة": "باور بانك TitanPower + كابل Type-C 100W مجدول + كارت الضمان"
+                        },
+                        specs_en: {
+                            "Capacity": "20,000 mAh / 74Wh Li-Polymer",
+                            "Max Output": "65W High-Speed (PD 3.0 + QC 4.0+)",
+                            "Ports": "2x Type-C (Bi-directional) + 1x USB-A Fast",
+                            "Smart Display": "Real-time numeric LED percentage battery monitor",
+                            "Safety System": "MultiProtect smart temperature & overvoltage guard",
+                            "Box Contents": "TitanPower Power Bank + 100W Braided Cable + Warranty Card"
                         }
                     },
                     {
                         id: 2,
                         model: "CB-PB10K",
-                        name: "باور بانك كابليتو SlimMag 10,000mAh لاسلكي مغناطيسي MagSafe للآيفون",
-                        price: 890,
-                        oldPrice: 1100,
-                        badge: "MagSafe آيفون 🧲",
+                        name_ar: "باور بانك كابليتو SlimMag 10,000mAh لاسلكي مغناطيسي MagSafe للآيفون",
+                        name_en: "Cableto SlimMag 10,000mAh Magnetic Wireless MagSafe Power Bank for iPhone",
+                        price: 105,
+                        oldPrice: 130,
+                        badge_ar: "MagSafe آيفون 🧲",
+                        badge_en: "MagSafe iPhone 🧲",
                         icon: "fa-magnet",
                         img: "images/powerbank.jpg",
-                        tag: "لاسلكي 15W",
-                        desc: "باور بانك نحيف مغناطيسي فائق الالتصاق متوافق مع تقنية MagSafe لجميع أجهزة iPhone 12 وحتى 16 Pro Max. يوفر شحناً لاسلكياً سريعاً 15 واط بدون كابلات بالإضافة لمنفذ Type-C بقدرة 20W PD.",
-                        specs: {
+                        tag_ar: "لاسلكي 15W",
+                        tag_en: "Wireless 15W",
+                        desc_ar: "باور بانك نحيف مغناطيسي فائق الالتصاق متوافق مع تقنية MagSafe لجميع أجهزة iPhone 12 وحتى 16 Pro Max. يوفر شحناً لاسلكياً سريعاً 15 واط بدون كابلات بالإضافة لمنفذ Type-C بقدرة 20W PD.",
+                        desc_en: "Ultra-slim magnetic power bank designed with strong snap-on MagSafe alignment for iPhone 12 to 16 Pro Max. Provides 15W cable-free wireless charging + 20W Type-C PD port.",
+                        specs_ar: {
                             "السعة": "10,000 مللي أمبير عالية الكثافة",
                             "الشحن اللاسلكي": "15 واط MagSafe مغناطيسي قوي",
                             "الشحن السلكي": "20 واط Type-C PD شحن سريع فوري",
                             "التوافق": "سلسلة iPhone 12/13/14/15/16 وجميع أجهزة Qi",
                             "التصميم": "هيكل من السيليكون الحريري المقاوم للخدش والانزلاق",
                             "محتويات العلبة": "باور بانك SlimMag + حلقة مغناطيسية إضافية + كابل C"
+                        },
+                        specs_en: {
+                            "Capacity": "10,000 mAh High-Density",
+                            "Wireless Output": "15W MagSafe Snap-On Alignment",
+                            "Wired Output": "20W Type-C Fast Power Delivery",
+                            "Compatibility": "iPhone 12/13/14/15/16 Series & Qi Devices",
+                            "Body": "Silky anti-slip scratch-resistant matte finish",
+                            "Box Contents": "SlimMag Power Bank + Extra Magnet Ring + Type-C Cable"
                         }
                     },
                     {
                         id: 3,
                         model: "CB-PB30K",
-                        name: "باور بانك كابليتو MaxVolt 30,000mAh بقوة 100W لشحن اللابتوب والهواتف",
-                        price: 1850,
-                        oldPrice: 2200,
-                        badge: "عملاق اللابتوب 💻",
+                        name_ar: "باور بانك كابليتو MaxVolt 30,000mAh بقوة 100W لشحن اللابتوب والهواتف",
+                        name_en: "Cableto MaxVolt 30,000mAh 100W Ultra-Fast Laptop & Phone Power Bank",
+                        price: 220,
+                        oldPrice: 260,
+                        badge_ar: "عملاق اللابتوب 💻",
+                        badge_en: "Laptop Beast 💻",
                         icon: "fa-laptop",
                         img: "images/powerbank.jpg",
-                        tag: "100W PD",
-                        desc: "وحش الطاقة الأكبر من كابليتو بسعة ضخمة 30,000 مللي أمبير وقدرة خارقة 100W Type-C PD. قادر على شحن لابتوبات MacBook Pro و Dell XPS و أجهزة الألعاب المحمولة Steam Deck بكامل سرعتها أينما كنت.",
-                        specs: {
+                        tag_ar: "100W PD",
+                        tag_en: "100W PD",
+                        desc_ar: "وحش الطاقة الأكبر من كابليتو بسعة ضخمة 30,000 مللي أمبير وقدرة خارقة 100W Type-C PD. قادر على شحن لابتوبات MacBook Pro و Dell XPS و أجهزة الألعاب المحمولة Steam Deck بكامل سرعتها أينما كنت.",
+                        desc_en: "Colossal 30,000mAh portable powerhouse with 100W Type-C PD output. Charges MacBook Pro, Dell XPS, tablets, and gaming consoles at peak speed anywhere.",
+                        specs_ar: {
                             "السعة": "30,000 مللي أمبير / 111Wh",
                             "القدرة القصوى": "100 واط Type-C1 + 45 واط Type-C2",
                             "عدد المنافذ": "4 منافذ (2x Type-C + 2x USB-A 22.5W)",
                             "إمكانية السفر": "شحن فائق السرعة متوافق مع معايير الطيران",
                             "الأمان": "مستشعرات حرارة NTC لمنع السخونة أثناء الشحن المكثف",
                             "محتويات العلبة": "باور بانك MaxVolt + كابل 100W بطول 1.2 متر + حقيبة مخملية"
+                        },
+                        specs_en: {
+                            "Capacity": "30,000 mAh / 111Wh",
+                            "Max Output": "100W Type-C1 + 45W Type-C2",
+                            "Ports": "4 Ports (2x Type-C + 2x USB-A 22.5W)",
+                            "Aviation Safe": "Compliant with international flight regulations",
+                            "Protection": "NTC thermal sensors prevent overheating",
+                            "Box Contents": "MaxVolt Power Bank + 100W Cable (1.2m) + Velvet Pouch"
                         }
                     },
                     {
                         id: 4,
                         model: "CB-PB-MINI",
-                        name: "باور بانك كابليتو PocketGo 5,000mAh كبسولة شحن سريع للجيب",
-                        price: 490,
-                        oldPrice: 600,
-                        badge: "حجم مدمج ⚡",
+                        name_ar: "باور بانك كابليتو PocketGo 5,000mAh كبسولة شحن سريع للجيب",
+                        name_en: "Cableto PocketGo 5,000mAh Ultra-Compact Pocket Fast Charging Capsule",
+                        price: 60,
+                        oldPrice: 75,
+                        badge_ar: "حجم مدمج ⚡",
+                        badge_en: "Compact Size ⚡",
                         icon: "fa-capsules",
                         img: "images/powerbank.jpg",
-                        tag: "كبسولة جيب",
-                        desc: "شاحن طوارئ فائق الصغر بحجم أحمر الشفاه مع موصل Type-C مدمج قابل للطي مباشرة في الهاتف دون الحاجة لأي كابلات إضافية. مثالي للخروجات والسفر السريع.",
-                        specs: {
+                        tag_ar: "كبسولة جيب",
+                        tag_en: "Pocket Capsule",
+                        desc_ar: "شاحن طوارئ فائق الصغر بحجم أحمر الشفاه مع موصل Type-C مدمج قابل للطي مباشرة في الهاتف دون الحاجة لأي كابلات إضافية. مثالي للخروجات والسفر السريع.",
+                        desc_en: "Lipstick-sized emergency mini power bank with a foldable direct Type-C plug. Plugs directly into your phone without any tangled cables.",
+                        specs_ar: {
                             "السعة": "5,000 مللي أمبير (شحنة كاملة لهاتفك)",
                             "القدرة": "20 واط شحن سريع مباشر",
                             "الوزن": "95 جرام فقط خفيف للغاية",
                             "الموصل": "رأس Type-C مدمج قابل للطي مع غطاء حماية",
                             "الأمان": "شريحة تحكم ذكية لتجنب الشحن الزائد",
                             "محتويات العلبة": "باور بانك PocketGo + كابل إعادة شحن"
+                        },
+                        specs_en: {
+                            "Capacity": "5,000 mAh (Full phone charge)",
+                            "Output": "20W Direct Fast Power Delivery",
+                            "Weight": "Ultra-lightweight 95 grams",
+                            "Connector": "Built-in foldable Type-C plug with cap",
+                            "Safety": "Smart chip prevents overcharging",
+                            "Box Contents": "PocketGo Power Bank + Recharging Cable"
                         }
                     }
                 ]
             },
             charger: {
-                title: "فئة الشواحن الجدارية والسيارة (Fast Chargers)",
-                desc: "4 شواحن فائقة السرعة بتقنية GaN الذكية ومنافذ متعددة وشاحن سيارة معدني 75W",
+                title_ar: "فئة الشواحن الجدارية والسيارة (Fast Chargers)",
+                title_en: "Wall & Car Fast Chargers",
+                desc_ar: "4 شواحن فائقة السرعة بتقنية GaN الذكية ومنافذ متعددة وشاحن سيارة معدني 75W",
+                desc_en: "4 advanced GaN III multi-port fast wall adapters and heavy-duty 75W metal car charger",
                 products: [
                     {
                         id: 5,
                         model: "CB-CH100W",
-                        name: "شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)",
-                        price: 790,
-                        oldPrice: 990,
-                        badge: "الأكثر مبيعاً 🥇",
+                        name_ar: "شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)",
+                        name_en: "Cableto GaNPro 100W Triple-Port Fast Wall Charger (2x Type-C + USB-A)",
+                        price: 95,
+                        oldPrice: 120,
+                        badge_ar: "الأكثر مبيعاً 🥇",
+                        badge_en: "Best Seller 🥇",
                         icon: "fa-plug-circle-bolt",
                         img: "images/charger.jpg",
-                        tag: "ثلاثي المنافذ",
-                        desc: "شاحن جداري بتقنية نيتريد الغاليوم GaN III الأحدث عالمياً. يوفر حجماً أصغر بنسبة 40% مع كفاءة حرارية لا تضاهى. يشحن 3 أجهزة معاً (لابتوب + آيباد + هاتف) بأعلى سرعة أمان ممكنة.",
-                        specs: {
+                        tag_ar: "ثلاثي المنافذ",
+                        tag_en: "Triple-Port",
+                        desc_ar: "شاحن جداري بتقنية نيتريد الغاليوم GaN III الأحدث عالمياً. يوفر حجماً أصغر بنسبة 40% مع كفاءة حرارية لا تضاهى. يشحن 3 أجهزة معاً (لابتوب + آيباد + هاتف) بأعلى سرعة أمان ممكنة.",
+                        desc_en: "Cutting-edge GaN III Gallium Nitride technology delivering 100W total output in a 40% smaller body. Powers 3 devices simultaneously (Laptop + Tablet + Phone) safely.",
+                        specs_ar: {
                             "التقنية": "جيل GaN III المتطور لتبريد فائق وكفاءة 95%",
                             "أقصى قدرة": "100 واط إجمالي (توزيع طاقة ذكي بين المنافذ)",
                             "المنافذ": "2x Type-C (PD 3.0 / PPS) + 1x USB-A (QC 4.0)",
                             "التوافق": "متوافق مع MacBook و iPhone وسامسونج Super Fast 45W",
                             "الأمان": "حماية ضد التردد الكهربائي وقصر الدائرة",
                             "محتويات العلبة": "شاحن GaNPro 100W + دليل الاستخدام + كارت الضمان"
+                        },
+                        specs_en: {
+                            "Technology": "GaN III tech with 95% thermal efficiency",
+                            "Max Output": "100W Total with Dynamic Power Allocation",
+                            "Ports": "2x Type-C (PD 3.0 / PPS) + 1x USB-A (QC 4.0)",
+                            "Compatibility": "MacBook, iPhone, Samsung 45W Super Fast",
+                            "Safety": "Short-circuit and surge protection",
+                            "Box Contents": "GaNPro 100W Charger + User Manual + Warranty Card"
                         }
                     },
                     {
                         id: 6,
                         model: "CB-CH65W",
-                        name: "شاحن جداري كابليتو DuoCharge 65W مزدوج المنافذ Type-C سريع",
-                        price: 580,
-                        oldPrice: 720,
-                        badge: "DuoCharge 65W",
+                        name_ar: "شاحن جداري كابليتو DuoCharge 65W مزدوج المنافذ Type-C سريع",
+                        name_en: "Cableto DuoCharge 65W Dual Type-C GaN Fast Wall Charger",
+                        price: 70,
+                        oldPrice: 85,
+                        badge_ar: "DuoCharge 65W",
+                        badge_en: "DuoCharge 65W",
                         icon: "fa-bolt",
                         img: "images/charger.jpg",
-                        tag: "مزدوج C",
-                        desc: "شاحن GaN خفيف وأنيق بمنفذين Type-C يدعمان بروتوكولات PD 3.0 و PPS لشحن هاتفك وجهازك اللوحي معاً في نفس الوقت بدون فقدان في سرعة الشحن.",
-                        specs: {
+                        tag_ar: "مزدوج C",
+                        tag_en: "Dual Type-C",
+                        desc_ar: "شاحن GaN خفيف وأنيق بمنفذين Type-C يدعمان بروتوكولات PD 3.0 و PPS لشحن هاتفك وجهازك اللوحي معاً في نفس الوقت بدون فقدان في سرعة الشحن.",
+                        desc_en: "Sleek dual Type-C GaN charger supporting PD 3.0 and Samsung 45W PPS to charge your phone and tablet concurrently without power drops.",
+                        specs_ar: {
                             "القدرة": "65 واط كحد أقصى لمنفذ واحد أو 45W+20W معاً",
                             "المنافذ": "2x Type-C فائق السرعة",
                             "بروتوكولات الشحن": "PD 3.0, QC 3.0, PPS 45W سامسونج",
                             "التصميم": "أرجل شاحن قابلة للطي لسهولة الحمل في الجيب",
                             "الضمان": "ضمان استبدال معتمد لمدة 12 شهراً",
                             "محتويات العلبة": "شاحن DuoCharge 65W + كتيب المواصفات"
+                        },
+                        specs_en: {
+                            "Max Output": "65W Single Port or 45W + 20W Dual",
+                            "Ports": "2x Type-C Fast Charging",
+                            "Protocols": "PD 3.0, QC 3.0, Samsung PPS 45W",
+                            "Design": "Foldable pins for compact travel convenience",
+                            "Warranty": "12-Month instant replacement guarantee",
+                            "Box Contents": "DuoCharge 65W Charger + Specs Guide"
                         }
                     },
                     {
                         id: 7,
                         model: "CB-CH35W",
-                        name: "شاحن جداري كابليتو MiniGaN 35W سريع جداً للهواتف الذكية",
-                        price: 390,
-                        oldPrice: 480,
-                        badge: "MiniGaN 35W",
+                        name_ar: "شاحن جداري كابليتو MiniGaN 35W سريع جداً للهواتف الذكية",
+                        name_en: "Cableto MiniGaN 35W Ultra-Compact Fast Phone Charger",
+                        price: 45,
+                        oldPrice: 60,
+                        badge_ar: "MiniGaN 35W",
+                        badge_en: "MiniGaN 35W",
                         icon: "fa-cube",
                         img: "images/charger.jpg",
-                        tag: "مكعب 35W",
-                        desc: "مكعب شحن GaN مصغر للغاية أصغر من شاحن أبل التقليدي بنسبة 50% ولكنه يضخ قدرة 35 واط كافية لشحن أحدث هواتف الآيفون وسامسونج بأقصى سرعة مدعومة.",
-                        specs: {
+                        tag_ar: "مكعب 35W",
+                        tag_en: "Cube 35W",
+                        desc_ar: "مكعب شحن GaN مصغر للغاية أصغر من شاحن أبل التقليدي بنسبة 50% ولكنه يضخ قدرة 35 واط كافية لشحن أحدث هواتف الآيفون وسامسونج بأقصى سرعة مدعومة.",
+                        desc_en: "Miniature GaN power cube 50% smaller than standard chargers, delivering 35W blazing fast output for iPhone 15/16 and flagship Android devices.",
+                        specs_ar: {
                             "القدرة": "35 واط Power Delivery",
                             "المنفذ": "1x Type-C مطلي لحماية نقل الإشارة",
                             "الحجم": "مكعب فائق الصغر 3x3 سم",
                             "التوافق": "iPhone 15/16 Series, Samsung S23/S24, Pixel",
                             "الأمان": "تقنية SmartChip لتنظيم الجهد الكهربائي تلقائياً",
                             "محتويات العلبة": "شاحن MiniGaN 35W"
+                        },
+                        specs_en: {
+                            "Output": "35W Power Delivery Fast Charge",
+                            "Port": "1x Gold-plated Type-C connection",
+                            "Size": "Micro-compact 3x3 cm cube footprint",
+                            "Compatibility": "iPhone 15/16, Samsung Galaxy S24, Pixel",
+                            "Safety": "SmartChip dynamic voltage auto-regulation",
+                            "Box Contents": "MiniGaN 35W Charger Unit"
                         }
                     },
                     {
                         id: 8,
                         model: "CB-CH-CAR",
-                        name: "شاحن سيارة كابليتو TurboDrive 75W معدني مخرجين شحن فائق للسيارة",
-                        price: 450,
-                        oldPrice: 550,
-                        badge: "شاحن سيارة 🚗",
+                        name_ar: "شاحن سيارة كابليتو TurboDrive 75W معدني مخرجين شحن فائق للسيارة",
+                        name_en: "Cableto TurboDrive 75W Dual-Port Aluminum Fast Car Charger",
+                        price: 55,
+                        oldPrice: 68,
+                        badge_ar: "شاحن سيارة 🚗",
+                        badge_en: "Car Charger 🚗",
                         icon: "fa-car-battery",
                         img: "images/charger.jpg",
-                        tag: "سبائك 75W",
-                        desc: "شاحن سيارة مصنوع بالكامل من سبائك الألومنيوم المقاوم للحرارة والخدش مع منفذين Type-C و USB-A بقوة إجمالية 75 واط مع إضاءة حلقة LED زرقاء ناعمة.",
-                        specs: {
+                        tag_ar: "سبائك 75W",
+                        tag_en: "Alloy 75W",
+                        desc_ar: "شاحن سيارة مصنوع بالكامل من سبائك الألومنيوم المقاوم للحرارة والخدش مع منفذين Type-C و USB-A بقوة إجمالية 75 واط مع إضاءة حلقة LED زرقاء ناعمة.",
+                        desc_en: "Heavy-duty aluminum alloy car charger featuring Type-C (45W) and USB-A (30W) outputs with soothing blue LED glow for night driving.",
+                        specs_ar: {
                             "القدرة": "75 واط (Type-C 45W + USB-A 30W)",
                             "جهد الإدخال": "12V - 24V متوافق مع جميع أنواع السيارات والشاحنات",
                             "الخامة": "هيكل معدني من سبائك الألومنيوم لتشتيت الحرارة",
                             "الإضاءة": "حلقة ضوء LED زرقاء لتحديد مكانه ليلاً",
                             "الأمان": "حماية من التغير المفاجئ في دينامو السيارة",
                             "محتويات العلبة": "شاحن TurboDrive 75W المعدني"
+                        },
+                        specs_en: {
+                            "Output": "75W Total (Type-C 45W + USB-A 30W)",
+                            "Input Voltage": "12V - 24V (Cars, SUVs & Trucks)",
+                            "Material": "Solid anodized heat-dissipating aluminum alloy",
+                            "Lighting": "Subtle blue LED halo ring indicator",
+                            "Safety": "Automotive alternator surge protection",
+                            "Box Contents": "TurboDrive 75W Aluminum Car Charger"
                         }
                     }
                 ]
             },
             cable: {
-                title: "فئة كابلات الشحن ونقل البيانات (High Performance Cables)",
-                desc: "4 كابلات متينة معضلة مجدولة بالنايلون بشاشة واط، وصلات آيفون Lightning، وUSB-A، ووصلة AUX صوتيات",
+                title_ar: "فئة كابلات الشحن ونقل البيانات (High Performance Cables)",
+                title_en: "Charging & High-Speed Data Cables",
+                desc_ar: "4 كابلات متينة معضلة مجدولة بالنايلون بشاشة واط، وصلات آيفون Lightning، وUSB-A، ووصلة AUX صوتيات",
+                desc_en: "4 armored Kevlar-braided cables with OLED live wattage displays, Lightning, USB-A & Hi-Res AUX",
                 products: [
                     {
                         id: 9,
                         model: "CB-CB240W",
-                        name: "كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط",
-                        price: 290,
-                        oldPrice: 350,
-                        badge: "الأكثر مبيعاً 🥇",
+                        name_ar: "كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط",
+                        name_en: "Cableto ArmorFlex 240W Braided Fast Cable with Live OLED Watt Meter",
+                        price: 35,
+                        oldPrice: 45,
+                        badge_ar: "الأكثر مبيعاً 🥇",
+                        badge_en: "Best Seller 🥇",
                         icon: "fa-bolt-lightning",
                         img: "images/cable.jpg",
-                        tag: "مجدول 240W",
-                        desc: "الكابل الأقوى على الإطلاق بقدرة 240 واط مع شاشة OLED رقمية مدمجة برأس الكابل تعرض سرعة الشحن الحقيقية بالواط بالزمن الفعلي. نسيج كيفلار مجدول يتحمل أكثر من 30,000 انحناء.",
-                        specs: {
+                        tag_ar: "مجدول 240W",
+                        tag_en: "Braided 240W",
+                        desc_ar: "الكابل الأقوى على الإطلاق بقدرة 240 واط مع شاشة OLED رقمية مدمجة برأس الكابل تعرض سرعة الشحن الحقيقية بالواط بالزمن الفعلي. نسيج كيفلار مجدول يتحمل أكثر من 30,000 انحناء.",
+                        desc_en: "Ultra-rugged 240W cable with built-in real-time digital OLED wattage meter. Armored with ballistic Kevlar weave rated for 30,000+ bends.",
+                        specs_ar: {
                             "أقصى قدرة": "240 واط (48V / 5A) بتقنية PD 3.1",
                             "الشاشة": "شاشة رقمية LED ذكية لقياس الواط بالوقت الفعلي",
                             "الخامة": "ألياف كيفلار العسكرية المجدولة مع رؤوس زنك مصمتة",
                             "سرعة نقل البيانات": "480 ميجابت / ثانية",
                             "الطول": "1.2 متر متين ومرن ضد التشابك",
                             "محتويات العلبة": "كابل ArmorFlex 240W + شريط تنظيمي جلد"
+                        },
+                        specs_en: {
+                            "Max Power": "240W (48V / 5A) EPR PD 3.1 Protocol",
+                            "Display": "Integrated smart OLED real-time wattage monitor",
+                            "Material": "Military Kevlar braided fiber + Zinc alloy heads",
+                            "Data Transfer": "480 Mbps high-speed sync",
+                            "Length": "1.2m tangle-free reinforced flexible length",
+                            "Box Contents": "ArmorFlex 240W Cable + Leather Organizer Strap"
                         }
                     },
                     {
                         id: 10,
                         model: "CB-CB-PD27W",
-                        name: "كابل كابليتو Type-C إلى Lightning بقوة 27W شحن سريع للآيفون",
-                        price: 220,
-                        oldPrice: 280,
-                        badge: "آيفون Lightning 📱",
+                        name_ar: "كابل كابليتو Type-C إلى Lightning بقوة 27W شحن سريع للآيفون",
+                        name_en: "Cableto Type-C to Lightning 27W Fast Charging Braided iPhone Cable",
+                        price: 28,
+                        oldPrice: 35,
+                        badge_ar: "آيفون Lightning 📱",
+                        badge_en: "iPhone Lightning 📱",
                         icon: "fa-mobile-screen-button",
                         img: "images/cable.jpg",
-                        tag: "Lightning 27W",
-                        desc: "كابل شحن سريع معتمد ومخصص لأجهزة الآيفون القديمة والحديثة التي تدعم مدخل Lightning. يشحن بنسبة 50% خلال 30 دقيقة مع شريحة C94 الأصلية لمنع ظهور رسائل الخطأ.",
-                        specs: {
+                        tag_ar: "Lightning 27W",
+                        tag_en: "Lightning 27W",
+                        desc_ar: "كابل شحن سريع معتمد ومخصص لأجهزة الآيفون القديمة والحديثة التي تدعم مدخل Lightning. يشحن بنسبة 50% خلال 30 دقيقة مع شريحة C94 الأصلية لمنع ظهور رسائل الخطأ.",
+                        desc_en: "Certified fast charging cable engineered for Lightning iPhone models. Delivers 50% charge in 30 minutes with original C94 chip avoiding warning popups.",
+                        specs_ar: {
                             "القدرة": "27 واط PD شحن سريع معتمد",
                             "الشريحة": "شريحة C94 الذكية المعتمدة",
                             "الخامة": "نايلون مضاعف الحياكة ضد القطع والتمزق",
                             "الطول": "1.2 متر",
                             "التوافق": "سلسلة iPhone 8 حتى iPhone 14 Pro Max و iPad",
                             "محتويات العلبة": "كابل Type-C إلى Lightning"
+                        },
+                        specs_en: {
+                            "Output": "27W Power Delivery fast charge",
+                            "Chipset": "Original smart C94 authorization chip",
+                            "Material": "Double-braided tear-proof nylon armor",
+                            "Length": "1.2m",
+                            "Compatibility": "iPhone 8 through iPhone 14 Pro Max & iPad",
+                            "Box Contents": "Type-C to Lightning Cable"
                         }
                     },
                     {
                         id: 11,
                         model: "CB-CB-USB3A",
-                        name: "كابل كابليتو SmartCharge من USB-A إلى Type-C بقوة 100W مجدول",
-                        price: 170,
-                        oldPrice: 220,
-                        badge: "USB-A إلى C 🔌",
+                        name_ar: "كابل كابليتو SmartCharge من USB-A إلى Type-C بقوة 100W مجدول",
+                        name_en: "Cableto SmartCharge USB-A to Type-C 100W Fast Braided Cable",
+                        price: 20,
+                        oldPrice: 28,
+                        badge_ar: "USB-A إلى C 🔌",
+                        badge_en: "USB-A to C 🔌",
                         icon: "fa-usb",
                         img: "images/cable.jpg",
-                        tag: "100W Type-C",
-                        desc: "كابل عالي الجودة يدعم شحن الهواتف والأجهزة من شواحن ومنافذ USB-A التقليدية مع دعم تقنيات الشحن السريع QC و SuperVOOC و Huawei Fast Charge حتى 100 واط.",
-                        specs: {
+                        tag_ar: "100W Type-C",
+                        tag_en: "100W Type-C",
+                        desc_ar: "كابل عالي الجودة يدعم شحن الهواتف والأجهزة من شواحن ومنافذ USB-A التقليدية مع دعم تقنيات الشحن السريع QC و SuperVOOC و Huawei Fast Charge حتى 100 واط.",
+                        desc_en: "Heavy-duty cable connecting legacy USB-A ports with fast 100W Type-C charging, fully compatible with QC, SuperVOOC, and Huawei fast protocols.",
+                        specs_ar: {
                             "القدرة": "100 واط (6A كحد أقصى)",
                             "التوافق": "يدعم Huawei SCP و Oppo SuperVOOC و Xiaomi Turbo",
                             "الخامة": "حياكة نسيج نايلون معزز برؤوس ألومنيوم مقاومة للتآكل",
                             "الطول": "1.0 متر",
                             "نقل البيانات": "480Mbps نقل سريع للصور والملفات",
                             "محتويات العلبة": "كابل SmartCharge USB-A to Type-C"
+                        },
+                        specs_en: {
+                            "Max Current": "100W (6A Peak Current)",
+                            "Protocols": "Supports Huawei SCP, Oppo SuperVOOC, Xiaomi Turbo",
+                            "Material": "Nylon braided jacket with anti-corrosion alloy tips",
+                            "Length": "1.0m",
+                            "Data Transfer": "480Mbps rapid file synchronization",
+                            "Box Contents": "SmartCharge USB-A to Type-C Cable"
                         }
                     },
                     {
                         id: 12,
                         model: "CB-CB-AUX",
-                        name: "كابل كابليتو SoundLine Type-C إلى AUX 3.5mm للصوت عالي النقاوة",
-                        price: 190,
-                        oldPrice: 250,
-                        badge: "صوتيات AUX 🎵",
+                        name_ar: "كابل كابليتو SoundLine Type-C إلى AUX 3.5mm للصوت عالي النقاوة",
+                        name_en: "Cableto SoundLine Type-C to 3.5mm AUX Cable with Hi-Res DAC Chip",
+                        price: 24,
+                        oldPrice: 32,
+                        badge_ar: "صوتيات AUX 🎵",
+                        badge_en: "Audio AUX 🎵",
                         icon: "fa-sliders",
                         img: "images/cable.jpg",
-                        tag: "DAC AUX 3.5mm",
-                        desc: "كابل توصيل صوتيات عالي الدقة مزود بشريحة معالجة رقمية DAC متطورة (24bit/96kHz) لتحويل الصوت الرقمي إلى أنالوج نقي بدون أي تشويش أو فقدان ترددات.",
-                        specs: {
+                        tag_ar: "DAC AUX 3.5mm",
+                        tag_en: "DAC 3.5mm",
+                        desc_ar: "كابل توصيل صوتيات عالي الدقة مزود بشريحة معالجة رقمية DAC متطورة (24bit/96kHz) لتحويل الصوت الرقمي إلى أنالوج نقي بدون أي تشويش أو فقدان ترددات.",
+                        desc_en: "Hi-Res audio adapter cable featuring an integrated 24-bit/96kHz digital DAC chip delivering studio-grade lossless sound to car systems and speakers.",
+                        specs_ar: {
                             "شريحة الصوت": "شريحة DAC Hi-Res Audio مدمجة (24-bit / 96kHz)",
                             "الموصلات": "Type-C ذكر إلى 3.5mm AUX ذكر مطلي بالذهب 24K",
                             "الاستخدام": "توصيل الهواتف بسماعات السيارة، مكبرات الصوت، والساوند بار",
                             "الخامة": "أسلاك نحاسية خالية من الأكسجين OFC مغلفة بنسيج مجدول",
                             "الطول": "1.0 متر",
                             "محتويات العلبة": "كابل كابليتو SoundLine AUX"
+                        },
+                        specs_en: {
+                            "Audio DAC": "Built-in 24-bit / 96kHz Hi-Res decoding chipset",
+                            "Connectors": "Type-C Male to 24K Gold-Plated 3.5mm AUX Male",
+                            "Application": "Connects smartphones to car audio, soundbars & speakers",
+                            "Core": "Oxygen-Free Copper (OFC) with braided protective jacket",
+                            "Length": "1.0m",
+                            "Box Contents": "Cableto SoundLine Type-C to AUX Cable"
                         }
                     }
                 ]
             },
             earbuds: {
-                title: "فئة السماعات والصوتيات (Audio & Wireless Earbuds)",
-                desc: "4 منتجات صوتية تشمل سماعات شفاف ANC، مكبر صوت RGB محمول، سماعات سينمائية، وسماعة سلكية DeepBass",
+                title_ar: "فئة السماعات والصوتيات (Audio & Wireless Earbuds)",
+                title_en: "Wireless Earbuds & Audio Gear",
+                desc_ar: "4 منتجات صوتية تشمل سماعات شفاف ANC، مكبر صوت RGB محمول، سماعات سينمائية، وسماعة سلكية DeepBass",
+                desc_en: "4 audio devices including transparent Hybrid ANC earbuds, 360° RGB speaker, and HiFi earphones",
                 products: [
                     {
                         id: 13,
                         model: "CB-PODS-ANC",
-                        name: "سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط ANC وحافظة شفافة",
-                        price: 1350,
-                        oldPrice: 1800,
-                        badge: "الأكثر مبيعاً 🥇",
+                        name_ar: "سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط ANC وحافظة شفافة",
+                        name_en: "Cableto UltraPods Hybrid ANC Wireless Earbuds with Transparent Case",
+                        price: 160,
+                        oldPrice: 215,
+                        badge_ar: "الأكثر مبيعاً 🥇",
+                        badge_en: "Best Seller 🥇",
                         icon: "fa-headphones",
                         img: "images/earbuds.jpg",
-                        tag: "ANC شفاف",
-                        desc: "سماعات بلوتوث بتصميم شفاف ثوري مستقبلي مزودة بتقنية عزل الضوضاء النشط ANC الهجين حتى -35dB. بطارية تدوم حتى 32 ساعة مع الحافظة مع شاشة LED تعرض نسبة الشحن الدقيقة لكل سماعة.",
-                        specs: {
+                        tag_ar: "ANC شفاف",
+                        tag_en: "Transparent ANC",
+                        desc_ar: "سماعات بلوتوث بتصميم شفاف ثوري مستقبلي مزودة بتقنية عزل الضوضاء النشط ANC الهجين حتى -35dB. بطارية تدوم حتى 32 ساعة مع الحافظة مع شاشة LED تعرض نسبة الشحن الدقيقة لكل سماعة.",
+                        desc_en: "Futuristic transparent aesthetic with hybrid active noise cancellation (up to -35dB). 32-hour battery life with individual earbud LED battery status indicators.",
+                        specs_ar: {
                             "تقنية العزل": "Active Noise Cancellation (ANC) حتى -35dB + وضع الشفافية",
                             "البطارية": "حتى 7 ساعات تشغيل متواصل (32 ساعة مع علبة الشحن)",
                             "البلوتوث": "Bluetooth 5.3 منخفض زمن الاستجابة (Low Latency Gaming)",
                             "المقاومة": "مقاومة لرذاذ الماء والعرق بمعيار IPX5",
                             "الميكروفونات": "4 ميكروفونات بخاصية ENC لعزل صوت الرياح في المكالمات",
                             "محتويات العلبة": "سماعات UltraPods + علبة شفافة + كابل شحن + 3 أزواج سدادات سيليكون"
+                        },
+                        specs_en: {
+                            "Noise Canceling": "Hybrid Active Noise Canceling (-35dB) + Transparency Mode",
+                            "Battery": "7 hours playback (32 hours with charging case)",
+                            "Bluetooth": "Bluetooth 5.3 with ultra-low latency gaming mode",
+                            "Waterproof": "IPX5 sweat & splash resistant rating",
+                            "Microphones": "Quad ENC microphones for crystal clear phone calls",
+                            "Box Contents": "UltraPods Earbuds + Transparent Case + Cable + 3 Ear Tip Sizes"
                         }
                     },
                     {
                         id: 14,
                         model: "CB-SPK-360",
-                        name: "مكبر صوت كابليتو BassBlast بلوتوث محمول مع إضاءة RGB 360 درجة",
-                        price: 650,
-                        oldPrice: 850,
-                        badge: "مكبر RGB 🔊",
+                        name_ar: "مكبر صوت كابليتو BassBlast بلوتوث محمول مع إضاءة RGB 360 درجة",
+                        name_en: "Cableto BassBlast 20W Portable Bluetooth Speaker with 360° RGB Light",
+                        price: 80,
+                        oldPrice: 105,
+                        badge_ar: "مكبر RGB 🔊",
+                        badge_en: "RGB Speaker 🔊",
                         icon: "fa-radio",
                         img: "images/earbuds.jpg",
-                        tag: "إضاءة 360",
-                        desc: "مكبر صوت محمول بقوة 20 واط مع صوت محيطي 360 درجة ومضخم صوت باس Deep Bass مدمج. مزود بحلقة إضاءة RGB متزامنة مع نبضات الموسيقى وبطارية تدوم حتى 12 ساعة تشغيل.",
-                        specs: {
+                        tag_ar: "إضاءة 360",
+                        tag_en: "360° Light",
+                        desc_ar: "مكبر صوت محمول بقوة 20 واط مع صوت محيطي 360 درجة ومضخم صوت باس Deep Bass مدمج. مزود بحلقة إضاءة RGB متزامنة مع نبضات الموسيقى وبطارية تدوم حتى 12 ساعة تشغيل.",
+                        desc_en: "20W punchy portable speaker delivering 360° room-filling sound with deep bass radiators and rhythm-synced RGB party lighting. 12-hour battery.",
+                        specs_ar: {
                             "القدرة الصوتية": "20 واط صوت استريو عالي النقاء",
                             "الإضاءة": "أوضاع إضاءة RGB متعددة متفاعلة مع الإيقاع",
                             "البطارية": "بطارية 3,000mAh تدوم حتى 12 ساعة تشغيل متواصل",
                             "المداخل": "Bluetooth 5.3, AUX 3.5mm, كارت ميموري TF, Flash USB",
                             "مقاومة الماء": "معيار IPX6 مقاوم للمطر والماء",
                             "محتويات العلبة": "مكبر BassBlast + كابل Type-C + كابل AUX + حبل تعليق"
+                        },
+                        specs_en: {
+                            "Audio Power": "20W Crisp stereo sound with dual passive radiators",
+                            "Lighting": "Multi-mode rhythm-synced 360° RGB lighting effects",
+                            "Battery": "3,000mAh battery providing up to 12 hours continuous playtime",
+                            "Inputs": "Bluetooth 5.3, 3.5mm AUX, TF Card Slot, USB Flash Drive",
+                            "Water Rating": "IPX6 weather and outdoor rain resistance",
+                            "Box Contents": "BassBlast Speaker + Type-C Cable + AUX Cable + Lanyard"
                         }
                     },
                     {
                         id: 15,
                         model: "CB-PODS-PRO",
-                        name: "سماعات كابليتو AirPro 3 لاسلكية مع ميكروفون مزدوج للمكالمات النقية",
-                        price: 990,
-                        oldPrice: 1250,
-                        badge: "صوت سينمائي 🎙️",
+                        name_ar: "سماعات كابليتو AirPro 3 لاسلكية مع ميكروفون مزدوج للمكالمات النقية",
+                        name_en: "Cableto AirPro 3 True Wireless Earbuds with Dual AI Noise-Canceling Mics",
+                        price: 120,
+                        oldPrice: 150,
+                        badge_ar: "صوت سينمائي 🎙️",
+                        badge_en: "HD Calls 🎙️",
                         icon: "fa-compact-disc",
                         img: "images/earbuds.jpg",
-                        tag: "مكالمات HD",
-                        desc: "سماعات مريحة للأذن مصممة للاستخدام الطويل والمكالمات الاحترافية مع ميكروفونات مزدوجة تعمل بتقنية الذكاء الاصطناعي لتنقية الصوت وعزل الضوضاء المحيطة.",
-                        specs: {
+                        tag_ar: "مكالمات HD",
+                        tag_en: "AI Voice",
+                        desc_ar: "سماعات مريحة للأذن مصممة للاستخدام الطويل والمكالمات الاحترافية مع ميكروفونات مزدوجة تعمل بتقنية الذكاء الاصطناعي لتنقية الصوت وعزل الضوضاء المحيطة.",
+                        desc_en: "Ergonomic semi-in-ear earbuds optimized for all-day comfort and professional business calls with dual AI noise-suppression microphones.",
+                        specs_ar: {
                             "المحركات الصوتية": "مشغلات تيتانيوم 13 ملم لصوت جهير وباس عميق",
                             "المكالمات": "ميكروفون مزدوج بخاصية AI Clear Call",
                             "البطارية": "6 ساعات لكل سماعة (28 ساعة مع العلبة)",
                             "التحكم": "مستشعرات لمس ذكية للتحكم بالموسيقى والمكالمات",
                             "التوافق": "اقتران فوري بجميع هواتف أندرويد وآيفون",
                             "محتويات العلبة": "سماعات AirPro 3 + علبة الشحن + كابل Type-C"
+                        },
+                        specs_en: {
+                            "Drivers": "13mm Titanium-coated drivers with dynamic punchy bass",
+                            "Call Quality": "Dual microphones powered by AI Clear Call beamforming",
+                            "Battery": "6 hours playback per charge (28 hours with charging case)",
+                            "Controls": "Smart intuitive touch gestures for volume, calls & tracks",
+                            "Pairing": "Instant auto-connect on Android, iOS, Windows & Mac",
+                            "Box Contents": "AirPro 3 Earbuds + Charging Case + Type-C Cable"
                         }
                     },
                     {
                         id: 16,
                         model: "CB-EAR-WIRED",
-                        name: "سماعات أذن سلكية كابليتو HiFi DeepBass مع ميكروفون مخرج Type-C",
-                        price: 190,
-                        oldPrice: 250,
-                        badge: "سماعة سلكية 🎧",
+                        name_ar: "سماعات أذن سلكية كابليتو HiFi DeepBass مع ميكروفون مخرج Type-C",
+                        name_en: "Cableto HiFi DeepBass Type-C Wired In-Ear Earphones with Mic & DAC",
+                        price: 25,
+                        oldPrice: 35,
+                        badge_ar: "سماعة سلكية 🎧",
+                        badge_en: "Wired HiFi 🎧",
                         icon: "fa-plug",
                         img: "images/earbuds.jpg",
-                        tag: "DeepBass Type-C",
-                        desc: "سماعة أذن سلكية مخصصة للأجهزة الحديثة ذات مدخل Type-C مزودة بشريحة صوت DAC وميكروفون فائق الحساسية مناسب للبث المباشر والألعاب والمكالمات بدون أي تأخير في الصوت.",
-                        specs: {
+                        tag_ar: "DeepBass Type-C",
+                        tag_en: "Type-C DAC",
+                        desc_ar: "سماعة أذن سلكية مخصصة للأجهزة الحديثة ذات مدخل Type-C مزودة بشريحة صوت DAC وميكروفون فائق الحساسية مناسب للبث المباشر والألعاب والمكالمات بدون أي تأخير في الصوت.",
+                        desc_en: "Direct digital Type-C wired in-ear earphones with built-in DAC lossless decoding and low-latency mic, perfect for streaming, gaming, and calls.",
+                        specs_ar: {
                             "المنفذ": "Type-C مباشر رقمي متوافق مع آيفون 15/16 وسامسونج",
                             "جودة الصوت": "HiFi Lossless Audio مع مشغل 14.2 ملم",
                             "التحكم": "وحدة تحكم سلكية مدمجة (رفع/خفض الصوت + زر الرد)",
                             "الميكروفون": "ميكروفون عالي الحساسية لعزل الصدى",
                             "السلك": "سلك مجدول مرن مقاوم للتشابك بطول 1.2 متر",
                             "محتويات العلبة": "سماعات HiFi DeepBass + مشبك تثبيت"
+                        },
+                        specs_en: {
+                            "Connector": "Direct digital Type-C (iPhone 15/16, Samsung & iPad)",
+                            "Acoustics": "14.2mm dynamic neodymium drivers for lossless HiFi sound",
+                            "In-Line Control": "Integrated 3-button remote for volume and call handling",
+                            "Microphone": "High-sensitivity anti-static studio condenser mic",
+                            "Cable": "1.2m tangle-free reinforced flexible cable",
+                            "Box Contents": "HiFi DeepBass Earphones + Cable Lapel Clip"
                         }
                     }
                 ]
             }
         };
 
-        // All Products List for Search
+        // Flattened list for search and lookup
         const ALL_PRODUCTS = [];
         Object.values(CATEGORIES_DATABASE).forEach(cat => {
             ALL_PRODUCTS.push(...cat.products);
         });
+
+        // Helper to get localized product properties
+        function getProdName(p) { return currentLang === 'en' ? (p.name_en || p.name) : (p.name_ar || p.name); }
+        function getProdDesc(p) { return currentLang === 'en' ? (p.desc_en || p.desc) : (p.desc_ar || p.desc); }
+        function getProdBadge(p) { return currentLang === 'en' ? (p.badge_en || p.badge) : (p.badge_ar || p.badge); }
+        function getProdTag(p) { return currentLang === 'en' ? (p.tag_en || p.tag) : (p.tag_ar || p.tag); }
+        function getProdSpecs(p) { return currentLang === 'en' ? (p.specs_en || p.specs) : (p.specs_ar || p.specs); }
 
         // Toast Notification System
         function showToast(message, icon = 'fa-circle-check') {
@@ -1455,8 +1815,8 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             let cart = [];
-            const shippingFee = 50;
-            let appliedDiscount = 0; // percentage: 0 to 1
+            const shippingFee = 15; // 15 AED / standard regional shipping
+            let appliedDiscount = 0; // percentage
             let appliedCouponCode = "";
 
             // Product Details Modal Elements
@@ -1476,28 +1836,75 @@
             const pdpBuyNowBtn = document.getElementById('pdp-buy-now-btn');
 
             let currentActivePdpProduct = null;
+            let currentActiveCategoryKey = null;
+
+            // Render Best Sellers (Flagship 4)
+            function renderBestSellers() {
+                const grid = document.getElementById('bestsellers-grid');
+                if (!grid) return;
+                const flagships = [ALL_PRODUCTS[0], ALL_PRODUCTS[4], ALL_PRODUCTS[8], ALL_PRODUCTS[12]];
+                const t = TRANSLATIONS[currentLang];
+
+                grid.innerHTML = flagships.map(p => `
+                    <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="${currentLang === 'en' ? 'Click to view full specs & details' : 'اضغط لعرض تفاصيل ومواصفات المنتج'}">
+                        <div class="product-badge gold">${getProdBadge(p)}</div>
+                        <div class="product-img-holder">
+                            <img src="${p.img}" alt="${getProdName(p)}">
+                            <span class="product-type-icon"><i class="fa-solid ${p.icon}"></i> ${getProdTag(p)}</span>
+                        </div>
+                        <div class="product-details">
+                            <span class="product-model">${t.pdpModelPrefix}${p.model}</span>
+                            <h3 class="product-title">${getProdName(p)}</h3>
+                            <div class="product-price">
+                                <span class="current-price">${p.price} ${t.currency}</span>
+                                <span class="old-price">${p.oldPrice} ${t.currency}</span>
+                            </div>
+                            <div class="product-actions" onclick="event.stopPropagation()">
+                                <button class="btn btn-cart add-to-cart-btn" data-id="${p.id}" data-title="${getProdName(p)}" data-price="${p.price}" data-img="${p.img}">
+                                    <i class="fa-solid fa-cart-plus"></i> ${t.btnAddToCart}
+                                </button>
+                                <button class="btn btn-buy buy-now-btn" data-id="${p.id}" data-title="${getProdName(p)}" data-price="${p.price}" data-img="${p.img}">
+                                    ${t.btnBuyNow}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                grid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                    btn.addEventListener('click', () => addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img));
+                });
+                grid.querySelectorAll('.buy-now-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img);
+                        openCheckoutModal();
+                    });
+                });
+            }
 
             window.openProductDetailsModal = function(productId) {
                 const product = ALL_PRODUCTS.find(p => p.id === productId);
                 if (!product) return;
                 currentActivePdpProduct = product;
+                const t = TRANSLATIONS[currentLang];
 
                 if (pdpImage) {
                     pdpImage.src = product.img;
-                    pdpImage.alt = product.name;
+                    pdpImage.alt = getProdName(product);
                 }
-                if (pdpBadge) pdpBadge.textContent = product.badge;
-                if (pdpTitle) pdpTitle.textContent = product.name;
-                if (pdpModel) pdpModel.textContent = `موديل: ${product.model}`;
-                if (pdpPrice) pdpPrice.textContent = `${product.price.toLocaleString()} ج.م`;
-                if (pdpOldPrice) pdpOldPrice.textContent = `${product.oldPrice.toLocaleString()} ج.م`;
+                if (pdpBadge) pdpBadge.textContent = getProdBadge(product);
+                if (pdpTitle) pdpTitle.textContent = getProdName(product);
+                if (pdpModel) pdpModel.textContent = `${t.pdpModelPrefix}${product.model}`;
+                if (pdpPrice) pdpPrice.textContent = `${product.price} ${t.currency}`;
+                if (pdpOldPrice) pdpOldPrice.textContent = `${product.oldPrice} ${t.currency}`;
                 
                 const savings = product.oldPrice - product.price;
-                if (pdpSavings) pdpSavings.textContent = `وفر ${savings.toLocaleString()} ج.م (${Math.round((savings / product.oldPrice) * 100)}%)`;
-                if (pdpDesc) pdpDesc.textContent = product.desc;
+                if (pdpSavings) pdpSavings.textContent = `${t.pdpSavePrefix}${savings} ${t.currency} (${Math.round((savings / product.oldPrice) * 100)}%)`;
+                if (pdpDesc) pdpDesc.textContent = getProdDesc(product);
 
-                if (pdpSpecsBody && product.specs) {
-                    pdpSpecsBody.innerHTML = Object.entries(product.specs).map(([key, val]) => `
+                const specs = getProdSpecs(product);
+                if (pdpSpecsBody && specs) {
+                    pdpSpecsBody.innerHTML = Object.entries(specs).map(([key, val]) => `
                         <tr>
                             <td>${key}</td>
                             <td>${val}</td>
@@ -1505,10 +1912,7 @@
                     `).join('');
                 }
 
-                // Natural WhatsApp greeting
-                const waText = `السلام عليكم`;
-                if (pdpWhatsAppBtn) pdpWhatsAppBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
-
+                if (pdpWhatsAppBtn) pdpWhatsAppBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.waGreeting)}`;
                 if (pdpModalOverlay) pdpModalOverlay.classList.add('active');
             };
 
@@ -1526,7 +1930,7 @@
             if (pdpAddCartBtn) {
                 pdpAddCartBtn.addEventListener('click', () => {
                     if (currentActivePdpProduct) {
-                        addToCart(currentActivePdpProduct.id, currentActivePdpProduct.name, currentActivePdpProduct.price, currentActivePdpProduct.img);
+                        addToCart(currentActivePdpProduct.id, getProdName(currentActivePdpProduct), currentActivePdpProduct.price, currentActivePdpProduct.img);
                     }
                 });
             }
@@ -1534,12 +1938,365 @@
             if (pdpBuyNowBtn) {
                 pdpBuyNowBtn.addEventListener('click', () => {
                     if (currentActivePdpProduct) {
-                        addToCart(currentActivePdpProduct.id, currentActivePdpProduct.name, currentActivePdpProduct.price, currentActivePdpProduct.img);
+                        addToCart(currentActivePdpProduct.id, getProdName(currentActivePdpProduct), currentActivePdpProduct.price, currentActivePdpProduct.img);
                         closeProductDetailsModal();
                         openCheckoutModal();
                     }
                 });
             }
+
+            // Category Modal Logic
+            const categoryPageModal = document.getElementById('category-page-modal');
+            const catModalTitle = document.getElementById('cat-modal-title');
+            const catModalDesc = document.getElementById('cat-modal-desc');
+            const catModalGrid = document.getElementById('cat-modal-grid');
+            const closeCatModal = document.getElementById('close-cat-modal');
+
+            function renderCategoryModal(catKey) {
+                const category = CATEGORIES_DATABASE[catKey];
+                if (!category) return;
+                currentActiveCategoryKey = catKey;
+                const t = TRANSLATIONS[currentLang];
+
+                catModalTitle.textContent = currentLang === 'en' ? category.title_en : category.title_ar;
+                catModalDesc.textContent = currentLang === 'en' ? category.desc_en : category.desc_ar;
+
+                catModalGrid.innerHTML = category.products.map(p => `
+                    <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="${currentLang === 'en' ? 'Click to view full specs & details' : 'اضغط لعرض تفاصيل ومواصفات المنتج'}">
+                        <div class="product-badge">${getProdBadge(p)}</div>
+                        <div class="product-img-holder">
+                            <img src="${p.img}" alt="${getProdName(p)}">
+                            <span class="product-type-icon"><i class="fa-solid ${p.icon}"></i> ${getProdTag(p)}</span>
+                        </div>
+                        <div class="product-details">
+                            <span class="product-model">${t.pdpModelPrefix}${p.model}</span>
+                            <h3 class="product-title">${getProdName(p)}</h3>
+                            <div class="product-price">
+                                <span class="current-price">${p.price} ${t.currency}</span>
+                                <span class="old-price">${p.oldPrice} ${t.currency}</span>
+                            </div>
+                            <div class="product-actions" onclick="event.stopPropagation()">
+                                <button class="btn btn-cart add-to-cart-btn" data-id="${p.id}" data-title="${getProdName(p)}" data-price="${p.price}" data-img="${p.img}">
+                                    <i class="fa-solid fa-cart-plus"></i> ${t.btnAddToCart}
+                                </button>
+                                <button class="btn btn-buy buy-now-btn" data-id="${p.id}" data-title="${getProdName(p)}" data-price="${p.price}" data-img="${p.img}">
+                                    ${t.btnBuyNow}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                catModalGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                    btn.addEventListener('click', () => addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img));
+                });
+                catModalGrid.querySelectorAll('.buy-now-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img);
+                        closeCategoryPageModal();
+                        openCheckoutModal();
+                    });
+                });
+            }
+
+            function openCategoryPageModal(catKey) {
+                renderCategoryModal(catKey);
+                categoryPageModal.classList.add('active');
+            }
+
+            function closeCategoryPageModal() {
+                categoryPageModal.classList.remove('active');
+                currentActiveCategoryKey = null;
+            }
+
+            if (closeCatModal) closeCatModal.addEventListener('click', closeCategoryPageModal);
+
+            document.querySelectorAll('.open-cat-btn').forEach(elem => {
+                elem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const catKey = elem.dataset.cat;
+                    if (catKey) openCategoryPageModal(catKey);
+                });
+            });
+
+            // Master Language Switcher Function
+            function setLanguage(lang) {
+                currentLang = lang;
+                localStorage.setItem('cableto-lang', lang);
+                document.documentElement.lang = lang;
+                document.documentElement.dir = (lang === 'ar' ? 'rtl' : 'ltr');
+
+                const t = TRANSLATIONS[lang];
+
+                // Update language button labels
+                document.querySelectorAll('.lang-text-label').forEach(el => el.textContent = t.langLabel);
+
+                // Update Announcement Bar
+                const annTextEl = document.getElementById('ann-text');
+                if (annTextEl) annTextEl.innerHTML = t.annText;
+                const annCsText = document.getElementById('ann-cs-text');
+                if (annCsText) annCsText.textContent = t.annCs;
+                const annVerifyText = document.getElementById('ann-verify-text');
+                if (annVerifyText) annVerifyText.textContent = t.annVerify;
+                const annWhyText = document.getElementById('ann-why-text');
+                if (annWhyText) annWhyText.textContent = t.annWhy;
+
+                // Search Box
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
+                // Brand Sub Label
+                const brandSubLabel = document.getElementById('brand-sub-label');
+                if (brandSubLabel) brandSubLabel.textContent = t.brandSub;
+
+                // Nav Links
+                const navHome = document.getElementById('nav-home');
+                if (navHome) navHome.textContent = t.navHome;
+                const navBs = document.getElementById('nav-bs');
+                if (navBs) navBs.textContent = t.navBs;
+                const navPb = document.getElementById('nav-pb');
+                if (navPb) navPb.textContent = t.navPb;
+                const navCh = document.getElementById('nav-ch');
+                if (navCh) navCh.textContent = t.navCh;
+                const navCb = document.getElementById('nav-cb');
+                if (navCb) navCb.textContent = t.navCb;
+                const navEar = document.getElementById('nav-ear');
+                if (navEar) navEar.textContent = t.navEar;
+                const navWhy = document.getElementById('nav-why');
+                if (navWhy) navWhy.textContent = t.navWhy;
+
+                // Hero Section
+                const heroTag = document.getElementById('hero-tag');
+                if (heroTag) heroTag.innerHTML = t.heroTag;
+                const heroTitle = document.getElementById('hero-title');
+                if (heroTitle) heroTitle.innerHTML = t.heroTitle;
+                const heroDesc = document.getElementById('hero-desc');
+                if (heroDesc) heroDesc.textContent = t.heroDesc;
+                const heroBtnBs = document.getElementById('hero-btn-bs-text');
+                if (heroBtnBs) heroBtnBs.textContent = t.heroBtnBs;
+                const heroBtnCats = document.getElementById('hero-btn-cats-text');
+                if (heroBtnCats) heroBtnCats.textContent = t.heroBtnCats;
+                const stat1Label = document.getElementById('stat1-label');
+                if (stat1Label) stat1Label.textContent = t.stat1Label;
+                const stat2Label = document.getElementById('stat2-label');
+                if (stat2Label) stat2Label.textContent = t.stat2Label;
+                const stat3Label = document.getElementById('stat3-label');
+                if (stat3Label) stat3Label.textContent = t.stat3Label;
+                const heroBadgeSub = document.getElementById('hero-badge-sub');
+                if (heroBadgeSub) heroBadgeSub.textContent = t.heroBadgeSub;
+
+                // Features Bar
+                const feat1H4 = document.getElementById('feat1-h4');
+                if (feat1H4) feat1H4.textContent = t.feat1H4;
+                const feat1P = document.getElementById('feat1-p');
+                if (feat1P) feat1P.textContent = t.feat1P;
+                const feat2H4 = document.getElementById('feat2-h4');
+                if (feat2H4) feat2H4.textContent = t.feat2H4;
+                const feat2P = document.getElementById('feat2-p');
+                if (feat2P) feat2P.textContent = t.feat2P;
+                const feat3H4 = document.getElementById('feat3-h4');
+                if (feat3H4) feat3H4.textContent = t.feat3H4;
+                const feat3P = document.getElementById('feat3-p');
+                if (feat3P) feat3P.textContent = t.feat3P;
+                const feat4H4 = document.getElementById('feat4-h4');
+                if (feat4H4) feat4H4.textContent = t.feat4H4;
+                const feat4P = document.getElementById('feat4-p');
+                if (feat4P) feat4P.textContent = t.feat4P;
+
+                // Best Sellers Section Header
+                const bsTitle = document.getElementById('bs-title');
+                if (bsTitle) bsTitle.innerHTML = t.bsTitle;
+                const bsDesc = document.getElementById('bs-desc');
+                if (bsDesc) bsDesc.textContent = t.bsDesc;
+
+                // Categories Section
+                const catSecTitle = document.getElementById('cat-sec-title');
+                if (catSecTitle) catSecTitle.innerHTML = t.catSecTitle;
+                const catSecDesc = document.getElementById('cat-sec-desc');
+                if (catSecDesc) catSecDesc.textContent = t.catSecDesc;
+
+                const cat1CardTitle = document.getElementById('cat1-card-title');
+                if (cat1CardTitle) cat1CardTitle.textContent = t.cat1CardTitle;
+                const cat1CardDesc = document.getElementById('cat1-card-desc');
+                if (cat1CardDesc) cat1CardDesc.textContent = t.cat1CardDesc;
+                const cat1CardBtn = document.getElementById('cat1-card-btn');
+                if (cat1CardBtn) cat1CardBtn.textContent = t.cat1CardBtn;
+
+                const cat2CardTitle = document.getElementById('cat2-card-title');
+                if (cat2CardTitle) cat2CardTitle.textContent = t.cat2CardTitle;
+                const cat2CardDesc = document.getElementById('cat2-card-desc');
+                if (cat2CardDesc) cat2CardDesc.textContent = t.cat2CardDesc;
+                const cat2CardBtn = document.getElementById('cat2-card-btn');
+                if (cat2CardBtn) cat2CardBtn.textContent = t.cat2CardBtn;
+
+                const cat3CardTitle = document.getElementById('cat3-card-title');
+                if (cat3CardTitle) cat3CardTitle.textContent = t.cat3CardTitle;
+                const cat3CardDesc = document.getElementById('cat3-card-desc');
+                if (cat3CardDesc) cat3CardDesc.textContent = t.cat3CardDesc;
+                const cat3CardBtn = document.getElementById('cat3-card-btn');
+                if (cat3CardBtn) cat3CardBtn.textContent = t.cat3CardBtn;
+
+                const cat4CardTitle = document.getElementById('cat4-card-title');
+                if (cat4CardTitle) cat4CardTitle.textContent = t.cat4CardTitle;
+                const cat4CardDesc = document.getElementById('cat4-card-desc');
+                if (cat4CardDesc) cat4CardDesc.textContent = t.cat4CardDesc;
+                const cat4CardBtn = document.getElementById('cat4-card-btn');
+                if (cat4CardBtn) cat4CardBtn.textContent = t.cat4CardBtn;
+
+                const closeCatModalText = document.getElementById('close-cat-modal-text');
+                if (closeCatModalText) closeCatModalText.textContent = t.closeCatModalText;
+
+                // Verification Section
+                const verifyTitle = document.getElementById('verify-title');
+                if (verifyTitle) verifyTitle.innerHTML = t.verifyTitle;
+                const verifyDesc = document.getElementById('verify-desc');
+                if (verifyDesc) verifyDesc.textContent = t.verifyDesc;
+                const serialCodeInput = document.getElementById('serial-code');
+                if (serialCodeInput) serialCodeInput.placeholder = t.serialPlaceholder;
+                const verifyBtnText = document.getElementById('verify-btn-text');
+                if (verifyBtnText) verifyBtnText.textContent = t.verifyBtnText;
+
+                // Why Cableto Section
+                const whyTitle = document.getElementById('why-title');
+                if (whyTitle) whyTitle.innerHTML = t.whyTitle;
+                const whyDesc = document.getElementById('why-desc');
+                if (whyDesc) whyDesc.textContent = t.whyDesc;
+                const trust1H4 = document.getElementById('trust1-h4');
+                if (trust1H4) trust1H4.textContent = t.trust1H4;
+                const trust1P = document.getElementById('trust1-p');
+                if (trust1P) trust1P.textContent = t.trust1P;
+                const trust2H4 = document.getElementById('trust2-h4');
+                if (trust2H4) trust2H4.textContent = t.trust2H4;
+                const trust2P = document.getElementById('trust2-p');
+                if (trust2P) trust2P.textContent = t.trust2P;
+                const trust3H4 = document.getElementById('trust3-h4');
+                if (trust3H4) trust3H4.textContent = t.trust3H4;
+                const trust3P = document.getElementById('trust3-p');
+                if (trust3P) trust3P.textContent = t.trust3P;
+                const trust4H4 = document.getElementById('trust4-h4');
+                if (trust4H4) trust4H4.textContent = t.trust4H4;
+                const trust4P = document.getElementById('trust4-p');
+                if (trust4P) trust4P.textContent = t.trust4P;
+
+                // PDP Modal Static Elements
+                const pdpWaText = document.getElementById('pdp-wa-text');
+                if (pdpWaText) pdpWaText.textContent = t.pdpWaText;
+                const pdpNoticeText = document.getElementById('pdp-notice-text');
+                if (pdpNoticeText) pdpNoticeText.textContent = t.pdpNoticeText;
+                const pdpAddCartText = document.getElementById('pdp-add-cart-text');
+                if (pdpAddCartText) pdpAddCartText.textContent = t.pdpAddCartText;
+                const pdpBuyNowText = document.getElementById('pdp-buy-now-text');
+                if (pdpBuyNowText) pdpBuyNowText.textContent = t.pdpBuyNowText;
+
+                // Checkout Modal
+                const checkoutHeading = document.getElementById('checkout-heading');
+                if (checkoutHeading) checkoutHeading.innerHTML = t.checkoutHeading;
+                const checkoutSubheading = document.getElementById('checkout-subheading');
+                if (checkoutSubheading) checkoutSubheading.textContent = t.checkoutSubheading;
+                const chkAddrH4 = document.getElementById('chk-addr-h4');
+                if (chkAddrH4) chkAddrH4.innerHTML = t.chkAddrH4;
+                const lblCustName = document.getElementById('lbl-cust-name');
+                if (lblCustName) lblCustName.textContent = t.lblCustName;
+                const custName = document.getElementById('cust-name');
+                if (custName) custName.placeholder = t.namePlaceholder;
+                const lblCustPhone = document.getElementById('lbl-cust-phone');
+                if (lblCustPhone) lblCustPhone.textContent = t.lblCustPhone;
+                const custPhone = document.getElementById('cust-phone');
+                if (custPhone) custPhone.placeholder = t.phonePlaceholder;
+                const lblCustGov = document.getElementById('lbl-cust-gov');
+                if (lblCustGov) lblCustGov.textContent = t.lblCustGov;
+                const lblCustDistrict = document.getElementById('lbl-cust-district');
+                if (lblCustDistrict) lblCustDistrict.textContent = t.lblCustDistrict;
+                const custDistrict = document.getElementById('cust-district');
+                if (custDistrict) custDistrict.placeholder = t.districtPlaceholder;
+                const lblCustStreet = document.getElementById('lbl-cust-street');
+                if (lblCustStreet) lblCustStreet.textContent = t.lblCustStreet;
+                const custStreet = document.getElementById('cust-street');
+                if (custStreet) custStreet.placeholder = t.streetPlaceholder;
+                const chkSummaryH4 = document.getElementById('chk-summary-h4');
+                if (chkSummaryH4) chkSummaryH4.innerHTML = t.chkSummaryH4;
+                const couponInput = document.getElementById('coupon-code-input');
+                if (couponInput) couponInput.placeholder = t.couponPlaceholder;
+                const couponBtnText = document.getElementById('coupon-btn-text');
+                if (couponBtnText) couponBtnText.textContent = t.couponBtnText;
+                const lblDiscountVal = document.getElementById('lbl-discount-val');
+                if (lblDiscountVal) lblDiscountVal.textContent = t.lblDiscountVal;
+                const lblSubtotal = document.getElementById('lbl-subtotal');
+                if (lblSubtotal) lblSubtotal.textContent = t.lblSubtotal;
+                const lblShipping = document.getElementById('lbl-shipping');
+                if (lblShipping) lblShipping.textContent = t.lblShipping;
+                const lblVat = document.getElementById('lbl-vat');
+                if (lblVat) lblVat.textContent = t.lblVat;
+                const lblVatVal = document.getElementById('lbl-vat-val');
+                if (lblVatVal) lblVatVal.textContent = t.lblVatVal;
+                const lblFinalTotal = document.getElementById('lbl-final-total');
+                if (lblFinalTotal) lblFinalTotal.textContent = t.lblFinalTotal;
+                const lblPaymentTitle = document.getElementById('lbl-payment-title');
+                if (lblPaymentTitle) lblPaymentTitle.textContent = t.lblPaymentTitle;
+                const lblCod = document.getElementById('lbl-cod');
+                if (lblCod) lblCod.innerHTML = t.lblCod;
+                const lblCodSub = document.getElementById('lbl-cod-sub');
+                if (lblCodSub) lblCodSub.textContent = t.lblCodSub;
+                const chkSubmitText = document.getElementById('chk-submit-text');
+                if (chkSubmitText) chkSubmitText.textContent = t.chkSubmitText;
+                const chkFooterNotice = document.getElementById('chk-footer-notice');
+                if (chkFooterNotice) chkFooterNotice.innerHTML = t.chkFooterNotice;
+
+                // Success Modal
+                const succH3 = document.getElementById('succ-h3');
+                if (succH3) succH3.textContent = t.succH3;
+                const succDesc = document.getElementById('succ-desc');
+                if (succDesc) succDesc.textContent = t.succDesc;
+                const succLblOrderno = document.getElementById('succ-lbl-orderno');
+                if (succLblOrderno) succLblOrderno.textContent = t.succLblOrderno;
+                const succLblName = document.getElementById('succ-lbl-name');
+                if (succLblName) succLblName.textContent = t.succLblName;
+                const succLblAddr = document.getElementById('succ-lbl-addr');
+                if (succLblAddr) succLblAddr.textContent = t.succLblAddr;
+                const succLblPaymethod = document.getElementById('succ-lbl-paymethod');
+                if (succLblPaymethod) succLblPaymethod.textContent = t.succLblPaymethod;
+                const succValPaymethod = document.getElementById('succ-val-paymethod');
+                if (succValPaymethod) succValPaymethod.textContent = t.succValPaymethod;
+                const succLblTotal = document.getElementById('succ-lbl-total');
+                if (succLblTotal) succLblTotal.textContent = t.succLblTotal;
+                const succWaBtnText = document.getElementById('succ-wa-btn-text');
+                if (succWaBtnText) succWaBtnText.textContent = t.succWaBtnText;
+                const succPrintBtn = document.getElementById('succ-print-btn');
+                if (succPrintBtn) succPrintBtn.textContent = t.succPrintBtn;
+                const succContBtn = document.getElementById('succ-cont-btn');
+                if (succContBtn) succContBtn.textContent = t.succContBtn;
+
+                // Cart Drawer
+                const cartDrawerTitle = document.getElementById('cart-drawer-title');
+                if (cartDrawerTitle) cartDrawerTitle.textContent = t.cartDrawerTitle;
+                const cartDrawerTotalLabel = document.getElementById('cart-drawer-total-label');
+                if (cartDrawerTotalLabel) cartDrawerTotalLabel.textContent = t.cartDrawerTotalLabel;
+                const cartDrawerCheckoutText = document.getElementById('cart-drawer-checkout-text');
+                if (cartDrawerCheckoutText) cartDrawerCheckoutText.textContent = t.cartDrawerCheckoutText;
+
+                // Footer
+                const footerCopyright = document.getElementById('footer-copyright');
+                if (footerCopyright) footerCopyright.innerHTML = t.footerCopyright;
+
+                // Re-render Dynamic Grids
+                renderBestSellers();
+                if (currentActiveCategoryKey) renderCategoryModal(currentActiveCategoryKey);
+                if (currentActivePdpProduct) openProductDetailsModal(currentActivePdpProduct.id);
+                updateCartUI();
+            }
+
+            // Attach Language Toggle Listeners
+            const langSwitchTopBtn = document.getElementById('lang-switch-top-btn');
+            const langSwitchHeaderBtn = document.getElementById('lang-switch-header-btn');
+
+            function toggleLanguage() {
+                const nextLang = currentLang === 'ar' ? 'en' : 'ar';
+                setLanguage(nextLang);
+                showToast(nextLang === 'en' ? 'Switched to English 🌐' : 'تم التحويل إلى العربية 🌐', 'fa-globe');
+            }
+
+            if (langSwitchTopBtn) langSwitchTopBtn.addEventListener('click', toggleLanguage);
+            if (langSwitchHeaderBtn) langSwitchHeaderBtn.addEventListener('click', toggleLanguage);
 
             // Theme Toggle Logic
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -1563,7 +2320,7 @@
                     const current = document.documentElement.getAttribute('data-theme');
                     const nextTheme = current === 'dark' ? 'light' : 'dark';
                     setTheme(nextTheme);
-                    showToast(nextTheme === 'dark' ? 'تم تفعيل الوضع الليلي 🌙' : 'تم تفعيل الوضع الفاتح ☀️', 'fa-palette');
+                    showToast(nextTheme === 'dark' ? (currentLang === 'en' ? 'Dark Mode Enabled 🌙' : 'تم تفعيل الوضع الليلي 🌙') : (currentLang === 'en' ? 'Light Mode Enabled ☀️' : 'تم تفعيل الوضع الفاتح ☀️'), 'fa-palette');
                 });
             }
 
@@ -1581,22 +2338,26 @@
                     }
 
                     const matches = ALL_PRODUCTS.filter(p => 
-                        p.name.toLowerCase().includes(query) || 
+                        (p.name_ar && p.name_ar.toLowerCase().includes(query)) ||
+                        (p.name_en && p.name_en.toLowerCase().includes(query)) ||
                         p.model.toLowerCase().includes(query) || 
-                        p.tag.toLowerCase().includes(query)
+                        (p.tag_ar && p.tag_ar.toLowerCase().includes(query)) ||
+                        (p.tag_en && p.tag_en.toLowerCase().includes(query))
                     );
 
+                    const t = TRANSLATIONS[currentLang];
+
                     if (matches.length === 0) {
-                        searchDropdown.innerHTML = '<div style="padding:14px; text-align:center; color:var(--text-muted); font-size:0.85rem;">لا توجد منتجات مطابقة للبحث</div>';
+                        searchDropdown.innerHTML = `<div style="padding:14px; text-align:center; color:var(--text-muted); font-size:0.85rem;">${currentLang === 'en' ? 'No products found matching your search' : 'لا توجد منتجات مطابقة للبحث'}</div>`;
                     } else {
                         searchDropdown.innerHTML = matches.map(p => `
                             <div class="search-item" onclick="window.openProductDetailsModal(${p.id}); document.getElementById('search-dropdown').classList.remove('active');">
-                                <img src="${p.img}" alt="${p.name}">
+                                <img src="${p.img}" alt="${getProdName(p)}">
                                 <div class="search-item-info">
-                                    <div class="search-item-title">${p.name}</div>
-                                    <div class="search-item-price">${p.price.toLocaleString()} ج.م</div>
+                                    <div class="search-item-title">${getProdName(p)}</div>
+                                    <div class="search-item-price">${p.price} ${t.currency}</div>
                                 </div>
-                                <i class="fa-solid fa-circle-info" style="color:var(--blue-primary); font-size:1.1rem;" title="عرض المواصفات"></i>
+                                <i class="fa-solid fa-circle-info" style="color:var(--blue-primary); font-size:1.1rem;" title="${currentLang === 'en' ? 'View Details' : 'عرض المواصفات'}"></i>
                             </div>
                         `).join('');
                     }
@@ -1625,6 +2386,7 @@
             const checkoutForm = document.getElementById('checkout-form');
             
             const summarySubtotal = document.getElementById('summary-subtotal');
+            const summaryShipping = document.getElementById('summary-shipping');
             const summaryFinalTotal = document.getElementById('summary-final-total');
             const summaryDiscount = document.getElementById('summary-discount');
             const couponDiscountRow = document.getElementById('coupon-discount-row');
@@ -1637,13 +2399,6 @@
             const orderSuccessModal = document.getElementById('order-success-modal');
             const closeSuccessBtn = document.getElementById('close-success-btn');
 
-            // Category Page Modal
-            const categoryPageModal = document.getElementById('category-page-modal');
-            const catModalTitle = document.getElementById('cat-modal-title');
-            const catModalDesc = document.getElementById('cat-modal-desc');
-            const catModalGrid = document.getElementById('cat-modal-grid');
-            const closeCatModal = document.getElementById('close-cat-modal');
-
             // Coupon Code Application
             if (applyCouponBtn && couponInput) {
                 applyCouponBtn.addEventListener('click', () => {
@@ -1651,7 +2406,7 @@
                     if (!code) {
                         couponAlert.style.display = 'block';
                         couponAlert.style.color = '#ef4444';
-                        couponAlert.textContent = 'يرجى إدخال كود الخصم أولاً';
+                        couponAlert.textContent = currentLang === 'en' ? 'Please enter a coupon code first' : 'يرجى إدخال كود الخصم أولاً';
                         return;
                     }
 
@@ -1660,85 +2415,23 @@
                         appliedCouponCode = code;
                         couponAlert.style.display = 'block';
                         couponAlert.style.color = '#10b981';
-                        couponAlert.textContent = '🎉 تم تطبيق كود الخصم 15% بنجاح!';
-                        showToast('تم تطبيق خصم 15% على طلبك ⚡', 'fa-tag');
+                        couponAlert.textContent = currentLang === 'en' ? '🎉 15% discount coupon applied successfully!' : '🎉 تم تطبيق كود الخصم 15% بنجاح!';
+                        showToast(currentLang === 'en' ? '15% discount applied ⚡' : 'تم تطبيق خصم 15% على طلبك ⚡', 'fa-tag');
                     } else if (code === 'CABLETO10' || code === 'WELCOME10') {
                         appliedDiscount = 0.10;
                         appliedCouponCode = code;
                         couponAlert.style.display = 'block';
                         couponAlert.style.color = '#10b981';
-                        couponAlert.textContent = '🎉 تم تطبيق كود الخصم 10% بنجاح!';
-                        showToast('تم تطبيق خصم 10% على طلبك ⚡', 'fa-tag');
+                        couponAlert.textContent = currentLang === 'en' ? '🎉 10% discount coupon applied successfully!' : '🎉 تم تطبيق كود الخصم 10% بنجاح!';
+                        showToast(currentLang === 'en' ? '10% discount applied ⚡' : 'تم تطبيق خصم 10% على طلبك ⚡', 'fa-tag');
                     } else {
                         couponAlert.style.display = 'block';
                         couponAlert.style.color = '#ef4444';
-                        couponAlert.textContent = 'عذراً، كود الخصم غير صالح أو منتهي الصلاحية';
+                        couponAlert.textContent = currentLang === 'en' ? 'Invalid or expired coupon code' : 'عذراً، كود الخصم غير صالح أو منتهي الصلاحية';
                     }
                     updateCheckoutSummary();
                 });
             }
-
-            // Category Modal Logic
-            function openCategoryPageModal(catKey) {
-                const category = CATEGORIES_DATABASE[catKey];
-                if (!category) return;
-
-                catModalTitle.textContent = category.title;
-                catModalDesc.textContent = category.desc;
-
-                catModalGrid.innerHTML = category.products.map(p => `
-                    <div class="product-card clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="اضغط لعرض تفاصيل ومواصفات المنتج">
-                        <div class="product-badge">${p.badge}</div>
-                        <div class="product-img-holder">
-                            <img src="${p.img}" alt="${p.name}">
-                            <span class="product-type-icon"><i class="fa-solid ${p.icon}"></i> ${p.tag}</span>
-                        </div>
-                        <div class="product-details">
-                            <span class="product-model">موديل: ${p.model}</span>
-                            <h3 class="product-title">${p.name}</h3>
-                            <div class="product-price">
-                                <span class="current-price">${p.price.toLocaleString()} ج.م</span>
-                                <span class="old-price">${p.oldPrice.toLocaleString()} ج.م</span>
-                            </div>
-                            <div class="product-actions" onclick="event.stopPropagation()">
-                                <button class="btn btn-cart add-to-cart-btn" data-id="${p.id}" data-title="${p.name}" data-price="${p.price}" data-img="${p.img}">
-                                    <i class="fa-solid fa-cart-plus"></i> للسلة
-                                </button>
-                                <button class="btn btn-buy buy-now-btn" data-id="${p.id}" data-title="${p.name}" data-price="${p.price}" data-img="${p.img}">
-                                    شراء الآن
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-
-                catModalGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-                    btn.addEventListener('click', () => addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img));
-                });
-                catModalGrid.querySelectorAll('.buy-now-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img);
-                        closeCategoryPageModal();
-                        openCheckoutModal();
-                    });
-                });
-
-                categoryPageModal.classList.add('active');
-            }
-
-            function closeCategoryPageModal() {
-                categoryPageModal.classList.remove('active');
-            }
-
-            if (closeCatModal) closeCatModal.addEventListener('click', closeCategoryPageModal);
-
-            document.querySelectorAll('.open-cat-btn').forEach(elem => {
-                elem.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const catKey = elem.dataset.cat;
-                    if (catKey) openCategoryPageModal(catKey);
-                });
-            });
 
             // Cart Drawer
             function toggleCart(show) {
@@ -1758,7 +2451,7 @@
             // Checkout Modal
             function openCheckoutModal() {
                 if (cart.length === 0) {
-                    showToast('سلة التسوق فارغة! أضف منتجات أولاً', 'fa-triangle-exclamation');
+                    showToast(currentLang === 'en' ? 'Cart is empty! Add products first' : 'سلة التسوق فارغة! أضف منتجات أولاً', 'fa-triangle-exclamation');
                     return;
                 }
                 toggleCart(false);
@@ -1774,12 +2467,13 @@
             if (cartCheckoutBtn) cartCheckoutBtn.addEventListener('click', openCheckoutModal);
 
             function updateCartUI() {
+                const t = TRANSLATIONS[currentLang];
                 const count = cart.reduce((sum, item) => sum + item.quantity, 0);
                 if (cartBadge) cartBadge.textContent = count;
 
                 if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 40px 0;">السلة فارغة حالياً</p>';
-                    cartTotalEl.textContent = '0 ج.م';
+                    cartItemsContainer.innerHTML = `<p style="text-align: center; color: var(--text-muted); padding: 40px 0;">${t.cartEmptyText}</p>`;
+                    cartTotalEl.textContent = `0 ${t.currency}`;
                     return;
                 }
 
@@ -1792,27 +2486,29 @@
                             <img src="${item.img}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
                             <div style="flex:1;">
                                 <div style="font-size:0.85rem; font-weight:700;">${item.title}</div>
-                                <div style="color:var(--blue-primary); font-size:0.85rem; font-weight:800;">${item.price.toLocaleString()} ج.م × ${item.quantity}</div>
+                                <div style="color:var(--blue-primary); font-size:0.85rem; font-weight:800;">${item.price} ${t.currency} × ${item.quantity}</div>
                             </div>
-                            <button onclick="window.removeItem(${item.id})" style="background:none; border:none; color:#ef4444; cursor:pointer;" title="حذف"><i class="fa-solid fa-trash"></i></button>
+                            <button onclick="window.removeItem(${item.id})" style="background:none; border:none; color:#ef4444; cursor:pointer;" title="${currentLang === 'en' ? 'Remove' : 'حذف'}"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     `;
                 }).join('');
 
-                cartTotalEl.textContent = `${total.toLocaleString()} ج.م`;
+                cartTotalEl.textContent = `${total} ${t.currency}`;
             }
 
             function updateCheckoutSummary() {
+                const t = TRANSLATIONS[currentLang];
                 const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
                 const discountAmount = subtotal * appliedDiscount;
                 const finalTotal = (subtotal - discountAmount) + shippingFee;
 
-                summarySubtotal.textContent = `${subtotal.toLocaleString()} ج.م`;
-                summaryFinalTotal.textContent = `${Math.round(finalTotal).toLocaleString()} ج.م`;
+                summarySubtotal.textContent = `${subtotal} ${t.currency}`;
+                if (summaryShipping) summaryShipping.textContent = `${shippingFee} ${t.currency}`;
+                summaryFinalTotal.textContent = `${Math.round(finalTotal)} ${t.currency}`;
 
                 if (appliedDiscount > 0) {
                     couponDiscountRow.style.display = 'flex';
-                    summaryDiscount.textContent = `-${Math.round(discountAmount).toLocaleString()} ج.م (${Math.round(appliedDiscount * 100)}%)`;
+                    summaryDiscount.textContent = `-${Math.round(discountAmount)} ${t.currency} (${Math.round(appliedDiscount * 100)}%)`;
                 } else {
                     couponDiscountRow.style.display = 'none';
                 }
@@ -1820,7 +2516,7 @@
                 checkoutItemsPreview.innerHTML = cart.map(item => `
                     <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px; font-weight:700;">
                         <span>${item.title} (x${item.quantity})</span>
-                        <span style="color:var(--blue-primary);">${(item.price * item.quantity).toLocaleString()} ج.م</span>
+                        <span style="color:var(--blue-primary);">${(item.price * item.quantity)} ${t.currency}</span>
                     </div>
                 `).join('');
             }
@@ -1833,26 +2529,15 @@
                     cart.push({ id, title, price: parseFloat(price), img, quantity: 1 });
                 }
                 updateCartUI();
-                showToast(`تمت إضافة "${title.substring(0, 24)}..." للسلة ⚡`, 'fa-cart-plus');
+                showToast(currentLang === 'en' ? `Added "${title.substring(0, 24)}..." to cart ⚡` : `تمت إضافة "${title.substring(0, 24)}..." للسلة ⚡`, 'fa-cart-plus');
                 toggleCart(true);
             };
 
             window.removeItem = function(id) {
                 cart = cart.filter(item => item.id !== id);
                 updateCartUI();
-                showToast('تم حذف المنتج من السلة', 'fa-trash');
+                showToast(currentLang === 'en' ? 'Item removed from cart' : 'تم حذف المنتج من السلة', 'fa-trash');
             };
-
-            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-                btn.addEventListener('click', () => addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img));
-            });
-
-            document.querySelectorAll('.buy-now-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    addToCart(parseInt(btn.dataset.id), btn.dataset.title, btn.dataset.price, btn.dataset.img);
-                    openCheckoutModal();
-                });
-            });
 
             // Serial Verification
             const verifyBtn = document.getElementById('verify-btn');
@@ -1863,7 +2548,7 @@
                 verifyBtn.addEventListener('click', () => {
                     const code = serialCodeInput.value.trim();
                     if (!code) {
-                        showToast('يرجى إدخال السيريال كود للتحقق', 'fa-triangle-exclamation');
+                        showToast(currentLang === 'en' ? 'Please enter a serial code' : 'يرجى إدخال السيريال كود للتحقق', 'fa-triangle-exclamation');
                         return;
                     }
                     verifyResult.style.display = 'block';
@@ -1877,13 +2562,17 @@
                         verifyResult.style.background = '#ecfdf5';
                         verifyResult.style.color = '#065f46';
                         verifyResult.style.border = '1px solid #a7f3d0';
-                        verifyResult.innerHTML = `✅ <strong>منتج كابليتو أصلي ومسجل 100%</strong> | السيريال: ${code} (الضمان ساري لمدة 12 شهراً)`;
-                        showToast('منتج أصلي معتمد من كابليتو ✅', 'fa-shield-check');
+                        verifyResult.innerHTML = currentLang === 'en' 
+                            ? `✅ <strong>100% Genuine Cableto Certified Product</strong> | Serial: ${code} (12-Month Active Warranty)`
+                            : `✅ <strong>منتج كابليتو أصلي ومسجل 100%</strong> | السيريال: ${code} (الضمان ساري لمدة 12 شهراً)`;
+                        showToast(currentLang === 'en' ? 'Certified genuine Cableto product ✅' : 'منتج أصلي معتمد من كابليتو ✅', 'fa-shield-check');
                     } else {
                         verifyResult.style.background = '#fef2f2';
                         verifyResult.style.color = '#991b1b';
                         verifyResult.style.border = '1px solid #fecaca';
-                        verifyResult.innerHTML = `⚠️ السيريال كود غير مطابق لسجلات منتجات كابليتو الأصلية. يرجى التأكد من الكود المطبوع على العلبة.`;
+                        verifyResult.innerHTML = currentLang === 'en'
+                            ? `⚠️ Serial code does not match official Cableto records. Please check the code printed on the box.`
+                            : `⚠️ السيريال كود غير مطابق لسجلات منتجات كابليتو الأصلية. يرجى التأكد من الكود المطبوع على العلبة.`;
                     }
                 });
             }
@@ -1896,48 +2585,64 @@
                 const gov = document.getElementById('cust-gov').value;
                 const district = document.getElementById('cust-district').value.trim();
                 const street = document.getElementById('cust-street').value.trim();
-                const floor = document.getElementById('cust-floor').value.trim();
-                const flat = document.getElementById('cust-flat').value.trim();
 
+                const t = TRANSLATIONS[currentLang];
                 const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
                 const discountAmount = subtotal * appliedDiscount;
                 const finalTotal = Math.round((subtotal - discountAmount) + shippingFee);
                 const orderId = 'CBL-' + Math.floor(10000 + Math.random() * 90000);
 
                 // Build WhatsApp formatted message
-                let itemsText = cart.map(item => `• ${item.title} (الكمية: ${item.quantity}) - ${(item.price * item.quantity).toLocaleString()} ج.م`).join('\n');
+                let itemsText = cart.map(item => `• ${item.title} (${currentLang === 'en' ? 'Qty' : 'الكمية'}: ${item.quantity}) - ${(item.price * item.quantity)} ${t.currency}`).join('\n');
                 
-                let waMessage = `⚡ *طلب شراء جديد من متجر كابليتو (Cableto)* ⚡\n` +
-                    `━━━━━━━━━━━━━━━━━━\n` +
-                    `🆔 *رقم الطلب:* #${orderId}\n` +
-                    `👤 *اسم العميل:* ${name}\n` +
-                    `📞 *رقم الهاتف للتواصل:* ${phone}\n` +
-                    `📍 *العنوان:* ${gov} - ${district} - ${street} (الدور: ${floor} / شقة: ${flat})\n` +
-                    `━━━━━━━━━━━━━━━━━━\n` +
-                    `📦 *المنتجات المطلوبة:*\n${itemsText}\n` +
-                    `━━━━━━━━━━━━━━━━━━\n` +
-                    `💰 *سعر المنتجات:* ${subtotal.toLocaleString()} ج.م\n` +
-                    (appliedDiscount > 0 ? `🏷️ *الخصم (${Math.round(appliedDiscount * 100)}%):* -${Math.round(discountAmount).toLocaleString()} ج.م (كود: ${appliedCouponCode})\n` : '') +
-                    `🚚 *خدمة الشحن والتوصيل:* ${shippingFee} ج.م\n` +
-                    `💳 *طريقة الدفع:* الدفع عند الاستلام (COD)\n` +
-                    `💵 *الإجمالي النهائي المستحق:* ${finalTotal.toLocaleString()} ج.م\n` +
-                    `━━━━━━━━━━━━━━━━━━\n` +
-                    `⏱️ *ملاحظة:* يرجى التأكيد والتوصيل خلال 24 إلى 48 ساعة. شكراً كابليتو!`;
+                let waMessage = currentLang === 'en'
+                    ? `⚡ *NEW ORDER PLACED ON CABLETO STORE* ⚡\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `🆔 *Order ID:* #${orderId}\n` +
+                      `👤 *Customer Name:* ${name}\n` +
+                      `📞 *Phone Number:* ${phone}\n` +
+                      `📍 *Shipping Address:* ${gov} - ${district} - ${street}\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `📦 *Ordered Items:*\n${itemsText}\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `💰 *Subtotal:* ${subtotal} ${t.currency}\n` +
+                      (appliedDiscount > 0 ? `🏷️ *Discount (${Math.round(appliedDiscount * 100)}%):* -${Math.round(discountAmount)} ${t.currency} (Code: ${appliedCouponCode})\n` : '') +
+                      `🚚 *Shipping:* ${shippingFee} ${t.currency}\n` +
+                      `💳 *Payment Method:* Cash on Delivery (COD)\n` +
+                      `💵 *Grand Total Due:* ${finalTotal} ${t.currency}\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `⏱️ *Note:* Please confirm and dispatch within 24-48 hours. Thank you, Cableto!`
+                    : `⚡ *طلب شراء جديد من متجر كابليتو (Cableto)* ⚡\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `🆔 *رقم الطلب:* #${orderId}\n` +
+                      `👤 *اسم العميل:* ${name}\n` +
+                      `📞 *رقم الهاتف للتواصل:* ${phone}\n` +
+                      `📍 *العنوان:* ${gov} - ${district} - ${street}\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `📦 *المنتجات المطلوبة:*\n${itemsText}\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `💰 *سعر المنتجات:* ${subtotal} ${t.currency}\n` +
+                      (appliedDiscount > 0 ? `🏷️ *الخصم (${Math.round(appliedDiscount * 100)}%):* -${Math.round(discountAmount)} ${t.currency} (كود: ${appliedCouponCode})\n` : '') +
+                      `🚚 *خدمة الشحن والتوصيل:* ${shippingFee} ${t.currency}\n` +
+                      `💳 *طريقة الدفع:* الدفع عند الاستلام (COD)\n` +
+                      `💵 *الإجمالي النهائي المستحق:* ${finalTotal} ${t.currency}\n` +
+                      `━━━━━━━━━━━━━━━━━━\n` +
+                      `⏱️ *ملاحظة:* يرجى التأكيد والتوصيل خلال 24 إلى 48 ساعة. شكراً كابليتو!`;
 
                 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`;
 
                 // Update Success Modal Elements
                 document.getElementById('success-order-id').textContent = `#${orderId}`;
                 document.getElementById('success-cust-name').textContent = name;
-                document.getElementById('success-cust-addr').textContent = `${gov} - ${district} - ${street} (دور ${floor} / شقة ${flat})`;
-                document.getElementById('success-order-total').textContent = `${finalTotal.toLocaleString()} ج.م`;
+                document.getElementById('success-cust-addr').textContent = `${gov} - ${district} - ${street}`;
+                document.getElementById('success-order-total').textContent = `${finalTotal} ${t.currency}`;
                 
                 const waBtn = document.getElementById('success-whatsapp-btn');
                 if (waBtn) waBtn.href = waUrl;
 
                 closeCheckoutModal();
                 orderSuccessModal.classList.add('active');
-                showToast(`🎉 تم تسجيل طلبك #${orderId} بنجاح!`, 'fa-circle-check');
+                showToast(currentLang === 'en' ? `🎉 Order #${orderId} registered successfully!` : `🎉 تم تسجيل طلبك #${orderId} بنجاح!`, 'fa-circle-check');
 
                 // Reset
                 cart = [];
@@ -1952,6 +2657,9 @@
                     orderSuccessModal.classList.remove('active');
                 });
             }
+
+            // Initialize Page with active language
+            setLanguage(currentLang);
         });
     </script>
 </body>
