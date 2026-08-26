@@ -81,17 +81,13 @@
         .header-center { display: flex; justify-content: center; text-align: center; }
         .header-left { display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
 
-        .brand-logo { display: flex; align-items: center; justify-content: center; text-decoration: none; }
-        .logo-text-wrapper { text-align: center; }
-        .brand-name { font-family: 'Outfit', 'Cairo', sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--text-dark); letter-spacing: 1.5px; line-height: 1; display: inline-flex; align-items: center; }
-        .brand-sub { font-size: 0.85rem; color: var(--blue-primary); display: block; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+        .brand-logo { display: flex; align-items: center; justify-content: center; text-decoration: none; direction: ltr !important; }
+        .logo-text-wrapper { text-align: center; direction: ltr !important; }
+        .brand-name { font-family: 'Outfit', 'Cairo', sans-serif; font-size: 1.85rem; font-weight: 900; color: var(--text-dark); letter-spacing: 1.5px; line-height: 1; display: inline-flex; align-items: center; direction: ltr !important; unicode-bidi: isolate; }
+        .brand-sub { font-size: 0.85rem; color: var(--blue-primary); display: block; font-weight: 800; letter-spacing: 2px; margin-top: 3px; direction: rtl; text-align: center; }
         
-        .logo-o-bolt { position: relative; display: inline-flex; align-items: center; justify-content: center; color: var(--text-dark); }
-        .logo-o-bolt .bolt-inside { position: absolute; color: #0099ff; font-size: 0.72em; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg); filter: drop-shadow(0 0 6px rgba(0, 136, 255, 0.9)); animation: bolt-glow 2s infinite alternate; }
-        @keyframes bolt-glow {
-            0% { filter: drop-shadow(0 0 4px rgba(0, 136, 255, 0.6)); }
-            100% { filter: drop-shadow(0 0 12px rgba(0, 200, 255, 1)); color: #00d2ff; }
-        }
+        .logo-letter-o { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+        .subtle-bolt { position: absolute; width: 12px; height: 12px; color: #0088ff; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
 
         .search-box { display: flex; width: 100%; max-width: 380px; position: relative; }
         .search-box input { width: 100%; padding: 10px 18px; border-radius: 25px; background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-dark); outline: none; font-size: 0.9rem; transition: var(--transition); }
@@ -215,6 +211,32 @@
         .cart-drawer-footer { padding: 20px; border-top: 1px solid var(--border-light); }
         .cart-subtotal { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 900; margin-bottom: 16px; color: var(--text-dark); }
         
+        /* Product Details Modal (PDP) */
+        .pdp-modal { max-width: 860px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 28px; }
+        .pdp-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: start; }
+        .pdp-img-wrap { background: linear-gradient(135deg, #f8fafc, #e2e8f0); border-radius: var(--radius-md); overflow: hidden; height: 350px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light); position: relative; }
+        .pdp-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .pdp-badge { display: inline-block; padding: 4px 12px; background: var(--blue-light); color: var(--blue-primary); border-radius: 20px; font-size: 0.8rem; font-weight: 800; margin-bottom: 8px; }
+        .pdp-title { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 6px; line-height: 1.35; }
+        .pdp-model { font-size: 0.82rem; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; }
+        .pdp-price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+        .pdp-current-price { font-size: 1.5rem; font-weight: 900; color: var(--blue-primary); }
+        .pdp-old-price { font-size: 0.95rem; color: var(--text-muted); text-decoration: line-through; }
+        .pdp-desc { font-size: 0.9rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 16px; background: var(--bg-surface); padding: 12px; border-radius: 10px; border-right: 3px solid var(--blue-primary); }
+        .pdp-specs-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 0.85rem; }
+        .pdp-specs-table tr { border-bottom: 1px solid var(--border-light); }
+        .pdp-specs-table td { padding: 6px 4px; }
+        .pdp-specs-table td:first-child { font-weight: 800; color: var(--text-dark); width: 35%; }
+        .pdp-specs-table td:last-child { color: var(--text-muted); }
+        .pdp-actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+        .pdp-wa-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25d366; color: #ffffff !important; font-weight: 800; padding: 10px; border-radius: var(--radius-md); text-decoration: none; font-size: 0.9rem; margin-top: 10px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: var(--transition); }
+        .pdp-wa-btn:hover { background: #20ba59; transform: translateY(-2px); }
+        .clickable-pdp { cursor: pointer; }
+        @media (max-width: 768px) {
+            .pdp-grid { grid-template-columns: 1fr; gap: 20px; }
+            .pdp-img-wrap { height: 250px; }
+        }
+
         .main-footer { background: #ffffff; border-top: 1px solid var(--border-light); padding-top: 40px; }
         .footer-bottom { border-top: 1px solid var(--border-light); padding: 20px 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-surface); }
 
@@ -427,7 +449,7 @@
     <div class="toast-container" id="toast-container"></div>
 
     <!-- Floating WhatsApp Action Button -->
-    <a href="https://wa.me/971509019496?text=مرحباً%20كابليتو%20،%20أود%20الاستفسار%20عن%20منتجاتكم" target="_blank" class="whatsapp-float" aria-label="تواصل واتساب" title="تواصل معنا عبر واتساب">
+    <a href="https://wa.me/971509019496?text=السلام%20عليكم%20،%20كنت%20حابب%20أستفسر%20عن%20منتجات%20كابليتو%20وتفاصيل%20التوصيل%20والضمان." target="_blank" class="whatsapp-float" aria-label="تواصل واتساب" title="تواصل معنا عبر واتساب">
         <i class="fa-brands fa-whatsapp"></i>
         <span class="whatsapp-tooltip">تواصل عبر واتساب (+971 50 901 9496)</span>
     </a>
@@ -437,7 +459,7 @@
         <div class="container announcement-content">
             <span><i class="fa-solid fa-bolt text-blue"></i> خصم خاص 15% على جميع كابلات Type-C السريعة | كود الخصم: <strong>CABLE15</strong></span>
             <div class="announcement-links">
-                <a href="https://wa.me/971509019496?text=مرحباً%20كابليتو%20،%20أود%20الاستفسار%20عن%20المنتجات" target="_blank"><i class="fa-brands fa-whatsapp text-blue"></i> خدمة العملاء (+971 50 901 9496)</a>
+                <a href="https://wa.me/971509019496?text=السلام%20عليكم%20،%20أود%20الاستفسار%20عن%20المنتجات%20المتاحة%20وعروض%20كابليتو." target="_blank"><i class="fa-brands fa-whatsapp text-blue"></i> خدمة العملاء (+971 50 901 9496)</a>
                 <a href="#serial-verify"><i class="fa-solid fa-shield-halved"></i> فحص الأصالة</a>
                 <a href="#why-cableto"><i class="fa-solid fa-award"></i> لماذا كابليتو؟</a>
             </div>
@@ -456,11 +478,11 @@
                 </div>
             </div>
 
-            <!-- 2. Center: Brand Logo with Electric Blue Bolt in letter O -->
+            <!-- 2. Center: Brand Logo with Subtle Electric Blue Bolt in letter O -->
             <div class="header-center">
-                <a href="#" class="brand-logo">
-                    <div class="logo-text-wrapper">
-                        <span class="brand-name">CABLET<span class="logo-o-bolt">O<i class="fa-solid fa-bolt bolt-inside"></i></span></span>
+                <a href="#" class="brand-logo" dir="ltr">
+                    <div class="logo-text-wrapper" dir="ltr">
+                        <span class="brand-name" dir="ltr">CABLET<span class="logo-letter-o">O<svg class="subtle-bolt" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z"/></svg></span></span>
                         <span class="brand-sub">كابليتو</span>
                     </div>
                 </a>
@@ -579,13 +601,13 @@
                 <!-- Best Seller 1: Powerbank -->
                 <div class="product-card">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
+                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(1)" title="اضغط لعرض المواصفات الكاملة">
                         <img src="images/pb_20k.jpg" alt="باور بانك TitanPower 20,000mAh">
                         <span class="product-type-icon"><i class="fa-solid fa-battery-full"></i> باور بانك</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-PB20K</span>
-                        <h3 class="product-title">باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية</h3>
+                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(1)" title="اضغط لعرض المواصفات الكاملة">باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية</h3>
                         <div class="product-price">
                             <span class="current-price">1,250 ج.م</span>
                             <span class="old-price">1,550 ج.م</span>
@@ -598,19 +620,22 @@
                                 شراء الآن
                             </button>
                         </div>
+                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(1)">
+                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
+                        </button>
                     </div>
                 </div>
 
                 <!-- Best Seller 2: Charger -->
                 <div class="product-card">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
+                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(5)" title="اضغط لعرض المواصفات الكاملة">
                         <img src="images/ch_100w.jpg" alt="شاحن جداري GaNPro 100W">
                         <span class="product-type-icon"><i class="fa-solid fa-plug-circle-bolt"></i> شواحن</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-CH100W</span>
-                        <h3 class="product-title">شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)</h3>
+                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(5)" title="اضغط لعرض المواصفات الكاملة">شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)</h3>
                         <div class="product-price">
                             <span class="current-price">790 ج.م</span>
                             <span class="old-price">990 ج.م</span>
@@ -623,19 +648,22 @@
                                 شراء الآن
                             </button>
                         </div>
+                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(5)">
+                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
+                        </button>
                     </div>
                 </div>
 
                 <!-- Best Seller 3: Cable -->
                 <div class="product-card">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
+                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(9)" title="اضغط لعرض المواصفات الكاملة">
                         <img src="images/cb_240w.jpg" alt="كابل ArmorFlex 240W">
                         <span class="product-type-icon"><i class="fa-solid fa-bolt-lightning"></i> كابلات</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-CB240W</span>
-                        <h3 class="product-title">كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط</h3>
+                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(9)" title="اضغط لعرض المواصفات الكاملة">كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط</h3>
                         <div class="product-price">
                             <span class="current-price">290 ج.م</span>
                             <span class="old-price">350 ج.م</span>
@@ -648,19 +676,22 @@
                                 شراء الآن
                             </button>
                         </div>
+                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(9)">
+                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
+                        </button>
                     </div>
                 </div>
 
                 <!-- Best Seller 4: Earbuds -->
                 <div class="product-card">
                     <div class="product-badge gold">🥇 الأكثر مبيعاً</div>
-                    <div class="product-img-holder">
+                    <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(13)" title="اضغط لعرض المواصفات الكاملة">
                         <img src="images/ear_anc.jpg" alt="سماعات UltraPods ANC">
                         <span class="product-type-icon"><i class="fa-solid fa-headphones"></i> سماعات</span>
                     </div>
                     <div class="product-details">
                         <span class="product-model">موديل: CB-PODS-ANC</span>
-                        <h3 class="product-title">سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط وحافظة شفافة</h3>
+                        <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(13)" title="اضغط لعرض المواصفات الكاملة">سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط وحافظة شفافة</h3>
                         <div class="product-price">
                             <span class="current-price">1,350 ج.م</span>
                             <span class="old-price">1,800 ج.م</span>
@@ -673,6 +704,9 @@
                                 شراء الآن
                             </button>
                         </div>
+                        <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(13)">
+                            <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
+                        </button>
                     </div>
                 </div>
             </div>
@@ -789,6 +823,59 @@
             </div>
         </div>
     </section>
+
+    <!-- Dedicated Product Details Modal (PDP) -->
+    <div class="checkout-modal-overlay" id="product-details-modal-overlay">
+        <div class="checkout-modal pdp-modal">
+            <button class="modal-close-btn" id="close-pdp-modal-btn">&times;</button>
+            <div class="pdp-grid">
+                <div>
+                    <div class="pdp-img-wrap">
+                        <img id="pdp-image" src="images/pb_20k.jpg" alt="تفاصيل المنتج">
+                    </div>
+                    <a id="pdp-whatsapp-btn" href="#" target="_blank" class="pdp-wa-btn">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> استفسار عن المنتج عبر واتساب
+                    </a>
+                </div>
+
+                <div>
+                    <span class="pdp-badge" id="pdp-badge">الأكثر مبيعاً</span>
+                    <h2 class="pdp-title" id="pdp-title">اسم المنتج الكامل</h2>
+                    <div class="pdp-model" id="pdp-model">موديل: CB-PB20K</div>
+                    
+                    <div class="pdp-price-row">
+                        <span class="pdp-current-price" id="pdp-price">1,250 ج.م</span>
+                        <span class="pdp-old-price" id="pdp-old-price">1,550 ج.م</span>
+                        <span class="pdp-discount-badge" id="pdp-savings">وفر 300 ج.م</span>
+                    </div>
+
+                    <div class="pdp-desc" id="pdp-desc">
+                        وصف تفصيلي شامل لمميزات المنتج والتقنيات المدعومة.
+                    </div>
+
+                    <table class="pdp-specs-table">
+                        <tbody id="pdp-specs-body">
+                            <!-- Specs inserted via JS -->
+                        </tbody>
+                    </table>
+
+                    <div class="notice-banner" style="margin-top:0; margin-bottom:14px; font-size:0.82rem;">
+                        <i class="fa-solid fa-shield-check"></i>
+                        <div>ضمان معتمد 12 شهراً | توصيل سريع خلال 24 - 48 ساعة والدفع عند الاستلام</div>
+                    </div>
+
+                    <div class="pdp-actions-row">
+                        <button class="btn btn-secondary-white btn-block" id="pdp-add-cart-btn">
+                            <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                        </button>
+                        <button class="btn btn-primary-blue btn-block" id="pdp-buy-now-btn">
+                            شراء الآن <i class="fa-solid fa-bolt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Detailed Checkout Modal -->
     <div class="checkout-modal-overlay" id="checkout-modal-overlay">
@@ -1000,40 +1087,344 @@
                 title: "فئة الباور بانك (Power Banks)",
                 desc: "استكشف 4 أنواع مختلفة من الباور بانك بسعات 5k, 10k, 20k, 30k mAh وتقنيات MagSafe واللابتوب",
                 products: [
-                    { id: 1, model: "CB-PB20K", name: "باور بانك TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية", price: 1250, oldPrice: 1550, badge: "الأكثر مبيعاً", icon: "fa-battery-full", img: "images/pb_20k.jpg", tag: "سعة 20k + شاشة" },
-                    { id: 2, model: "CB-PB10K", name: "باور بانك SlimMag 10,000mAh لاسلكي مدمج مغناطيسي MagSafe للآيفون", price: 890, oldPrice: 1100, badge: "MagSafe آيفون", icon: "fa-magnet", img: "images/pb_magsafe.jpg", tag: "لاسلكي 15W" },
-                    { id: 3, model: "CB-PB30K", name: "باور بانك MaxVolt 30,000mAh بقوة 100W لشحن اللابتوب والهواتف", price: 1850, oldPrice: 2200, badge: "عملاق اللابتوب", icon: "fa-laptop", img: "images/pb_30k.jpg", tag: "100W PD" },
-                    { id: 4, model: "CB-PB-MINI", name: "باور بانك PocketGo 5,000mAh كبسولة شحن سريع للجيب", price: 490, oldPrice: 600, badge: "حجم مدمج", icon: "fa-capsules", img: "images/pb_mini.jpg", tag: "كبسولة جيب" }
+                    {
+                        id: 1,
+                        model: "CB-PB20K",
+                        name: "باور بانك كابليتو TitanPower 20,000mAh بقوة 65W مع شاشة LED الرقمية",
+                        price: 1250,
+                        oldPrice: 1550,
+                        badge: "الأكثر مبيعاً 🥇",
+                        icon: "fa-battery-full",
+                        img: "images/pb_20k.jpg",
+                        tag: "سعة 20k + شاشة",
+                        desc: "باور بانك احترافي فائق السرعة بقدرة 65 واط بتقنية Power Delivery 3.0 و Quick Charge 4.0+. يشحن الهواتف من 0% إلى 60% في 25 دقيقة فقط، ويدعم شحن أجهزة اللابتوب والماك بوك مع شاشة LED رقمية دقيقة لعرض النسبة المئوية وقدرة الشحن.",
+                        specs: {
+                            "السعة الإجمالية": "20,000 مللي أمبير / 74Wh ليثيوم بوليمر",
+                            "أقصى قدرة إخراج": "65 واط (PD 3.0 + QC 4.0+)",
+                            "المنافذ": "2x Type-C (شحن وإخراج) + 1x USB-A سريع",
+                            "الشاشة الذكية": "شاشة LED رقمية لقياس النسبة المئوية المتبقية",
+                            "نظام الحماية": "نظام MultiProtect لحماية الدوائر من الحرارة والجهد العالي",
+                            "محتويات العلبة": "باور بانك TitanPower + كابل Type-C 100W مجدول + كارت الضمان"
+                        }
+                    },
+                    {
+                        id: 2,
+                        model: "CB-PB10K",
+                        name: "باور بانك كابليتو SlimMag 10,000mAh لاسلكي مغناطيسي MagSafe للآيفون",
+                        price: 890,
+                        oldPrice: 1100,
+                        badge: "MagSafe آيفون 🧲",
+                        icon: "fa-magnet",
+                        img: "images/pb_magsafe.jpg",
+                        tag: "لاسلكي 15W",
+                        desc: "باور بانك نحيف مغناطيسي فائق الالتصاق متوافق مع تقنية MagSafe لجميع أجهزة iPhone 12 وحتى 16 Pro Max. يوفر شحناً لاسلكياً سريعاً 15 واط بدون كابلات بالإضافة لمنفذ Type-C بقدرة 20W PD.",
+                        specs: {
+                            "السعة": "10,000 مللي أمبير عالية الكثافة",
+                            "الشحن اللاسلكي": "15 واط MagSafe مغناطيسي قوي",
+                            "الشحن السلكي": "20 واط Type-C PD شحن سريع فوري",
+                            "التوافق": "سلسلة iPhone 12/13/14/15/16 وجميع أجهزة Qi",
+                            "التصميم": "هيكل من السيليكون الحريري المقاوم للخدش والانزلاق",
+                            "محتويات العلبة": "باور بانك SlimMag + حلقة مغناطيسية إضافية + كابل C"
+                        }
+                    },
+                    {
+                        id: 3,
+                        model: "CB-PB30K",
+                        name: "باور بانك كابليتو MaxVolt 30,000mAh بقوة 100W لشحن اللابتوب والهواتف",
+                        price: 1850,
+                        oldPrice: 2200,
+                        badge: "عملاق اللابتوب 💻",
+                        icon: "fa-laptop",
+                        img: "images/pb_30k.jpg",
+                        tag: "100W PD",
+                        desc: "وحش الطاقة الأكبر من كابليتو بسعة ضخمة 30,000 مللي أمبير وقدرة خارقة 100W Type-C PD. قادر على شحن لابتوبات MacBook Pro و Dell XPS و أجهزة الألعاب المحمولة Steam Deck بكامل سرعتها أينما كنت.",
+                        specs: {
+                            "السعة": "30,000 مللي أمبير / 111Wh",
+                            "القدرة القصوى": "100 واط Type-C1 + 45 واط Type-C2",
+                            "عدد المنافذ": "4 منافذ (2x Type-C + 2x USB-A 22.5W)",
+                            "إمكانية السفر": "شحن فائق السرعة متوافق مع معايير الطيران",
+                            "الأمان": "مستشعرات حرارة NTC لمنع السخونة أثناء الشحن المكثف",
+                            "محتويات العلبة": "باور بانك MaxVolt + كابل 100W بطول 1.2 متر + حقيبة مخملية"
+                        }
+                    },
+                    {
+                        id: 4,
+                        model: "CB-PB-MINI",
+                        name: "باور بانك كابليتو PocketGo 5,000mAh كبسولة شحن سريع للجيب",
+                        price: 490,
+                        oldPrice: 600,
+                        badge: "حجم مدمج ⚡",
+                        icon: "fa-capsules",
+                        img: "images/pb_mini.jpg",
+                        tag: "كبسولة جيب",
+                        desc: "شاحن طوارئ فائق الصغر بحجم أحمر الشفاه مع موصل Type-C مدمج قابل للطي مباشرة في الهاتف دون الحاجة لأي كابلات إضافية. مثالي للخروجات والسفر السريع.",
+                        specs: {
+                            "السعة": "5,000 مللي أمبير (شحنة كاملة لهاتفك)",
+                            "القدرة": "20 واط شحن سريع مباشر",
+                            "الوزن": "95 جرام فقط خفيف للغاية",
+                            "الموصل": "رأس Type-C مدمج قابل للطي مع غطاء حماية",
+                            "الأمان": "شريحة تحكم ذكية لتجنب الشحن الزائد",
+                            "محتويات العلبة": "باور بانك PocketGo + كابل إعادة شحن"
+                        }
+                    }
                 ]
             },
             charger: {
                 title: "فئة الشواحن الجدارية والسيارة (Fast Chargers)",
                 desc: "4 شواحن فائقة السرعة بتقنية GaN الذكية ومنافذ متعددة وشاحن سيارة معدني 75W",
                 products: [
-                    { id: 5, model: "CB-CH100W", name: "شاحن جداري GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)", price: 790, oldPrice: 990, badge: "GaNPro 100W", icon: "fa-plug-circle-bolt", img: "images/ch_100w.jpg", tag: "ثلاثي المنافذ" },
-                    { id: 6, model: "CB-CH65W", name: "شاحن جداري DuoCharge 65W مزدوج المنافذ Type-C سريع", price: 580, oldPrice: 720, badge: "DuoCharge 65W", icon: "fa-bolt", img: "images/ch_65w.jpg", tag: "مزدوج C" },
-                    { id: 7, model: "CB-CH35W", name: "شاحن جداري MiniGaN 35W سريع جداً للهواتف الذكية", price: 390, oldPrice: 480, badge: "MiniGaN 35W", icon: "fa-cube", img: "images/ch_35w.jpg", tag: "مكعب 35W" },
-                    { id: 8, model: "CB-CH-CAR", name: "شاحن سيارة TurboDrive 75W معدني مخرجين شحن فائق للسيارة", price: 450, oldPrice: 550, badge: "شاحن سيارة", icon: "fa-car-battery", img: "images/ch_car.jpg", tag: "سبائك 75W" }
+                    {
+                        id: 5,
+                        model: "CB-CH100W",
+                        name: "شاحن جداري كابليتو GaNPro بقوة 100W ثلاثي المنافذ (2x Type-C + USB-A)",
+                        price: 790,
+                        oldPrice: 990,
+                        badge: "الأكثر مبيعاً 🥇",
+                        icon: "fa-plug-circle-bolt",
+                        img: "images/ch_100w.jpg",
+                        tag: "ثلاثي المنافذ",
+                        desc: "شاحن جداري بتقنية نيتريد الغاليوم GaN III الأحدث عالمياً. يوفر حجماً أصغر بنسبة 40% مع كفاءة حرارية لا تضاهى. يشحن 3 أجهزة معاً (لابتوب + آيباد + هاتف) بأعلى سرعة أمان ممكنة.",
+                        specs: {
+                            "التقنية": "جيل GaN III المتطور لتبريد فائق وكفاءة 95%",
+                            "أقصى قدرة": "100 واط إجمالي (توزيع طاقة ذكي بين المنافذ)",
+                            "المنافذ": "2x Type-C (PD 3.0 / PPS) + 1x USB-A (QC 4.0)",
+                            "التوافق": "متوافق مع MacBook و iPhone وسامسونج Super Fast 45W",
+                            "الأمان": "حماية ضد التردد الكهربائي وقصر الدائرة",
+                            "محتويات العلبة": "شاحن GaNPro 100W + دليل الاستخدام + كارت الضمان"
+                        }
+                    },
+                    {
+                        id: 6,
+                        model: "CB-CH65W",
+                        name: "شاحن جداري كابليتو DuoCharge 65W مزدوج المنافذ Type-C سريع",
+                        price: 580,
+                        oldPrice: 720,
+                        badge: "DuoCharge 65W",
+                        icon: "fa-bolt",
+                        img: "images/ch_65w.jpg",
+                        tag: "مزدوج C",
+                        desc: "شاحن GaN خفيف وأنيق بمنفذين Type-C يدعمان بروتوكولات PD 3.0 و PPS لشحن هاتفك وجهازك اللوحي معاً في نفس الوقت بدون فقدان في سرعة الشحن.",
+                        specs: {
+                            "القدرة": "65 واط كحد أقصى لمنفذ واحد أو 45W+20W معاً",
+                            "المنافذ": "2x Type-C فائق السرعة",
+                            "بروتوكولات الشحن": "PD 3.0, QC 3.0, PPS 45W سامسونج",
+                            "التصميم": "أرجل شاحن قابلة للطي لسهولة الحمل في الجيب",
+                            "الضمان": "ضمان استبدال معتمد لمدة 12 شهراً",
+                            "محتويات العلبة": "شاحن DuoCharge 65W + كتيب المواصفات"
+                        }
+                    },
+                    {
+                        id: 7,
+                        model: "CB-CH35W",
+                        name: "شاحن جداري كابليتو MiniGaN 35W سريع جداً للهواتف الذكية",
+                        price: 390,
+                        oldPrice: 480,
+                        badge: "MiniGaN 35W",
+                        icon: "fa-cube",
+                        img: "images/ch_35w.jpg",
+                        tag: "مكعب 35W",
+                        desc: "مكعب شحن GaN مصغر للغاية أصغر من شاحن أبل التقليدي بنسبة 50% ولكنه يضخ قدرة 35 واط كافية لشحن أحدث هواتف الآيفون وسامسونج بأقصى سرعة مدعومة.",
+                        specs: {
+                            "القدرة": "35 واط Power Delivery",
+                            "المنفذ": "1x Type-C مطلي لحماية نقل الإشارة",
+                            "الحجم": "مكعب فائق الصغر 3x3 سم",
+                            "التوافق": "iPhone 15/16 Series, Samsung S23/S24, Pixel",
+                            "الأمان": "تقنية SmartChip لتنظيم الجهد الكهربائي تلقائياً",
+                            "محتويات العلبة": "شاحن MiniGaN 35W"
+                        }
+                    },
+                    {
+                        id: 8,
+                        model: "CB-CH-CAR",
+                        name: "شاحن سيارة كابليتو TurboDrive 75W معدني مخرجين شحن فائق للسيارة",
+                        price: 450,
+                        oldPrice: 550,
+                        badge: "شاحن سيارة 🚗",
+                        icon: "fa-car-battery",
+                        img: "images/ch_car.jpg",
+                        tag: "سبائك 75W",
+                        desc: "شاحن سيارة مصنوع بالكامل من سبائك الألومنيوم المقاوم للحرارة والخدش مع منفذين Type-C و USB-A بقوة إجمالية 75 واط مع إضاءة حلقة LED زرقاء ناعمة.",
+                        specs: {
+                            "القدرة": "75 واط (Type-C 45W + USB-A 30W)",
+                            "جهد الإدخال": "12V - 24V متوافق مع جميع أنواع السيارات والشاحنات",
+                            "الخامة": "هيكل معدني من سبائك الألومنيوم لتشتيت الحرارة",
+                            "الإضاءة": "حلقة ضوء LED زرقاء لتحديد مكانه ليلاً",
+                            "الأمان": "حماية من التغير المفاجئ في دينامو السيارة",
+                            "محتويات العلبة": "شاحن TurboDrive 75W المعدني"
+                        }
+                    }
                 ]
             },
             cable: {
                 title: "فئة كابلات الشحن ونقل البيانات (High Performance Cables)",
                 desc: "4 كابلات متينة معضلة مجدولة بالنايلون بشاشة واط، وصلات آيفون Lightning، وUSB-A، ووصلة AUX صوتيات",
                 products: [
-                    { id: 9, model: "CB-CB240W", name: "كابل شحن ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط", price: 290, oldPrice: 350, badge: "شاشة واط 240W", icon: "fa-bolt-lightning", img: "images/cb_240w.jpg", tag: "مجدول 240W" },
-                    { id: 10, model: "CB-CB-PD27W", name: "كابل Type-C إلى Lightning بقوة 27W شحن سريع للآيفون", price: 220, oldPrice: 280, badge: "آيفون Lightning", icon: "fa-mobile-screen-button", img: "images/cb_lightning.jpg", tag: "Lightning 27W" },
-                    { id: 11, model: "CB-CB-USB3A", name: "كابل SmartCharge من USB-A إلى Type-C بقوة 100W مجدول", price: 170, oldPrice: 220, badge: "USB-A إلى C", icon: "fa-usb", img: "images/cb_usba.jpg", tag: "100W Type-C" },
-                    { id: 12, model: "CB-CB-AUX", name: "كابل SoundLine Type-C إلى AUX 3.5mm للصوت عالي النقاوة", price: 190, oldPrice: 250, badge: "صوتيات AUX", icon: "fa-sliders", img: "images/cb_aux.jpg", tag: "DAC AUX 3.5mm" }
+                    {
+                        id: 9,
+                        model: "CB-CB240W",
+                        name: "كابل شحن كابليتو ArmorFlex مجدول بقوة 240W مع شاشة قياس الواط",
+                        price: 290,
+                        oldPrice: 350,
+                        badge: "الأكثر مبيعاً 🥇",
+                        icon: "fa-bolt-lightning",
+                        img: "images/cb_240w.jpg",
+                        tag: "مجدول 240W",
+                        desc: "الكابل الأقوى على الإطلاق بقدرة 240 واط مع شاشة OLED رقمية مدمجة برأس الكابل تعرض سرعة الشحن الحقيقية بالواط بالزمن الفعلي. نسيج كيفلار مجدول يتحمل أكثر من 30,000 انحناء.",
+                        specs: {
+                            "أقصى قدرة": "240 واط (48V / 5A) بتقنية PD 3.1",
+                            "الشاشة": "شاشة رقمية LED ذكية لقياس الواط بالوقت الفعلي",
+                            "الخامة": "ألياف كيفلار العسكرية المجدولة مع رؤوس زنك مصمتة",
+                            "سرعة نقل البيانات": "480 ميجابت / ثانية",
+                            "الطول": "1.2 متر متين ومرن ضد التشابك",
+                            "محتويات العلبة": "كابل ArmorFlex 240W + شريط تنظيمي جلد"
+                        }
+                    },
+                    {
+                        id: 10,
+                        model: "CB-CB-PD27W",
+                        name: "كابل كابليتو Type-C إلى Lightning بقوة 27W شحن سريع للآيفون",
+                        price: 220,
+                        oldPrice: 280,
+                        badge: "آيفون Lightning 📱",
+                        icon: "fa-mobile-screen-button",
+                        img: "images/cb_lightning.jpg",
+                        tag: "Lightning 27W",
+                        desc: "كابل شحن سريع معتمد ومخصص لأجهزة الآيفون القديمة والحديثة التي تدعم مدخل Lightning. يشحن بنسبة 50% خلال 30 دقيقة مع شريحة C94 الأصلية لمنع ظهور رسائل الخطأ.",
+                        specs: {
+                            "القدرة": "27 واط PD شحن سريع معتمد",
+                            "الشريحة": "شريحة C94 الذكية المعتمدة",
+                            "الخامة": "نايلون مضاعف الحياكة ضد القطع والتمزق",
+                            "الطول": "1.2 متر",
+                            "التوافق": "سلسلة iPhone 8 حتى iPhone 14 Pro Max و iPad",
+                            "محتويات العلبة": "كابل Type-C إلى Lightning"
+                        }
+                    },
+                    {
+                        id: 11,
+                        model: "CB-CB-USB3A",
+                        name: "كابل كابليتو SmartCharge من USB-A إلى Type-C بقوة 100W مجدول",
+                        price: 170,
+                        oldPrice: 220,
+                        badge: "USB-A إلى C 🔌",
+                        icon: "fa-usb",
+                        img: "images/cb_usba.jpg",
+                        tag: "100W Type-C",
+                        desc: "كابل عالي الجودة يدعم شحن الهواتف والأجهزة من شواحن ومنافذ USB-A التقليدية مع دعم تقنيات الشحن السريع QC و SuperVOOC و Huawei Fast Charge حتى 100 واط.",
+                        specs: {
+                            "القدرة": "100 واط (6A كحد أقصى)",
+                            "التوافق": "يدعم Huawei SCP و Oppo SuperVOOC و Xiaomi Turbo",
+                            "الخامة": "حياكة نسيج نايلون معزز برؤوس ألومنيوم مقاومة للتآكل",
+                            "الطول": "1.0 متر",
+                            "نقل البيانات": "480Mbps نقل سريع للصور والملفات",
+                            "محتويات العلبة": "كابل SmartCharge USB-A to Type-C"
+                        }
+                    },
+                    {
+                        id: 12,
+                        model: "CB-CB-AUX",
+                        name: "كابل كابليتو SoundLine Type-C إلى AUX 3.5mm للصوت عالي النقاوة",
+                        price: 190,
+                        oldPrice: 250,
+                        badge: "صوتيات AUX 🎵",
+                        icon: "fa-sliders",
+                        img: "images/cb_aux.jpg",
+                        tag: "DAC AUX 3.5mm",
+                        desc: "كابل توصيل صوتيات عالي الدقة مزود بشريحة معالجة رقمية DAC متطورة (24bit/96kHz) لتحويل الصوت الرقمي إلى أنالوج نقي بدون أي تشويش أو فقدان ترددات.",
+                        specs: {
+                            "شريحة الصوت": "شريحة DAC Hi-Res Audio مدمجة (24-bit / 96kHz)",
+                            "الموصلات": "Type-C ذكر إلى 3.5mm AUX ذكر مطلي بالذهب 24K",
+                            "الاستخدام": "توصيل الهواتف بسماعات السيارة، مكبرات الصوت، والساوند بار",
+                            "الخامة": "أسلاك نحاسية خالية من الأكسجين OFC مغلفة بنسيج مجدول",
+                            "الطول": "1.0 متر",
+                            "محتويات العلبة": "كابل كابليتو SoundLine AUX"
+                        }
+                    }
                 ]
             },
             earbuds: {
                 title: "فئة السماعات والصوتيات (Audio & Wireless Earbuds)",
                 desc: "4 منتجات صوتية تشمل سماعات شفاف ANC، مكبر صوت RGB محمول، سماعات سينمائية، وسماعة سلكية DeepBass",
                 products: [
-                    { id: 13, model: "CB-PODS-ANC", name: "سماعات لاسلكية UltraPods مع عزل ضوضاء نشط ANC وحافظة شفافة", price: 1350, oldPrice: 1800, badge: "ANC شفاف", icon: "fa-headphones", img: "images/ear_anc.jpg", tag: "عزل ضوضاء" },
-                    { id: 14, model: "CB-SPK-360", name: "مكبر صوت BassBlast بلوتوث محمول مع إضاءة RGB 360 درجة", price: 650, oldPrice: 850, badge: "مكبر RGB", icon: "fa-radio", img: "images/ear_speaker.jpg", tag: "إضاءة 360" },
-                    { id: 15, model: "CB-PODS-PRO", name: "سماعات AirPro 3 لاسلكية مع ميكروفون مزدوج للمكالمات النقية", price: 990, oldPrice: 1250, badge: "صوت سينمائي", icon: "fa-compact-disc", img: "images/ear_airpro.jpg", tag: "مكالمات HD" },
-                    { id: 16, model: "CB-EAR-WIRED", name: "سماعات أذن سلكية HiFi DeepBass مع ميكروفون مخرج Type-C", price: 190, oldPrice: 250, badge: "سماعة سلكية", icon: "fa-plug", img: "images/ear_wired.jpg", tag: "DeepBass Type-C" }
+                    {
+                        id: 13,
+                        model: "CB-PODS-ANC",
+                        name: "سماعات لاسلكية كابليتو UltraPods مع عزل ضوضاء نشط ANC وحافظة شفافة",
+                        price: 1350,
+                        oldPrice: 1800,
+                        badge: "الأكثر مبيعاً 🥇",
+                        icon: "fa-headphones",
+                        img: "images/ear_anc.jpg",
+                        tag: "ANC شفاف",
+                        desc: "سماعات بلوتوث بتصميم شفاف ثوري مستقبلي مزودة بتقنية عزل الضوضاء النشط ANC الهجين حتى -35dB. بطارية تدوم حتى 32 ساعة مع الحافظة مع شاشة LED تعرض نسبة الشحن الدقيقة لكل سماعة.",
+                        specs: {
+                            "تقنية العزل": "Active Noise Cancellation (ANC) حتى -35dB + وضع الشفافية",
+                            "البطارية": "حتى 7 ساعات تشغيل متواصل (32 ساعة مع علبة الشحن)",
+                            "البلوتوث": "Bluetooth 5.3 منخفض زمن الاستجابة (Low Latency Gaming)",
+                            "المقاومة": "مقاومة لرذاذ الماء والعرق بمعيار IPX5",
+                            "الميكروفونات": "4 ميكروفونات بخاصية ENC لعزل صوت الرياح في المكالمات",
+                            "محتويات العلبة": "سماعات UltraPods + علبة شفافة + كابل شحن + 3 أزواج سدادات سيليكون"
+                        }
+                    },
+                    {
+                        id: 14,
+                        model: "CB-SPK-360",
+                        name: "مكبر صوت كابليتو BassBlast بلوتوث محمول مع إضاءة RGB 360 درجة",
+                        price: 650,
+                        oldPrice: 850,
+                        badge: "مكبر RGB 🔊",
+                        icon: "fa-radio",
+                        img: "images/ear_speaker.jpg",
+                        tag: "إضاءة 360",
+                        desc: "مكبر صوت محمول بقوة 20 واط مع صوت محيطي 360 درجة ومضخم صوت باس Deep Bass مدمج. مزود بحلقة إضاءة RGB متزامنة مع نبضات الموسيقى وبطارية تدوم حتى 12 ساعة تشغيل.",
+                        specs: {
+                            "القدرة الصوتية": "20 واط صوت استريو عالي النقاء",
+                            "الإضاءة": "أوضاع إضاءة RGB متعددة متفاعلة مع الإيقاع",
+                            "البطارية": "بطارية 3,000mAh تدوم حتى 12 ساعة تشغيل متواصل",
+                            "المداخل": "Bluetooth 5.3, AUX 3.5mm, كارت ميموري TF, Flash USB",
+                            "مقاومة الماء": "معيار IPX6 مقاوم للمطر والماء",
+                            "محتويات العلبة": "مكبر BassBlast + كابل Type-C + كابل AUX + حبل تعليق"
+                        }
+                    },
+                    {
+                        id: 15,
+                        model: "CB-PODS-PRO",
+                        name: "سماعات كابليتو AirPro 3 لاسلكية مع ميكروفون مزدوج للمكالمات النقية",
+                        price: 990,
+                        oldPrice: 1250,
+                        badge: "صوت سينمائي 🎙️",
+                        icon: "fa-compact-disc",
+                        img: "images/ear_airpro.jpg",
+                        tag: "مكالمات HD",
+                        desc: "سماعات مريحة للأذن مصممة للاستخدام الطويل والمكالمات الاحترافية مع ميكروفونات مزدوجة تعمل بتقنية الذكاء الاصطناعي لتنقية الصوت وعزل الضوضاء المحيطة.",
+                        specs: {
+                            "المحركات الصوتية": "مشغلات تيتانيوم 13 ملم لصوت جهير وباس عميق",
+                            "المكالمات": "ميكروفون مزدوج بخاصية AI Clear Call",
+                            "البطارية": "6 ساعات لكل سماعة (28 ساعة مع العلبة)",
+                            "التحكم": "مستشعرات لمس ذكية للتحكم بالموسيقى والمكالمات",
+                            "التوافق": "اقتران فوري بجميع هواتف أندرويد وآيفون",
+                            "محتويات العلبة": "سماعات AirPro 3 + علبة الشحن + كابل Type-C"
+                        }
+                    },
+                    {
+                        id: 16,
+                        model: "CB-EAR-WIRED",
+                        name: "سماعات أذن سلكية كابليتو HiFi DeepBass مع ميكروفون مخرج Type-C",
+                        price: 190,
+                        oldPrice: 250,
+                        badge: "سماعة سلكية 🎧",
+                        icon: "fa-plug",
+                        img: "images/ear_wired.jpg",
+                        tag: "DeepBass Type-C",
+                        desc: "سماعة أذن سلكية مخصصة للأجهزة الحديثة ذات مدخل Type-C مزودة بشريحة صوت DAC وميكروفون فائق الحساسية مناسب للبث المباشر والألعاب والمكالمات بدون أي تأخير في الصوت.",
+                        specs: {
+                            "المنفذ": "Type-C مباشر رقمي متوافق مع آيفون 15/16 وسامسونج",
+                            "جودة الصوت": "HiFi Lossless Audio مع مشغل 14.2 ملم",
+                            "التحكم": "وحدة تحكم سلكية مدمجة (رفع/خفض الصوت + زر الرد)",
+                            "الميكروفون": "ميكروفون عالي الحساسية لعزل الصدى",
+                            "السلك": "سلك مجدول مرن مقاوم للتشابك بطول 1.2 متر",
+                            "محتويات العلبة": "سماعات HiFi DeepBass + مشبك تثبيت"
+                        }
+                    }
                 ]
             }
         };
@@ -1065,6 +1456,88 @@
             const shippingFee = 50;
             let appliedDiscount = 0; // percentage: 0 to 1
             let appliedCouponCode = "";
+
+            // Product Details Modal Elements
+            const pdpModalOverlay = document.getElementById('product-details-modal-overlay');
+            const closePdpModalBtn = document.getElementById('close-pdp-modal-btn');
+            const pdpImage = document.getElementById('pdp-image');
+            const pdpBadge = document.getElementById('pdp-badge');
+            const pdpTitle = document.getElementById('pdp-title');
+            const pdpModel = document.getElementById('pdp-model');
+            const pdpPrice = document.getElementById('pdp-price');
+            const pdpOldPrice = document.getElementById('pdp-old-price');
+            const pdpSavings = document.getElementById('pdp-savings');
+            const pdpDesc = document.getElementById('pdp-desc');
+            const pdpSpecsBody = document.getElementById('pdp-specs-body');
+            const pdpWhatsAppBtn = document.getElementById('pdp-whatsapp-btn');
+            const pdpAddCartBtn = document.getElementById('pdp-add-cart-btn');
+            const pdpBuyNowBtn = document.getElementById('pdp-buy-now-btn');
+
+            let currentActivePdpProduct = null;
+
+            window.openProductDetailsModal = function(productId) {
+                const product = ALL_PRODUCTS.find(p => p.id === productId);
+                if (!product) return;
+                currentActivePdpProduct = product;
+
+                if (pdpImage) {
+                    pdpImage.src = product.img;
+                    pdpImage.alt = product.name;
+                }
+                if (pdpBadge) pdpBadge.textContent = product.badge;
+                if (pdpTitle) pdpTitle.textContent = product.name;
+                if (pdpModel) pdpModel.textContent = `موديل: ${product.model}`;
+                if (pdpPrice) pdpPrice.textContent = `${product.price.toLocaleString()} ج.م`;
+                if (pdpOldPrice) pdpOldPrice.textContent = `${product.oldPrice.toLocaleString()} ج.م`;
+                
+                const savings = product.oldPrice - product.price;
+                if (pdpSavings) pdpSavings.textContent = `وفر ${savings.toLocaleString()} ج.م (${Math.round((savings / product.oldPrice) * 100)}%)`;
+                if (pdpDesc) pdpDesc.textContent = product.desc;
+
+                if (pdpSpecsBody && product.specs) {
+                    pdpSpecsBody.innerHTML = Object.entries(product.specs).map(([key, val]) => `
+                        <tr>
+                            <td>${key}</td>
+                            <td>${val}</td>
+                        </tr>
+                    `).join('');
+                }
+
+                // Natural WhatsApp greeting
+                const waText = `السلام عليكم ، كنت حابب أستفسر عن تفاصيل وسعر منتج: ${product.name} (موديل ${product.model})`;
+                if (pdpWhatsAppBtn) pdpWhatsAppBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
+
+                if (pdpModalOverlay) pdpModalOverlay.classList.add('active');
+            };
+
+            function closeProductDetailsModal() {
+                if (pdpModalOverlay) pdpModalOverlay.classList.remove('active');
+            }
+
+            if (closePdpModalBtn) closePdpModalBtn.addEventListener('click', closeProductDetailsModal);
+            if (pdpModalOverlay) {
+                pdpModalOverlay.addEventListener('click', (e) => {
+                    if (e.target === pdpModalOverlay) closeProductDetailsModal();
+                });
+            }
+
+            if (pdpAddCartBtn) {
+                pdpAddCartBtn.addEventListener('click', () => {
+                    if (currentActivePdpProduct) {
+                        addToCart(currentActivePdpProduct.id, currentActivePdpProduct.name, currentActivePdpProduct.price, currentActivePdpProduct.img);
+                    }
+                });
+            }
+
+            if (pdpBuyNowBtn) {
+                pdpBuyNowBtn.addEventListener('click', () => {
+                    if (currentActivePdpProduct) {
+                        addToCart(currentActivePdpProduct.id, currentActivePdpProduct.name, currentActivePdpProduct.price, currentActivePdpProduct.img);
+                        closeProductDetailsModal();
+                        openCheckoutModal();
+                    }
+                });
+            }
 
             // Theme Toggle Logic
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -1115,13 +1588,13 @@
                         searchDropdown.innerHTML = '<div style="padding:14px; text-align:center; color:var(--text-muted); font-size:0.85rem;">لا توجد منتجات مطابقة للبحث</div>';
                     } else {
                         searchDropdown.innerHTML = matches.map(p => `
-                            <div class="search-item" onclick="window.addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.img}'); document.getElementById('search-dropdown').classList.remove('active');">
+                            <div class="search-item" onclick="window.openProductDetailsModal(${p.id}); document.getElementById('search-dropdown').classList.remove('active');">
                                 <img src="${p.img}" alt="${p.name}">
                                 <div class="search-item-info">
                                     <div class="search-item-title">${p.name}</div>
                                     <div class="search-item-price">${p.price.toLocaleString()} ج.م</div>
                                 </div>
-                                <i class="fa-solid fa-cart-plus" style="color:var(--blue-primary); font-size:1.1rem;"></i>
+                                <i class="fa-solid fa-circle-info" style="color:var(--blue-primary); font-size:1.1rem;" title="عرض المواصفات"></i>
                             </div>
                         `).join('');
                     }
@@ -1214,13 +1687,13 @@
                 catModalGrid.innerHTML = category.products.map(p => `
                     <div class="product-card">
                         <div class="product-badge">${p.badge}</div>
-                        <div class="product-img-holder">
+                        <div class="product-img-holder clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="اضغط لعرض المواصفات الكاملة">
                             <img src="${p.img}" alt="${p.name}">
                             <span class="product-type-icon"><i class="fa-solid ${p.icon}"></i> ${p.tag}</span>
                         </div>
                         <div class="product-details">
                             <span class="product-model">موديل: ${p.model}</span>
-                            <h3 class="product-title">${p.name}</h3>
+                            <h3 class="product-title clickable-pdp" onclick="window.openProductDetailsModal(${p.id})" title="اضغط لعرض المواصفات الكاملة">${p.name}</h3>
                             <div class="product-price">
                                 <span class="current-price">${p.price.toLocaleString()} ج.م</span>
                                 <span class="old-price">${p.oldPrice.toLocaleString()} ج.م</span>
@@ -1233,6 +1706,9 @@
                                     شراء الآن
                                 </button>
                             </div>
+                            <button class="btn btn-secondary-white btn-block" style="margin-top: 8px; font-size: 0.8rem; padding: 6px;" onclick="window.openProductDetailsModal(${p.id})">
+                                <i class="fa-solid fa-circle-info"></i> عرض التفاصيل والمواصفات الكاملة
+                            </button>
                         </div>
                     </div>
                 `).join('');
